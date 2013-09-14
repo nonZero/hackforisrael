@@ -1,0 +1,91 @@
+.body {
+}
+
+.intro {
+    padding: 30px 0 0;
+    background: url('../img/top-bg.jpg') no-repeat center center fixed;
+    color: #eee;
+    font-size: 130%;
+    background-size: cover;
+}
+
+.intro h1 {
+    margin: 0;/
+    padding: 30px 0 10px;
+    text-shadow: 4px 4px black;
+    color: white;
+    font-family: 'Graduate', cursive;
+    font-size: 3.4em;
+}
+.intro h1, h3 {
+    color: white
+}
+
+.teaser {
+    background: #FF4400;
+    color: white !important;
+    font-size: 1.4em;
+    padding: 10px 0;
+}
+
+.howitworks {
+    background: blue;
+    color: white !important;
+    padding: 10px 0;
+}
+
+.gotidea {
+    background: green;
+    color: white !important;
+    padding: 10px 0;
+}
+
+.luztech {
+    background: brown;
+    color: white !important;
+    padding: 10px 0;
+}
+
+.luztech .box {
+    background: white;
+    color: black;
+}
+
+.luztech .tech li {
+    text-align: center;
+}
+
+.circular {
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+.mentors {
+    background: yellow;
+    color: white !important;
+    padding: 10px 0;
+}
+
+.circular.einstein {
+    background: url(http://www.barewalls.com/i/c/490129_Albert-Einstein-Funny-Face.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.sponsors {
+    background: purple;
+    color: white !important;
+    padding: 10px 0;
+}
+.sponsors img {
+    height: 100px;
+}
+.sponsors .sponsor {
+    text-align: center;
+}
+

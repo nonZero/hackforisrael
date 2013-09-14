@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--[if IE 8]>               <html class="no-js lt-ie9" lang="en" dir="rtl"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" dir="rtl">
+    <!--<![endif]-->
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Hack For Israel</title>
+
+        <link rel="stylesheet" href="{{STATIC_URL}}css/foundation.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/h4il.css">
+
+        <script src="{{STATIC_URL}}js/vendor/custom.modernizr.js"></script>
+
+
+        <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'>
+        
+    </head>
+    <body>
+
+        {% block content %}
+        {% endblock %}
+
+        <script>
+            document.write('<script src=' + ('__proto__' in {} ? '{{STATIC_URL}}js/vendor/zepto' : '{{STATIC_URL}}js/vendor/jquery') + '.js><\/script>')
+        </script>
+
+        <script src="{{STATIC_URL}}js/foundation.min.js"></script>
+
+        <script>
+            $(document).foundation();
+        </script>
+    </body>
+</html>
