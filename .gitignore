@@ -1,0 +1,15 @@
+*~
+*.py[cod]
+
+# Installer logs
+pip-log.txt
+
+#virtualenv dir
+venv/
+
+.project
+.pydevproject
+
+*.log
+*.pot
+local_settings.py
