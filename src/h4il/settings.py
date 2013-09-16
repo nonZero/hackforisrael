@@ -1,7 +1,13 @@
 # Django settings for h4il project.
+import os.path
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_DIR = os.path.abspath(
+                      os.path.join(os.path.dirname(__file__), '..', '..'))
+
+ABSDIR = lambda path: os.path.abspath(os.path.join(PROJECT_DIR, path))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -23,13 +29,13 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['h.10x.org.il']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Jerusalem'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -61,7 +67,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = ABSDIR('static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -157,3 +163,9 @@ LOGGING = {
         },
     }
 }
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

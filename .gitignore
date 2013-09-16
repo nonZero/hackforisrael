@@ -13,3 +13,4 @@ venv/
 *.log
 *.pot
 local_settings.py
+static/
