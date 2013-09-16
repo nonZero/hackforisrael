@@ -12,7 +12,7 @@ h2 {
 }
 
 .title-area h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Alef', sans-serif;
 }
 
 #intro {
@@ -27,7 +27,7 @@ h2 {
     margin-bottom: 0;
     text-shadow: 4px 4px black;
     color: white;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Alef', sans-serif;
     font-size: 3.4em;
 }
 #intro h1, h3 {
