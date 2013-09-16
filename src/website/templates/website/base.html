@@ -22,8 +22,67 @@
     <body>
 
 
-        {% block content %}
-        {% endblock %}
+        <div>
+            <div class="contain-to-grid sticky">
+                <nav class="top-bar">
+                    <ul class="title-area">
+                        <!-- Title Area -->
+                        <li class="name">
+                            <h1><a href="{% url 'home' %}">Hack For Israel</a></h1>
+                        </li>
+                        <li class="toggle-topbar menu-icon">
+                            <a href="#"><span></span></a>
+                        </li>
+                    </ul>
+
+                    <section class="top-bar-section">
+                        <ul class="right">
+                            <li class="divider"></li>
+                            <li class="active">
+                                <a href="{% url 'program' %}">איך זה עובד?</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{% url 'faq' %}">שאלות ותשובות</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{% url 'ideas' %}">רעיונות למיזמים</a>
+                            </li>
+                            <li>
+                                <a class="button" href="#">להרשמה</a>
+                            </li>
+                        </ul>
+                    </section>
+                </nav>
+            </div>
+        
+            {% block content %}
+            {% endblock %}
+
+            <div id="sponsors">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h2> בחסות </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-4 columns sponsor">
+                        <img src="{{STATIC_URL}}img/google-campus.png">
+                    </div>
+{% comment %}
+                      <div class="large-4 columns sponsor">
+                          <img src="{{STATIC_URL}}img/10x.png" height="100">
+                      </div>
+                    {% endcomment %}
+                    <div class="large-4 columns sponsor">
+                        <span class="button"> מעוניין להעניק חסות? </span>
+                    </div>
+                </div>
+        
+            </div>
+        
+        </div>
 
         <script>
             document.write('<script src=' + ('__proto__' in {} ? '{{STATIC_URL}}js/vendor/zepto' : '{{STATIC_URL}}js/vendor/jquery') + '.js><\/script>')
@@ -33,32 +92,6 @@
 
         <script>
             $(document).foundation();
-            var Scroller = {
-                scrollTo : function (el, to, duration, callback) {
-                    if (duration < 0) return;
-                    var difference = to - $(window).scrollTop();
-                    var perTick = difference / duration * 10;
-
-                    this.scrollToTimerCache = setTimeout(function() {
-                        if (!isNaN(parseInt(perTick, 10))) {
-                            window.scrollTo(0, $(window).scrollTop() + perTick);
-                            this.scrollTo(el, to, duration - 10, callback);
-                        } else {
-                            callback();
-                        }
-                    }.bind(this), 10);
-                }
-            }
-
-            $('a').on('click', function(e) {
-                e.preventDefault();
-
-                //Foundation.lib_methods.scrollTo($(window), $($(e.currentTarget).attr('href')).offset().top, 200);
-                var newhash = $(e.currentTarget).attr('href');
-                Scroller.scrollTo($(window), $(newhash).offset().top, 200, function() {
-                    location.hash = newhash;
-                });
-            });
         </script>
     </body>
 </html>

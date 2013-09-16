@@ -1,0 +1,28 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+    <div id="faq">
+        <div class="row">
+            <div class="large-12 columns">
+                <h2> שאלות ותשובות </h2>
+            </div>
+        </div>
+        <div class="row">
+            <dl>
+                {% for l in faq %}
+                    <div class="large-6 columns">
+                        {% for q, a in l %}
+                            <dt>{{q}}</dt>
+                            <dd>
+                                {{a}}
+                            </dd>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </dl>
+        </div>
+
+    </div>
+
+{% endblock %}

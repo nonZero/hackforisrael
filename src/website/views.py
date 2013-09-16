@@ -19,11 +19,14 @@ def extract_questions(s):
 
 FAQ = [extract_questions(read_faq(n + 1)) for n in range(2)]
 
+website_view = lambda s: TemplateView.as_view(template_name="website/%s.html"
+                                              % s)
 
-class HomeView(TemplateView):
-    template_name = 'website/home.html'
+
+class FAQView(TemplateView):
+    template_name = 'website/faq.html'
 
     def get_context_data(self, **kwargs):
-        d = super(HomeView, self).get_context_data(**kwargs)
+        d = super(FAQView, self).get_context_data(**kwargs)
         d['faq'] = FAQ
         return d

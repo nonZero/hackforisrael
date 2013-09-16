@@ -11,6 +11,10 @@ h2 {
     margin-bottom: 0;
 }
 
+.title-area h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+
 #intro {
     padding: 30px 0 0;
     background: url('../img/top-bg.jpg') no-repeat center center fixed;
@@ -20,12 +24,9 @@ h2 {
 }
 
 #intro h1 {
-    /*margin: 0;
-     padding: 30px 0 10px;*/
     margin-bottom: 0;
     text-shadow: 4px 4px black;
     color: white;
-    /*font-family: 'Francois One', sans-serif;*/
     font-family: 'Montserrat', sans-serif;
     font-size: 3.4em;
 }
@@ -65,11 +66,24 @@ h2 {
 #luztech .box {
     background: white;
     color: black;
+    padding: 0 15px;
 }
 
 #luztech .box h2 {
     color: black;
+    margin-bottom: 0;
 }
+
+
+#luztech .box ul {
+    padding: 0 20px;
+}
+
+#luztech .box li {
+    margin:0;
+    padding:0 0 3px;
+}
+
 
 #luztech .tech li {
     text-align: center;
@@ -99,9 +113,9 @@ h2 {
 }
 
 #sponsors {
-    background: purple;
-    color: white !important;
+    background: white;
     padding: 10px 0;
+    color: black;
 }
 #sponsors img {
     height: 100px;
@@ -115,7 +129,7 @@ h2 {
     padding: 10px 0;
 }
 
-#faq h2 {
+#faq h2, #sponsors h2 {
     color: black;
 }
 
