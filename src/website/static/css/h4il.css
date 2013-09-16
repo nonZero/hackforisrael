@@ -34,6 +34,27 @@ h2 {
     color: white
 }
 
+.things {
+    position:relative;
+    display:inline-block;
+    width:100px;
+    height:1em;
+}
+.things span{
+    position:absolute;
+    top:0;
+    right:0;
+    transition: opacity 0.8s ease-out;
+    -webkit-transition: opacity 1s ease-out;
+    opacity: 0; 
+    height: 0;
+    overflow: hidden;     
+}
+.things span.active{
+    opacity: 1;
+    height: auto;
+}
+
 .toolbar {
     background: black;
 }

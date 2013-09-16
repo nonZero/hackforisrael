@@ -9,7 +9,34 @@
 
                 <h1>Hack For Israel</h1>
 
-                <h3> שישה שבועות של עשיה <!-- יצירה, בניה, למידה, תרומה לחברה, פיתוח תוכנה, עבודה משותפת, יזמות  --></h3>
+                <h3> שישה שבועות של
+                    <span class="things">
+                        <span class="active">
+                            עשיה
+                        </span>
+                        <span>
+                            יצירה
+                        </span>
+                        <span>
+                            בניה
+                        </span>
+                        <span>
+                            למידה
+                        </span>
+                        <span>
+                            תרומה
+                        </span>
+                        <span>
+                            פיתוח
+                        </span>
+                        <span>
+                            עבודה
+                        </span>
+                        <span>
+                            יזמות
+                        </span>
+                    </span>
+    </h3>
 
                 <p>
                     מחזור ראשון - סתיו 2013
@@ -65,4 +92,9 @@
 
 
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{STATIC_URL}}js/home.js"></script>
 {% endblock %}
