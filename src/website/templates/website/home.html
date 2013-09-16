@@ -1,236 +1,300 @@
 {% extends 'website/base.html' %}
 {% block content %}
 
-<div class="intro">
-    <div class="row">
-        <div class="large-12 columns text-center">
-            הסדנא לידע ציבורי גאה להציג
+<div>
+    <div id="intro">
+        <div class="row">
+            <div class="large-12 columns text-center">
+                הסדנא לידע ציבורי גאה להציג:
 
-            <h1>Hack For Israel</h1>
+                <h1>Hack For Israel</h1>
 
-            <h3> שישה שבועות של עשיה <!-- יצירה, בניה, למידה, תרומה לחברה, פיתוח תוכנה, עבודה משותפת, יזמות  --></h3>
+                <h3> שישה שבועות של עשיה <!-- יצירה, בניה, למידה, תרומה לחברה, פיתוח תוכנה, עבודה משותפת, יזמות  --></h3>
 
-            <p>
-                מחזור ראשון - סתיו 2013
-            </p>
+                <p>
+                    מחזור ראשון - סתיו 2013
+                </p>
 
+            </div>
         </div>
     </div>
-</div>
 
-<div class="teaser">
-    <div class="row">
-        <div class="large-12 columns text-center">
-
-            <ul class="no-bullet">
-                <li>
-                    תמיד רצית לכתוב תוכנה למען החברה?
+    <div class="contain-to-grid sticky">
+        <nav class="top-bar">
+            <ul class="title-area">
+                <!-- Title Area -->
+                <li class="name">
+                    <h1><a href="#intro">Hack For Israel</a></h1>
                 </li>
-                <li>
-                    תמיד רצית ללמוד לעבוד עם כלי קוד פתוח?
+                <li class="toggle-topbar menu-icon">
+                    <a href="#"><span></span></a>
                 </li>
-                <li>
-                    תמיד רצית לפתח יישומי Web מתקדמים?
-                </li>
-                <li>
-                    תמיד רצית לשבת עם יחד עם עוד מפתחים וללמוד אחד מהשני?
-                </li>
-
             </ul>
 
-            <p>
-                <b><i> זאת ההזדמנות שלך! </i></b>
-            </p>
-
-            <p>
-                הסדנא לידע ציבורי מזמינה אותך לתכנית יחודית למפתחי תוכנה.
-                <br/>
-                הצטרף אלינו לשישה שבועות של יצירה בסתיו הקרוב, ותוכל גם אתה להגשים חלום.
-            </p>
-
-        </div>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li class="divider"></li>
+                    <li class="active">
+                        <a href="#howitworks">איך זה עובד?</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#suggest">רעיונות למיזמים</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#luztech">לוח זמנים</a>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#mentors">צוות</a>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#sponsors">חסויות</a>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#faq">שאלות ותשובות</a>
+                    <li class="divider"></li>
+                </ul>
+            </section>
+        </nav>
     </div>
-</div>
 
-<div class="howitworks">
-    <div class="row">
-        <div class="large-12 columns">
-            <h2> איך זה עובד? </h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-9 columns">
-            <p>
-                <b> החל מה-14/10/2013 ולמשך שישה שבועות נפגש יחד, קבוצה של כעשרים מפתחי תוכנה ונעבוד יחד בימי שני וחמישי בקמפוס תל אביב של גוגל, נלמד זה ומזה ונבנה מיזמים נבחרים בתחום המידע הפתוח. </b>
-            </p>
-            <p>
-                התכנית  מיועדת למפתחים המוכנים להתחייב להגיע ל-8 שעות לפחות מדי שבוע (מ-10:00 עד 18:00 באחד מהימים או מ-18:00 עד 22:00 בשני הערבים), ותכלול ליווי והנחיה רצופה ממפתחים פעילים מהסדנא.  בהמשך נשתף פעולה גם עם מעצבים ואנשי תוכן מתנדבים בסדנא, ונכיר ונתרום גם לפרויקטים הקיימים של הסדנא כמו כנסת פתוחה או רשויות מקומיות פתוחות.
-            </p>
-        </div>
-        <div class="large-3 text-center columns">
-            <span class="button"> להרשמה </span>
-        </div>
-        </section>
-    </div>
-</div>
+    <div id="teaser">
+        <div class="row">
+            <div class="large-12 columns text-center">
 
-<div class="gotidea">
-    <div class="row">
-        <div class="large-12 columns">
-            <h2> יש לך רעיון למיזם? </h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-9 columns">
-
-            <p>
-                מהם הכבישים המסוכנים בארץ, וכיצד אפשר לראות אותם על מפה? איזה רשויות מקומיות משקיעות הכי הרבה משאבים בחינוך? איזה ישוב בארץ הכי רחוק מתחנה של טיפת חלב?  באיזה אזורים בארץ מתגלים באופן קבוע חריגות בשימוש המותר בחומרי הדברה?
-            </p>
-            <p>
-                סביר להניח שדו"ח בנושאים אלו שוכב לו במקום כלשהו, אבל בטוח שישנה דרך טובה יותר להנגיש אותו לציבור: על מפה, בנייד, על המחשב שלך, לפי העניינים שמעניינים אותך.
-            </p>
-            <p>
-                אם גם אתה חושב כך, אנחנו מחפשים רעיונות לפרויקטים קטנים, כאלו שניתן לסיים או להדגים במספר שבועות של פיתוח.
-            </p>
-            <p>
-                תחומי העיסוק שלנו הם <b>מידע וידע פתוח, אקטיביזם אזרחי וכמובן קוד פתוח</b>.
-            </p>
-            <p>
-                אם הרעיון הוא טוב - אנחנו נשמח להשקיע זמן ומאמץ להגשים אותו!
-            </p>
-            <p>
-                אל תהסס - הרשם לאתר והצע את הרעיון שלך עוד היום!
-            </p>
-        </div>
-        <div class="large-3 text-center columns">
-
-            <span class="button"> להצעת רעיון </span>
-
-        </div>
-    </div>
-</div>
-
-<div class="luztech">
-    <div class="row">
-        <div class="large-6 columns">
-            <div class="box">
-                <h2> לוח זמנים </h2>
                 <ul class="no-bullet">
                     <li>
-                        ספטמבר: הרשמה
+                        תמיד רצית לכתוב תוכנה למען החברה?
                     </li>
                     <li>
-                        תחילת אוקטובר: ימי מיון למועמדים
+                        תמיד רצית ללמוד לעבוד עם כלי קוד פתוח?
                     </li>
                     <li>
-                        10.10 ערב גיבוש למשתתפים
+                        תמיד רצית לפתח יישומי Web מתקדמים?
                     </li>
                     <li>
-                        שבוע 1: הכרות עם הסדנא והתנסות בטכנולוגיות בשימוש הסדנא
+                        תמיד רצית לשבת עם יחד עם עוד מפתחים וללמוד אחד מהשני?
                     </li>
-                    <li>
-                        שבוע 2: התחלת עבודה על מיזמים בזוגות
-                    </li>
-                    <li>
-                        שבוע 3: המשך עבודה על מיזמים בזוגות
-                    </li>
-                    <li>
-                        שבוע 4: שבוע פתוח בהשתתפות מעצבים ואנשי תוכן
-                    </li>
-                    <li>
-                        שבוע 5: שבוע כנסת פתוחה
-                    </li>
-                    <li>
-                        שבוע 6: עבודה במסגרת מיזמי הסדנא על פי בחירה
-                    </li>
-                    <li>
-                        25.11 : אירוע פתוח לציבור: סיכום והצגת תוצרים
-                    </li>
+
                 </ul>
-            </div>
-        </div>
-        <div class="large-6 columns">
-            <div class="box">
-                <h2> טכנולוגיות </h2>
-                <ul class="tech small-block-grid-2">
-                    <li>
-                        Git
-                    </li>
-                    <li>
-                        GitHub
-                    </li>
-                    <li>
-                        Python
-                    </li>
-                    <li>
-                        Django
-                    </li>
-                    <li>
-                        Linux
-                    </li>
-                    <li>
-                        Javascript
-                    </li>
-                    <li>
-                        jQuery
-                    </li>
-                    <li>
-                        HTML5
-                    </li>
-                    <li>
-                        CSS3
-                    </li>
-                    <li>
-                        LESS
-                    </li>
-                </ul>
+
+                <p>
+                    <b><i> זאת ההזדמנות שלך! </i></b>
+                </p>
+
+                <p>
+                    הסדנא לידע ציבורי מזמינה אותך לתכנית יחודית למפתחי תוכנה.
+                    <br/>
+                    הצטרף אלינו לשישה שבועות של יצירה בסתיו הקרוב, ותוכל גם אתה להגשים חלום.
+                </p>
+
             </div>
         </div>
     </div>
 
+    <div id="howitworks">
+        <div class="row">
+            <div class="large-12 columns">
+                <h2> איך זה עובד? </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-9 columns">
+                <p>
+                    <b> החל מה-14/10/2013 ולמשך שישה שבועות נפגש יחד, קבוצה של כעשרים מפתחי תוכנה ונעבוד יחד בימי שני וחמישי בקמפוס תל אביב של גוגל, נלמד זה ומזה ונבנה מיזמים נבחרים בתחום המידע הפתוח. </b>
+                </p>
+                <p>
+                    התכנית  מיועדת למפתחים המוכנים להתחייב להגיע ל-8 שעות לפחות מדי שבוע (מ-10:00 עד 18:00 באחד מהימים או מ-18:00 עד 22:00 בשני הערבים), ותכלול ליווי והנחיה רצופה ממפתחים פעילים מהסדנא.  בהמשך נשתף פעולה גם עם מעצבים ואנשי תוכן מתנדבים בסדנא, ונכיר ונתרום גם לפרויקטים הקיימים של הסדנא כמו כנסת פתוחה או רשויות מקומיות פתוחות.
+                </p>
+            </div>
+            <div class="large-3 text-center columns">
+                <span class="button"> להרשמה </span>
+            </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="suggest">
+        <div class="row">
+            <div class="large-12 columns">
+                <h2> יש לך רעיון למיזם? </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-9 columns">
+
+                <p>
+                    מהם הכבישים המסוכנים בארץ, וכיצד אפשר לראות אותם על מפה? איזה רשויות מקומיות משקיעות הכי הרבה משאבים בחינוך? איזה ישוב בארץ הכי רחוק מתחנה של טיפת חלב?  באיזה אזורים בארץ מתגלים באופן קבוע חריגות בשימוש המותר בחומרי הדברה?
+                </p>
+                <p>
+                    סביר להניח שדו"ח בנושאים אלו שוכב לו במקום כלשהו, אבל בטוח שישנה דרך טובה יותר להנגיש אותו לציבור: על מפה, בנייד, על המחשב שלך, לפי העניינים שמעניינים אותך.
+                </p>
+                <p>
+                    אם גם אתה חושב כך, אנחנו מחפשים רעיונות לפרויקטים קטנים, כאלו שניתן לסיים או להדגים במספר שבועות של פיתוח.
+                </p>
+                <p>
+                    תחומי העיסוק שלנו הם <b>מידע וידע פתוח, אקטיביזם אזרחי וכמובן קוד פתוח</b>.
+                </p>
+                <p>
+                    אם הרעיון הוא טוב - אנחנו נשמח להשקיע זמן ומאמץ להגשים אותו!
+                </p>
+                <p>
+                    אל תהסס - הרשם לאתר והצע את הרעיון שלך עוד היום!
+                </p>
+            </div>
+            <div class="large-3 text-center columns">
+
+                <span class="button"> להצעת רעיון </span>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="luztech">
+        <div class="row">
+            <div class="large-6 columns">
+                <div class="box">
+                    <h2> לוח זמנים </h2>
+                    <ul class="no-bullet">
+                        <li>
+                            ספטמבר: הרשמה
+                        </li>
+                        <li>
+                            תחילת אוקטובר: ימי מיון למועמדים
+                        </li>
+                        <li>
+                            10.10 ערב גיבוש למשתתפים
+                        </li>
+                        <li>
+                            שבוע 1: הכרות עם הסדנא והתנסות בטכנולוגיות בשימוש הסדנא
+                        </li>
+                        <li>
+                            שבוע 2: התחלת עבודה על מיזמים בזוגות
+                        </li>
+                        <li>
+                            שבוע 3: המשך עבודה על מיזמים בזוגות
+                        </li>
+                        <li>
+                            שבוע 4: שבוע פתוח בהשתתפות מעצבים ואנשי תוכן
+                        </li>
+                        <li>
+                            שבוע 5: שבוע כנסת פתוחה
+                        </li>
+                        <li>
+                            שבוע 6: עבודה במסגרת מיזמי הסדנא על פי בחירה
+                        </li>
+                        <li>
+                            25.11 : אירוע פתוח לציבור: סיכום והצגת תוצרים
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="large-6 columns">
+                <div class="box">
+                    <h2> טכנולוגיות </h2>
+                    <ul class="tech small-block-grid-2">
+                        <li>
+                            Git
+                        </li>
+                        <li>
+                            GitHub
+                        </li>
+                        <li>
+                            Python
+                        </li>
+                        <li>
+                            Django
+                        </li>
+                        <li>
+                            Linux
+                        </li>
+                        <li>
+                            Javascript
+                        </li>
+                        <li>
+                            jQuery
+                        </li>
+                        <li>
+                            HTML5
+                        </li>
+                        <li>
+                            CSS3
+                        </li>
+                        <li>
+                            LESS
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="mentors">
+        <div class="row">
+            <div class="large-12 columns">
+                <h2> צוות מלווה </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-3 small-6 columns text-center">
+                <div class="circular einstein"></div>
+            </div>
+            <div class="large-3 small-6 columns text-center">
+                <div class="circular einstein"></div>
+            </div>
+            <div class="large-3 small-6 columns text-center">
+                <div class="circular einstein"></div>
+            </div>
+            <div class="large-3 small-6 columns text-center">
+                <div class="circular einstein"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="sponsors">
+        <div class="row">
+            <div class="large-12 columns">
+                <h2> בחסות </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-4 columns sponsor">
+                <img src="https://lh4.googleusercontent.com/-FydqCOwISNc/AAAAAAAAAAI/AAAAAAAAACY/BqDb2KF5Bfg/photo.jpg">
+            </div>
+            <div class="large-4 columns sponsor">
+                <img src="http://www.10x.org.il/images/10x.png">
+            </div>
+            <div class="large-4 columns sponsor">
+                <span class="button"> מעוניין להעניק חסות? </span>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="faq">
+        <div class="row">
+            <div class="large-12 columns">
+                <h2> שאלות ותשובות </h2>
+            </div>
+        </div>
+        <div class="row">
+            <dl>
+                {% for l in faq %}
+                    <div class="large-6 columns">
+                        {% for q, a in l %}
+                            <dt>{{q}}</dt>
+                            <dd>
+                                {{a}}
+                            </dd>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </dl>
+        </div>
+
+    </div>
 </div>
-
-<div class="mentors">
-    <div class="row">
-        <div class="large-12 columns">
-            <h2> צוות מלווה </h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-3 columns">
-            <div class="circular einstein"></div>
-        </div>
-        <div class="large-3 columns">
-            <div class="circular einstein"></div>
-        </div>
-        <div class="large-3 columns">
-            <div class="circular einstein"></div>
-        </div>
-        <div class="large-3 columns">
-            <div class="circular einstein"></div>
-        </div>
-    </div>
-
-</div>
-
-<div class="sponsors">
-    <div class="row">
-        <div class="large-12 columns">
-            <h2> בחסות </h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-4 columns sponsor">
-            <img src="https://lh4.googleusercontent.com/-FydqCOwISNc/AAAAAAAAAAI/AAAAAAAAACY/BqDb2KF5Bfg/photo.jpg">
-        </div>
-        <div class="large-4 columns sponsor">
-            <img src="http://www.10x.org.il/images/10x.png">
-        </div>
-        <div class="large-4 columns sponsor">
-            <span class="button"> מעוניין להעניק חסות? </span>
-        </div>
-    </div>
-
-</div>
-
 {% endblock %}

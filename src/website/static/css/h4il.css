@@ -1,7 +1,17 @@
-.body {
+body {
+    font-family: 'Alef', sans-serif;
 }
 
-.intro {
+h2 {
+    margin-top: 35px;
+    color: white;
+}
+
+.contain-to-grid .top-bar, .top-bar {
+    margin-bottom: 0;
+}
+
+#intro {
     padding: 30px 0 0;
     background: url('../img/top-bg.jpg') no-repeat center center fixed;
     color: #eee;
@@ -9,50 +19,66 @@
     background-size: cover;
 }
 
-.intro h1 {
-    margin: 0;/
-    padding: 30px 0 10px;
+#intro h1 {
+    /*margin: 0;
+     padding: 30px 0 10px;*/
+    margin-bottom: 0;
     text-shadow: 4px 4px black;
     color: white;
-    font-family: 'Graduate', cursive;
+    /*font-family: 'Francois One', sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
     font-size: 3.4em;
 }
-.intro h1, h3 {
+#intro h1, h3 {
     color: white
 }
 
-.teaser {
+.toolbar {
+    background: black;
+}
+
+#teaser {
     background: #FF4400;
     color: white !important;
     font-size: 1.4em;
     padding: 10px 0;
 }
 
-.howitworks {
+#howitworks {
     background: blue;
     color: white !important;
     padding: 10px 0;
 }
 
-.gotidea {
+#suggest {
     background: green;
     color: white !important;
     padding: 10px 0;
 }
 
-.luztech {
+#luztech {
     background: brown;
     color: white !important;
     padding: 10px 0;
 }
 
-.luztech .box {
+#luztech .box {
     background: white;
     color: black;
 }
 
-.luztech .tech li {
+#luztech .box h2 {
+    color: black;
+}
+
+#luztech .tech li {
     text-align: center;
+}
+
+#mentors {
+    background: yellow;
+    color: white !important;
+    padding: 10px 0;
 }
 
 .circular {
@@ -64,12 +90,7 @@
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-}
-
-.mentors {
-    background: yellow;
-    color: white !important;
-    padding: 10px 0;
+    margin: 0 auto;
 }
 
 .circular.einstein {
@@ -77,15 +98,26 @@
     background-size: cover;
 }
 
-.sponsors {
+#sponsors {
     background: purple;
     color: white !important;
     padding: 10px 0;
 }
-.sponsors img {
+#sponsors img {
     height: 100px;
 }
-.sponsors .sponsor {
+#sponsors .sponsor {
     text-align: center;
 }
 
+#faq {
+    color: black;
+    padding: 10px 0;
+}
+
+#faq h2 {
+    color: black;
+}
+
+#faq dl {
+}
