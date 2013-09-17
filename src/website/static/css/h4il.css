@@ -17,27 +17,31 @@ h2 {
 
 #intro {
     padding: 30px 0 0;
-    background: url('../img/top-bg.jpg') no-repeat center center fixed;
-    color: #eee;
-    font-size: 130%;
+    background: url('../img/top-bg.jpg') no-repeat center center;
     background-size: cover;
+    color: #eee;
+}
+
+#intro .shady {
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    margin: 0 0 30px 0;
 }
 
 #intro h1 {
     margin-bottom: 0;
-    text-shadow: 4px 4px black;
+    text-shadow: 2px 2px black;
     color: white;
-    font-family: 'Montserrat', 'Alef', sans-serif;
-    font-size: 3.4em;
 }
 #intro h1, h3 {
-    color: white
+    color: white;
+    font-family: 'Montserrat', 'Alef', sans-serif;
 }
 
 .things {
     position:relative;
     display:inline-block;
-    width:100px;
+    width:42%;
     height:1em;
 }
 .things span{
@@ -48,7 +52,7 @@ h2 {
     -webkit-transition: opacity 1s ease-out;
     opacity: 0; 
     height: 0;
-    overflow: hidden;     
+    overflow: hidden;
 }
 .things span.active{
     opacity: 1;
@@ -60,10 +64,12 @@ h2 {
 }
 
 #teaser {
-    background: #FF4400;
+    background: #A7AF3F;
     color: white !important;
-    font-size: 1.4em;
     padding: 10px 0;
+}
+
+#teaser .button {
 }
 
 #howitworks {
