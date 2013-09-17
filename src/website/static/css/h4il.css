@@ -12,7 +12,7 @@ h2 {
 }
 
 .title-area h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Alef', sans-serif;
 }
 
 #intro {
@@ -27,7 +27,7 @@ h2 {
     margin-bottom: 0;
     text-shadow: 4px 4px black;
     color: white;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Alef', sans-serif;
     font-size: 3.4em;
 }
 #intro h1, h3 {
@@ -84,25 +84,42 @@ h2 {
     padding: 10px 0;
 }
 
-#luztech .box {
+.box {
     background: white;
     color: black;
     padding: 0 15px;
 }
 
-#luztech .box h2 {
+.box h2 {
     color: black;
     margin-bottom: 0;
 }
 
 
-#luztech .box ul {
+.box ul {
     padding: 0 20px;
 }
 
-#luztech .box li {
+.box li {
     margin:0;
     padding:0 0 3px;
+}
+
+
+#howitworks .box ul {
+    padding: 0 5px;
+}
+
+#howitworks .box li {
+    border-bottom: #ddd solid 1px;
+    padding:0.6em 0;
+}
+#howitworks .box li:last-child {
+}
+
+
+#howitworks .box li b{
+    font-size:1.2em;
 }
 
 
