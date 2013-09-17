@@ -64,9 +64,13 @@ h2 {
 }
 
 #teaser {
-    background: #A7AF3F;
+    background: #672115;
     color: white !important;
-    padding: 10px 0;
+    padding: 15px 0 0;
+}
+
+#teaser p{
+    margin-bottom: 5px;
 }
 
 #teaser .button {
