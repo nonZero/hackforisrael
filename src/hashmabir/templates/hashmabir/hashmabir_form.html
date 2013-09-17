@@ -3,12 +3,16 @@
 
 {% block content %}
 
-<h1>הציעו חשמביר חדש</h1>
-<form method="post">
-    <table>
-        {{ form }}
-        {% csrf_token %}
-    </table>
-    <input type="submit" value={% trans 'save' %}>
-</form>
+<div class="row">
+    <div class="columns large-16">
+        <h1>הציעו חשמביר חדש</h1>
+        <form method="post">
+            <table>
+                {{ form }}
+                {% csrf_token %}
+            </table>
+            <input type="submit" value={% trans 'save' %}>
+        </form>
+    </div>
+</div>
 {% endblock %}
