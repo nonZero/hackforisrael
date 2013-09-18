@@ -50,7 +50,7 @@ h2 {
     right:0;
     transition: opacity 0.8s ease-out;
     -webkit-transition: opacity 1s ease-out;
-    opacity: 0; 
+    opacity: 0;
     height: 0;
     overflow: hidden;
 }
@@ -88,8 +88,14 @@ h2 {
     padding: 10px 0;
 }
 
-#luztech {
+#luz {
     background: brown;
+    color: white !important;
+    padding: 10px 0;
+}
+
+#techs {
+    background: green;
     color: white !important;
     padding: 10px 0;
 }
@@ -133,7 +139,7 @@ h2 {
 }
 
 
-#luztech .tech li {
+#luz .tech .techs li {
     text-align: center;
 }
 
