@@ -39,7 +39,7 @@ TIME_ZONE = 'Asia/Jerusalem'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'he'
 
 SITE_ID = 1
 
@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'website',
     'q13es',
     'student_applications',
+    'hashmabir',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

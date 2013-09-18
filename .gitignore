@@ -14,3 +14,4 @@ venv/
 *.pot
 local_settings.py
 /static/
+src/h4il.db

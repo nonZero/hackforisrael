@@ -13,6 +13,9 @@ urlpatterns = patterns('',
     url(r'^faq/$', views.FAQView.as_view(), name='faq'),
     url(r'^program/$', views.website_view('program'), name='program'),
     url(r'^ideas/$', views.website_view('ideas'), name='ideas'),
+
+    url(r'^hashmabirs/', include('hashmabir.urls')),
+
     # url(r'^h4il/', include('h4il.foo.urls')),
 
     url(r'^dash/$', Dashboard.as_view(), name='dashboard'),
