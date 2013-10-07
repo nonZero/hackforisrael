@@ -55,7 +55,6 @@ class FillFormView(FormView):
     template_name = 'fill-form.html'
 
     def get_form_class(self):
-        logger.info("FOO")
         form_name = get_user_next_form(self.request.user)
         assert form_name
         return FORMS[form_name]
