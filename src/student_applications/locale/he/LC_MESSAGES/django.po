@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 21:58+0300\n"
+"POT-Creation-Date: 2013-10-07 23:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,55 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\views.py:68
+#: .\views.py:24
+msgid "control"
+msgstr "שליטה"
+
+#: .\views.py:27
+msgid "10 - Full control of the technology"
+msgstr "10 - שליטה מוחלטת בטכנולוגיה"
+
+#: .\views.py:28
+msgid "9"
+msgstr ""
+
+#: .\views.py:29
+msgid "8 - Considerable work experience (5+ years)"
+msgstr "8 - נסיון רב בטכנולוגיה (5+ שנים)"
+
+#: .\views.py:30
+msgid "7"
+msgstr ""
+
+#: .\views.py:31
+msgid "6 - Some parctical work experience (~ 1 year)"
+msgstr "6 - בעל נסיון פרקטי בטכנולוגיה (כשנת נסיון)"
+
+#: .\views.py:32
+msgid "5"
+msgstr ""
+
+#: .\views.py:33
+msgid "4 - Good informal knowledge or Formal Education"
+msgstr "4 - ידע בלתי פורמלי או פורמלי טוב בלבד"
+
+#: .\views.py:34
+msgid "3"
+msgstr ""
+
+#: .\views.py:35
+msgid "2 - Some knowledge"
+msgstr "2 - הכרות מסוימת"
+
+#: .\views.py:36
+msgid "1"
+msgstr ""
+
+#: .\views.py:37
+msgid "0 - No knowledge"
+msgstr "0 - ללא ידע בתחום"
+
+#: .\views.py:89
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
