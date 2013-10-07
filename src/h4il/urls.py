@@ -1,10 +1,9 @@
 from django.conf.urls import patterns, include, url
 from website import views
-from student_applications.views import Dashboard
+from student_applications.views import Dashboard, AllFormsView
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 
 urlpatterns = patterns('',
@@ -19,10 +18,13 @@ urlpatterns = patterns('',
     # url(r'^h4il/', include('h4il.foo.urls')),
 
     url(r'^dash/$', Dashboard.as_view(), name='dashboard'),
+    url(r'^all-forms/$', AllFormsView.as_view(), name='dashboard'),
+
+    url(r'^accounts/', include('allauth.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^hadmin/', include(admin.site.urls)),
 )

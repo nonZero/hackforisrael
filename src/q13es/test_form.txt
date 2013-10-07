@@ -1,0 +1,32 @@
+Test Form
+
+paragraph 1a
+paragraph 1b
+
+paragraph 2a
+paragraph 2b
+
+[name]
+What is your name?
+
+[father_name?]
+What is your father's name?
+
+[notes]
+Please write some notes
+
+text
+
+[color]
+What is your favourite color?
+
+radio:
+   * red
+   * green
+   * blue
+
+
+Please choose your
+favourite color.
+
+You can choose only one

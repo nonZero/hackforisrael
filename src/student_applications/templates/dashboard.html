@@ -2,6 +2,9 @@
 
 {% block content %}
 
-{{form}}
+{% for k, form in forms %}
+  <h1>k</h1>
+  {{form}}
+{% endfor %}
 
 {% endblock %}

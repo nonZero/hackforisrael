@@ -1,0 +1,38 @@
+טכנולוגיות Web
+
+[html]
+HTML
+
+שליטה
+
+[css]
+CSS
+
+שליטה
+
+[javascript]
+Javascript
+
+שליטה
+
+[php]
+php
+
+שליטה
+
+[django]
+Django
+
+שליטה
+
+[rails]
+Ruby On Rails
+
+שליטה
+
+[other_web]
+נסיון אחר בטכנולוגיות web
+
+טקסט
+
+במידה ויש לך ידע ונסיון רלוונטי בטכנולגיות WEB אחרות, אנא ציין זאת כאן.
