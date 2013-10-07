@@ -3,23 +3,13 @@ from django.utils.datastructures import SortedDict
 from django.utils.translation import gettext as _
 import re
 
-FIELDS = {
+FIELD_TYPES = {
             _("general"): forms.CharField,
             _("text"): (forms.CharField, {
                                            'widget': forms.Textarea,
                                           }),
             _("radio"): (forms.ChoiceField, {
                                            'widget': forms.RadioSelect,
-                                          }),
-            _("control"): (forms.ChoiceField, {
-                                           'widget': forms.RadioSelect,
-                                           'choices': (
-                                                       (5, _('Excellent')),
-                                                       (4, _('Good')),
-                                                       (3, _('Fair')),
-                                                       (2, _('Low')),
-                                                       (1, _('None')),
-                                                       ),
                                           }),
          }
 
@@ -96,12 +86,12 @@ def split_form_file(text):
     return head, fields
 
 
-def lookup_field_class_and_args(field_type, info):
+def lookup_field_class_and_args(field_type, info, field_types=FIELD_TYPES):
     """ lookups field definition and composes a tuple of:
         (field_class, kwargs)
     """
 
-    field_def = FIELDS[field_type if field_type else _('general')]
+    field_def = field_types[field_type if field_type else _('general')]
 
     field_class, base_args = field_def if isinstance(field_def, tuple) \
                                         else (field_def, {})
@@ -109,11 +99,6 @@ def lookup_field_class_and_args(field_type, info):
     args.update(info)
 
     return field_class, args
-
-
-# def build_field(fld_name, kw):
-#     cls, args = lookup_field_class_and_args(fld_name, kw)
-#     return cls(**args)
 
 
 def create_form(info):
@@ -138,14 +123,15 @@ def parse_form_head(text):
     return title, description
 
 
-def parse_form(text):
+def parse_form(text, field_types=FIELD_TYPES):
 
     head, fields = split_form_file(text)
 
     title, description = parse_form_head(head)
 
     get_field = lambda info, required: lookup_field_class_and_args(
-                              *parse_field(info, required=required))
+                              *parse_field(info, required=required), 
+                              field_types=field_types)
 
     fields_def = [(k, get_field(info, required)) for
                                 k, required, info in fields]
