@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView, View
 from django.views.generic.edit import FormView
-from q13es.forms import parse_form
+from q13es.forms import parse_form, get_pretty_answer
 from q13es.models import Answer
 import logging
 import os.path
@@ -69,7 +69,10 @@ class Dashboard(TemplateView, ProtectedMixin):
 
     def get_context_data(self, **kwargs):
         d = super(Dashboard, self).get_context_data(**kwargs)
-        d['forms'] = [(k, FORMS[k]) for k in FORM_NAMES]
+
+        d['answers'] = [get_pretty_answer(FORMS[a.q13e_slug], a.data)
+                        for a in self.request.user.answers.all()]
+
         return d
 
 
