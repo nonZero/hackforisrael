@@ -1,4 +1,4 @@
-from django import forms
+import floppyforms as forms
 from django.utils.datastructures import SortedDict
 from django.utils.translation import gettext as _
 import re

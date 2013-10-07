@@ -1,4 +1,3 @@
-from django import forms
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
@@ -6,6 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from q13es.forms import parse_form, FIELD_TYPES
 from q13es.models import Answer
+import floppyforms as forms
 import logging
 import os.path
 
@@ -21,20 +21,25 @@ def read_file(k):
 
 CUSTOM_FIELD_TYPES = FIELD_TYPES.copy()
 
+
+class ControlSelect(forms.RadioSelect):
+    template_name = 'student_applications/control.html'
+
+
 CUSTOM_FIELD_TYPES[_("control")] = (forms.ChoiceField, {
-       'widget': forms.RadioSelect,
+       'widget': ControlSelect,
        'choices': (
-                   (10, _('10 - Full control of the technology')),
-                   (9, _('9')),
-                   (8, _('8 - Considerable work experience (5+ years)')),
-                   (7, _('7')),
-                   (6, _('6 - Some parctical work experience (~ 1 year)')),
-                   (5, _('5')),
-                   (4, _('4 - Good informal knowledge or Formal Education')),
-                   (3, _('3')),
-                   (2, _('2 - Some knowledge')),
-                   (1, _('1')),
                    (0, _('0 - No knowledge')),
+                   (1, _('1')),
+                   (2, _('2 - Some knowledge')),
+                   (3, _('3')),
+                   (4, _('4 - Good informal knowledge or Formal Education')),
+                   (5, _('5')),
+                   (6, _('6 - Some parctical work experience')),
+                   (7, _('7')),
+                   (8, _('8 - Considerable work experience (2+ years)')),
+                   (9, _('9')),
+                   (10, _('10 - Full control of the technology')),
                    ),
       }
 )
