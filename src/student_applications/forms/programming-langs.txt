@@ -51,7 +51,7 @@ Python
 שליטה
 
 
-[other_languages]
+[other_languages?]
 שפות תכנות אחרות
 
 טקסט

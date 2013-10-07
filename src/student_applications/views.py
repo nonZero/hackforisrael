@@ -1,10 +1,15 @@
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from q13es.forms import parse_form
-from student_applications import forms
+from q13es.models import Answer
+import logging
 import os.path
 
 FORMS_DIR = os.path.join(os.path.dirname(__file__), 'forms')
+logger = logging.getLogger(__name__)
 
 
 def read_file(k):
@@ -27,13 +32,41 @@ FORM_NAMES = (
 FORMS = {k: parse_form(read_file(k)) for k in FORM_NAMES}
 
 
-class Dashboard(FormView):
+def get_user_forms(user):
+    return user.answers.values_list('q13e_slug', flat=True)
+
+
+def get_user_next_form(user):
+
+    filled = get_user_forms(user)
+
+    for f in FORM_NAMES:
+        if f not in filled:
+            return f
+
+    return None
+
+
+class Dashboard(TemplateView):
     template_name = 'dashboard.html'
-    # form_class = forms.PersonalDetailsForm
-    # form_class = forms.ApplicationForm
+
+
+class FillFormView(FormView):
+    template_name = 'fill-form.html'
 
     def get_form_class(self):
-        return  forms.ApplicationForm
+        logger.info("FOO")
+        form_name = get_user_next_form(self.request.user)
+        assert form_name
+        return FORMS[form_name]
+
+    def form_valid(self, form):
+        form_name = get_user_next_form(self.request.user)
+        logger.info("User %s filled %s" % (self.request.user, form_name))
+        Answer.objects.create(user=self.request.user, q13e_slug=form_name,
+                              data=form.cleaned_data)
+        messages.info(self.request, _("'%s' was saved.") % form.form_title)
+        return redirect('fill_form')
 
 
 class AllFormsView(TemplateView):
