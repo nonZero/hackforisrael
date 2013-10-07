@@ -30,7 +30,7 @@ Ruby On Rails
 
 שליטה
 
-[other_web]
+[other_web?]
 נסיון אחר בטכנולוגיות web
 
 טקסט
