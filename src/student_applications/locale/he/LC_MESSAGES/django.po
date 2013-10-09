@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-09 15:42+0300\n"
+"POT-Creation-Date: 2013-10-10 01:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,27 @@ msgstr ""
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\views.py:94
+#: .\views.py:131
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
+
+#: .\templates\fill-form.html.py:22
+msgid "Questionnare"
+msgstr "שאלון"
+
+#: .\templates\fill-form.html.py:22
+msgid "of"
+msgstr "מתוך"
+
+#: .\templates\fill-form.html.py:43
+msgid "Send"
+msgstr "שלח"
+
+#: .\templates\student_applications\base.html.py:16
+msgid "Sign Out"
+msgstr "יציאה"
+
+#: .\templates\student_applications\base.html.py:19
+msgid "You are logged in as"
+msgstr "אתה מחובר למערכת בתור"

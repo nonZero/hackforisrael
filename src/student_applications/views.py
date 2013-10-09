@@ -96,8 +96,12 @@ class Dashboard(TemplateView, ProtectedMixin):
     def get_context_data(self, **kwargs):
         d = super(Dashboard, self).get_context_data(**kwargs)
 
-        d['answers'] = [get_pretty_answer(FORMS[a.q13e_slug], a.data)
-                        for a in self.request.user.answers.all()]
+        def pretty(answer):
+            d = get_pretty_answer(FORMS[a.q13e_slug], a.data)
+            d['answer'] = answer
+            return d
+
+        d['answers'] = [pretty(a) for a in self.request.user.answers.all()]
 
         return d
 
@@ -110,7 +114,7 @@ class FillFormView(FormView, ProtectedMixin):
         if form is None:
             return redirect('dashboard')
 
-        return form
+        return super(FillFormView, self).dispatch(request, *args, **kwargs)
 
     def get_form_class(self):
         form_name = get_user_next_form(self.request.user)
@@ -125,11 +129,17 @@ class FillFormView(FormView, ProtectedMixin):
         Answer.objects.create(user=self.request.user, q13e_slug=form_name,
                               data=form.cleaned_data)
         messages.info(self.request, _("'%s' was saved.") % form.form_title)
+
+        # TODO: save personal details in User model
+
         return redirect('fill_form')
 
     def get_context_data(self, **kwargs):
         d = super(FillFormView, self).get_context_data(**kwargs)
-        d['progress'] = _("%d form(s) filled out of %d") % get_user_progress(self.request.user)
+        d['filled_count'], d['total_count'] = get_user_progress(
+                                                            self.request.user)
+        d['progress'] = int(100 * (d['filled_count'] + 1) /
+                             (d['total_count'] + 1))
         return d
 
 

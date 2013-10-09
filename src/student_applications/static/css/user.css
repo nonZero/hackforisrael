@@ -1,0 +1,83 @@
+.user-container {
+    margin-top: 20px;
+}
+
+.userpanel > .left {
+    margin-top: -7px;
+}
+
+.row .q13e-top {
+    margin-bottom: 1em;
+}
+.row .qprogress {
+    border: #ddd 1px solid;
+    padding: 0.2em 1em 0;
+    margin-top: -0.5em;
+    background: white;
+}
+
+.qprogress p{
+    margin-bottom: 0
+}
+
+.q13e h1 {
+    font-size: 2em;
+    margin:0;
+}
+
+.q13e .fc {
+    background: #f7f7f7;
+    padding: 9px 6px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+}
+
+.q13e .fc input,
+.q13e .fc textarea {
+    margin-bottom: 0;
+}
+
+.q13e .fc textarea {
+    min-height: 12em;
+    resize: vertical;
+}
+
+.q13e .fc > label {
+    font-size: 1em;
+}
+
+.q13e .fc label {
+    font-weight: bold;
+}
+
+.q13e p.helptext {
+    margin-top: 0em;
+    margin-bottom: 0;
+    padding: 0 0.2em;
+    font-style: italic;
+    line-height: 1.2em;
+}
+
+.q13e .choices {
+    margin-bottom: 0;
+}
+.q13e .choices > li {
+    margin-right: 1.5em;
+    list-style-type: none;
+    list-style-position: inside;
+    text-indent: -1.5em;
+    padding: 0 0 6px 0;
+    line-height: 0.8em;
+}
+.q13e .choices > li input {
+    width: 1.5em;
+}
+.q13e .choices > li label {
+    display: inline;
+}
+
+
+.section-container.vertical-tabs > section > .title, 
+.section-container.vertical-tabs > .section > .title {
+    overflow: hidden;
+}

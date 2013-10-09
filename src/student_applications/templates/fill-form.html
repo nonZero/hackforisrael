@@ -1,19 +1,38 @@
-{% extends 'website/base.html' %}
+{% extends 'student_applications/base.html' %}
+{% load i18n %}
 
 {% block content %}
 
-    <div class="row">
-        <div class="small-12 columns">
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+<div class="row">
+    <div class="small-12 columns">
 
-            <h1>{{progress}}</h1>
-            <h1>{{form.form_title}}</h1>
+        <div class="panel q13e">
+
+            <div class="row q13e-top">
+
+                <div class="large-8 columns">
+                    <h1>{{form.form_title}}</h1>
+                </div>
+
+                <div class="large-4 columns">
+                    <div class="qprogress">
+                        <div class="text-center">
+                            <p>
+                                <b>
+                                {% trans "Questionnare" %} {{filled_count|add:1}} {% trans "of" %} {{total_count}}
+                                </b>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="progress large-12">
+                                <span class="meter" style="width: {{progress}}%"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
             {% if form.form_description %}
             {{form.form_description|linebreaks}}
             {% endif %}
@@ -21,10 +40,11 @@
                 {% csrf_token %}
                 {{form.as_p}}
                 <p>
-                    <input type="submit"/>
+                    <input class="button" type="submit" value="{% trans "Send" %}"/>
                 </p>
             </form>
         </div>
     </div>
+</div>
 
 {% endblock %}

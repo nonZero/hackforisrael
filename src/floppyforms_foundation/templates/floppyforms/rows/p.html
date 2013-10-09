@@ -2,10 +2,10 @@
 {% with classes=field.css_classes label=label|default:field.label help_text=help_text|default:field.help_text %}
 {% block field %}
 {% block errors %}{% include "floppyforms/errors.html" with errors=field.errors %}{% endblock %}
-<p{% if classes or field.errors %} class="{{ classes }}{% if field.errors %} error{% endif %}"{% endif %}>
+<div class="fc {{ classes }}{% if field.errors %} error{% endif %}">
     {% block label %}{% if field|id %}<label for="{{ field|id }}">{% endif %}{{ label }}{% if label|last not in ".:!?" %}:{% endif %}{% if field|id %}</label>{% endif %}{% endblock %}
     {% block widget %}{% formfield field %}{% endblock %}
-    {% block help_text %}{% if help_text %}<span class="helptext">{{ help_text }}</span>{% endif %}{% endblock %}
+    {% block help_text %}{% if help_text %}<p class="helptext">{{ help_text }}</p>{% endif %}{% endblock %}
     {% block hidden_fields %}{% for field in hidden_fields %}{{ field.as_hidden }}{% endfor %}{% endblock %}
-</p>{% endblock %}
+</div>{% endblock %}
 {% endwith %}{% endfor %}{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'website/base.html' %}
+{% load i18n %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+{% endblock %}
+
+{% block content_container %}
+    <div class="user-container">
+        <div class="row">
+            <div class="columns large-12">
+                <div class="panel">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

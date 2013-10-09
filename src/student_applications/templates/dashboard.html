@@ -1,19 +1,29 @@
-{% extends 'website/base.html' %}
+{% extends 'student_applications/base.html' %}
 
 {% block content %}
+
 <div class="row">
     <div class="columns large-12">
-        {% for a in answers %}
-            <div class="panel">
-                <h1>{{a.title}}</h1>
-                <dl>
-                  {% for field in a.fields %}
-                        <dt>{{field.label}}</dt>
-                        <dd>{{field.html}}</dd>
-                  {% endfor %}
-                </dl>
-            </div>
-        {% endfor %}
+        <div class="section-container vertical-tabs" data-section="vertical-tabs">
+            {% for a in answers %}
+                <section>
+                    <p class="title" data-section-title><a href="#">{{forloop.counter}}. {{a.title}}</a></p>
+                    <div class="content" data-section-content>
+                        <dl>
+                            {% for field in a.fields %}
+                                {% if field.html %}
+                                      <dt>{{field.label}}</dt>
+                                      <dd>{{field.html|linebreaksbr}}</dd>
+                                {% endif %}
+                            {% endfor %}
+                        </dl>
+                        <p><i>
+                            <span class="radius secondary label">{{a.answer.created_at}}</span>
+                        </i></p>
+                    </div>
+                </section>
+            {% endfor %}
+        </div>
     </div>
  </div>
 

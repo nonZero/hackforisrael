@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="{{STATIC_URL}}css/foundation.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/h4il.css">
 
+        {% block extra_css %}
+        {% endblock %}
+
         <script src="{{STATIC_URL}}js/vendor/custom.modernizr.js"></script>
 
 
@@ -54,14 +57,16 @@
                                 <a href="{% url 'ideas' %}">רעיונות למיזמים</a>
                             </li>
                             <li>
-                                <a class="button" href="#">להרשמה</a>
+                                <a class="button" href="{% url 'dashboard' %}">
+                                    להרשמה
+                                </a>
                             </li>
                         </ul>
                     </section>
                 </nav>
             </div>
 
-            {% block content %}
+            {% block content_container %}
             {% endblock %}
 
             <div id="sponsors">

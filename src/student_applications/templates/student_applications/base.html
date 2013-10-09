@@ -1,0 +1,43 @@
+{% extends 'website/base.html' %}
+{% load i18n %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+{% endblock %}
+
+{% block content_container %}
+    <div class="user-container">
+        <div class="row">
+            <div class="columns large-12">
+                <div class="panel userpanel">
+                    <div class="left">
+                        <form method="post" action="{% url 'account_logout' %}">
+                          {% csrf_token %}
+                          <button type="submit" class="small">{% trans 'Sign Out' %}</button>
+                        </form>
+                    </div>
+                    {% trans "You are logged in as" %} {{user.email}}
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+            <div class="panel">
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

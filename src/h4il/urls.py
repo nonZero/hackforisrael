@@ -19,7 +19,7 @@ urlpatterns = patterns('',
 
     url(r'^dashboard/$', Dashboard.as_view(), name='dashboard'),
     url(r'^form/$', FillFormView.as_view(), name='fill_form'),
-    url(r'^all-forms/$', AllFormsView.as_view(), name='dashboard'),
+    url(r'^all-forms/$', AllFormsView.as_view(), name='all_forms'),
 
     url(r'^accounts/', include('allauth.urls')),
 

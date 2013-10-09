@@ -18,7 +18,7 @@ Subversion, CVS, SourceSafe or other non-DCVS source control system
 
 
 [linux]
-Linux / Unix / BD
+Linux / Unix / BSD
 
 רדיו:
   * ללא ידע או נסיון

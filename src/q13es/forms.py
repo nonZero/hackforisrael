@@ -144,6 +144,10 @@ def parse_form(text, field_types=FIELD_TYPES):
 
 
 def get_pretty_answer(form_class, data):
-    return {"title": form_class.form_title,
-            "fields": [{"label": form_class.base_fields[k].label, "html": v} for (k, v) in data.items()]
+    return {
+            "title": form_class.form_title,
+            "fields": [{
+                        "label": form_class.base_fields[k].label,
+                        "html": v
+                       } for (k, v) in data.items()]
            }
