@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 01:09+0300\n"
+"POT-Creation-Date: 2013-10-09 15:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,6 @@ msgid "1"
 msgstr ""
 
 #: .\views.py:34
-#, fuzzy
 msgid "2 - Some knowledge"
 msgstr "2 - הכרות מסוימת"
 
@@ -34,7 +33,6 @@ msgid "3"
 msgstr ""
 
 #: .\views.py:36
-#, fuzzy
 msgid "4 - Good informal knowledge or Formal Education"
 msgstr "4 - ידע פורמלי בלבד"
 
@@ -43,7 +41,6 @@ msgid "5"
 msgstr ""
 
 #: .\views.py:38
-#, fuzzy
 msgid "6 - Some parctical work experience"
 msgstr "6 - נסיון פרקטי מועט"
 
@@ -52,7 +49,6 @@ msgid "7"
 msgstr ""
 
 #: .\views.py:40
-#, fuzzy
 msgid "8 - Considerable work experience (2+ years)"
 msgstr "8 - נסיון משמעותי (2+ שנים)"
 
@@ -61,11 +57,10 @@ msgid "9"
 msgstr ""
 
 #: .\views.py:42
-#, fuzzy
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\views.py:95
+#: .\views.py:94
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
