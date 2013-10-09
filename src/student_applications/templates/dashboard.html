@@ -1,10 +1,20 @@
-{% extends 'website\base.html' %}
+{% extends 'website/base.html' %}
 
 {% block content %}
-
-{% for k, form in forms %}
-  <h1>k</h1>
-  {{form}}
-{% endfor %}
+<div class="row">
+    <div class="columns large-12">
+        {% for a in answers %}
+            <div class="panel">
+                <h1>{{a.title}}</h1>
+                <dl>
+                  {% for field in a.fields %}
+                        <dt>{{field.label}}</dt>
+                        <dd>{{field.html}}</dd>
+                  {% endfor %}
+                </dl>
+            </div>
+        {% endfor %}
+    </div>
+ </div>
 
 {% endblock %}

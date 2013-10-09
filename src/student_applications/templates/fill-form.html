@@ -1,4 +1,4 @@
-{% extends 'website\base.html' %}
+{% extends 'website/base.html' %}
 
 {% block content %}
 
@@ -12,6 +12,7 @@
                 </ul>
             {% endif %}
 
+            <h1>{{progress}}</h1>
             <h1>{{form.form_title}}</h1>
             {% if form.form_description %}
             {{form.form_description|linebreaks}}
