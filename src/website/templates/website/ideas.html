@@ -32,9 +32,10 @@
                 </p>
             </div>
             <div class="large-3 text-center columns">
-
-                <a href="{% url 'hashmabir_create' %}"><span class="button"> להצעת רעיון </span></a>
-
+                {% include "website/_add_idea_button.html" %}
+                <p>
+                    <a href="{% url 'hashmabir_list' %}">רשימת הרעיונות</a>
+                </p>
             </div>
         </div>
     </div>
