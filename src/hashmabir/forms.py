@@ -10,3 +10,11 @@ class HashmabirForm(forms.ModelForm):
                   'title',
                   'content',
                   )
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(HashmabirForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        self.instance.created_by = self.user
+        return super(HashmabirForm, self).save(commit)

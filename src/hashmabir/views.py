@@ -13,6 +13,11 @@ class HashmabirCreateView(CreateView, ProtectedMixin):
     model = Hashmabir
     form_class = forms.HashmabirForm
 
+    def get_form_kwargs(self):
+        d = super(HashmabirCreateView, self).get_form_kwargs()
+        d['user'] = self.request.user
+        return d
+
 
 class HashmabirDetailView(DetailView):
     model = Hashmabir

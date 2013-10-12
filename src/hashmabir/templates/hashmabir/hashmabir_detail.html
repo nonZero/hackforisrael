@@ -1,7 +1,7 @@
 {% extends 'website/base.html' %}
 {% load i18n %}
 
-{% block content %}
+{% block content_container %}
 <div class="row">
     <div class="columns large-16">
 
@@ -10,23 +10,7 @@
         </h1>
 
         <div class="panel">
-            <dl>
-                <dt>{% trans 'Content domain' %}</dt>
-                <dd>{{object.content_domain|urlize|linebreaks}}
-
-                <dt>{% trans 'Vision' %}</dt>
-                <dd>{{object.vision|urlize|linebreaks}}
-
-                <dt>{% trans 'Target audience' %}</dt>
-                <dd>{{object.target_audience|urlize|linebreaks}}
-
-                <dt>{% trans 'Similar projects' %}</dt>
-                <dd>{{object.similar_projects|urlize|linebreaks}}
-
-                <dt>{% trans 'Contact info' %}</dt>
-                <dd>{{object.contact_info|urlize|linebreaks}}
-
-            </dl>
+            {{object.content|safe}}
         </div>
 
     </div>

@@ -1,4 +1,4 @@
-{% extends 'website/base.html' %}
+{% extends 'users/base.html' %}
 {% load i18n %}
 
 {% block content %}
@@ -7,12 +7,35 @@
     <div class="columns large-16">
         <h1>הציעו חשמביר חדש</h1>
         <form method="post">
-            <table>
-                {{ form }}
-                {% csrf_token %}
-            </table>
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
             <input type="submit" value={% trans 'save' %}>
+
         </form>
     </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{STATIC_URL}}tinymce/tinymce.min.js"></script>
+<script>
+    $(function() {
+        tinymce.init({
+            selector:'textarea.wysiwyg',
+            script_url : '{{STATIC_URL}}tinymce/tinymce.min.js',
+            directionality : 'rtl',
+            language : 'he_IL',
+            menubar : false,
+            toolbar_items_size : 'small',
+            content_css : "/static/m/tinymce.css",
+            toolbar : "numlist bullist | alignjustify alignright aligncenter alignleft | underline italic bold",
+        });
+    });
+</script>
+
 {% endblock %}
