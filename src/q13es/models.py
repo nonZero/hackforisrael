@@ -11,3 +11,6 @@ class Answer(models.Model):
 
     class Meta:
         unique_together = (('user', 'q13e_slug'),)
+
+    def __unicode__(self):
+        return u"%s: %s (%s)" % (self.user, self.q13e_slug, self.created_at)

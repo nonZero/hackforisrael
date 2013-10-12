@@ -1,15 +1,18 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView, View
 from django.views.generic.edit import FormView
+from h4il.base_views import ProtectedMixin
 from q13es.forms import parse_form, FIELD_TYPES, get_pretty_answer
 from q13es.models import Answer
 import floppyforms as forms
 import logging
 import os.path
+
+REQUIRED_FIELD = _("Required field")  # override floppyforms-foundation i18n
 
 FORMS_DIR = os.path.join(os.path.dirname(__file__), 'forms')
 logger = logging.getLogger(__name__)
@@ -78,43 +81,48 @@ def get_user_progress(user):
     return len(get_user_forms(user)), len(FORMS)
 
 
-class ProtectedMixin(View):
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(ProtectedMixin, self).dispatch(request, *args, **kwargs)
+class UserViewMixin(ProtectedMixin):
+
+    def get_context_data(self, **kwargs):
+        d = super(UserViewMixin, self).get_context_data(**kwargs)
+
+        d['filled_count'], d['total_count'] = get_user_progress(
+                                                            self.request.user)
+        d['progress'] = int(100 * (d['filled_count'] + 1) /
+                             (d['total_count'] + 1))
+
+        return d
 
 
-class Dashboard(TemplateView, ProtectedMixin):
+class Dashboard(UserViewMixin, TemplateView):
     template_name = 'dashboard.html'
-
-    def get(self, request, *args, **kwargs):
-        if get_user_next_form(request.user):
-            return redirect('fill_form')
-
-        return super(Dashboard, self).get(self, request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         d = super(Dashboard, self).get_context_data(**kwargs)
 
         def pretty(answer):
-            d = get_pretty_answer(FORMS[a.q13e_slug], a.data)
-            d['answer'] = answer
-            return d
+            dct = get_pretty_answer(FORMS[a.q13e_slug], a.data)
+            dct['answer'] = answer
+            return dct
 
-        d['answers'] = [pretty(a) for a in self.request.user.answers.all()]
+        d['registered'] = get_user_next_form(self.request.user) is None
+
+        if d['registered']:
+            d['answers'] = [pretty(a) for a in self.request.user.answers.all()]
 
         return d
 
 
-class FillFormView(FormView, ProtectedMixin):
-    template_name = 'fill-form.html'
+class RegisterView(UserViewMixin, FormView):
+    template_name = 'register.html'
 
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         form = self.get_form_class()
         if form is None:
             return redirect('dashboard')
 
-        return super(FillFormView, self).dispatch(request, *args, **kwargs)
+        return super(RegisterView, self).dispatch(request, *args, **kwargs)
 
     def get_form_class(self):
         form_name = get_user_next_form(self.request.user)
@@ -125,22 +133,22 @@ class FillFormView(FormView, ProtectedMixin):
 
     def form_valid(self, form):
         form_name = get_user_next_form(self.request.user)
+
         logger.info("User %s filled %s" % (self.request.user, form_name))
+
         Answer.objects.create(user=self.request.user, q13e_slug=form_name,
                               data=form.cleaned_data)
-        messages.info(self.request, _("'%s' was saved.") % form.form_title)
+        messages.success(self.request, _("'%s' was saved.") % form.form_title)
 
         # TODO: save personal details in User model
 
-        return redirect('fill_form')
+        return redirect('register')
 
-    def get_context_data(self, **kwargs):
-        d = super(FillFormView, self).get_context_data(**kwargs)
-        d['filled_count'], d['total_count'] = get_user_progress(
-                                                            self.request.user)
-        d['progress'] = int(100 * (d['filled_count'] + 1) /
-                             (d['total_count'] + 1))
-        return d
+    def form_invalid(self, form):
+        messages.warning(self.request,
+                         _("Problems detected in form. "
+                           "Please fix your errors and try again."))
+        return FormView.form_invalid(self, form)
 
 
 class AllFormsView(TemplateView, ProtectedMixin):

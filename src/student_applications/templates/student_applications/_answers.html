@@ -1,0 +1,28 @@
+{% load i18n %}
+
+<div class="section-container vertical-tabs" data-section="vertical-tabs">
+    {% for a in answers %}
+        <section>
+            <p class="title" data-section-title>
+                <a href="#">{{forloop.counter}}. {{a.title}}</a>
+            </p>
+            <div class="content" data-section-content>
+                <dl>
+                    {% for field in a.fields %}
+                        {% if field.html %}
+                            <dt>
+                                {{field.label}}
+                            </dt>
+                            <dd>
+                                {{field.html|linebreaksbr}}
+                            </dd>
+                        {% endif %}
+                    {% endfor %}
+                </dl>
+                <p>
+                    <i> <span class="radius secondary label">{{a.answer.created_at}}</span> </i>
+                </p>
+            </div>
+        </section>
+    {% endfor %}
+</div>

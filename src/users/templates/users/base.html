@@ -7,6 +7,7 @@
 
 {% block content_container %}
     <div class="user-container">
+
         <div class="row">
             <div class="columns large-12">
                 <div class="panel userpanel">
@@ -21,18 +22,7 @@
             </div>
         </div>
 
-        {% if messages %}
-            <div class="panel">
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                            {{ message }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-
+        {% include 'users/_messages.html' %}
 
         <div>
             {% block content %}

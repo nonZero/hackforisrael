@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 01:54+0300\n"
+"POT-Creation-Date: 2013-10-12 21:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,75 +12,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\views.py:29
+#: .\views.py:15
+msgid "Required field"
+msgstr "שדה חובה"
+
+#: .\views.py:32
 msgid "control"
 msgstr "שליטה"
 
-#: .\views.py:32
+#: .\views.py:35
 msgid "0 - No knowledge"
 msgstr "0 - ללא ידע בתחום"
 
-#: .\views.py:33
+#: .\views.py:36
 msgid "1"
-msgstr ""
+msgstr "1"
 
-#: .\views.py:34
+#: .\views.py:37
 msgid "2 - Some knowledge"
 msgstr "2 - הכרות מסוימת"
 
-#: .\views.py:35
+#: .\views.py:38
 msgid "3"
-msgstr ""
+msgstr "3"
 
-#: .\views.py:36
+#: .\views.py:39
 msgid "4 - Good informal knowledge or Formal Education"
 msgstr "4 - ידע פורמלי בלבד"
 
-#: .\views.py:37
+#: .\views.py:40
 msgid "5"
-msgstr ""
+msgstr "5"
 
-#: .\views.py:38
+#: .\views.py:41
 msgid "6 - Some parctical work experience"
 msgstr "6 - נסיון פרקטי מועט"
 
-#: .\views.py:39
+#: .\views.py:42
 msgid "7"
-msgstr ""
+msgstr "7"
 
-#: .\views.py:40
+#: .\views.py:43
 msgid "8 - Considerable work experience (2+ years)"
 msgstr "8 - נסיון משמעותי (2+ שנים)"
 
-#: .\views.py:41
+#: .\views.py:44
 msgid "9"
-msgstr ""
+msgstr "9"
 
-#: .\views.py:42
+#: .\views.py:45
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\views.py:131
+#: .\views.py:139
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: .\templates\fill-form.html.py:22
-msgid "Questionnare"
-msgstr "שאלון"
+#: .\views.py:147
+msgid "Problems detected in form. Please fix your errors and try again."
+msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
 
-#: .\templates\fill-form.html.py:22
-msgid "of"
-msgstr "מתוך"
+#: .\templates\dashboard.html.py:37
+msgid "Continue Registration"
+msgstr "המשך בהרשמה"
 
-#: .\templates\fill-form.html.py:43
+#: .\templates\dashboard.html.py:39
+msgid "Start Registration"
+msgstr "התחל הרשמה"
+
+#: .\templates\fill-form.html.py:31
 msgid "Send"
 msgstr "שלח"
 
-#: .\templates\student_applications\base.html.py:16
+#: .\templates\student_applications\_progress.html.py:7
+msgid "Questionnare"
+msgstr "שאלון"
+
+#: .\templates\student_applications\_progress.html.py:7
+msgid "of"
+msgstr "מתוך"
+
 msgid "Sign Out"
 msgstr "יציאה"
 
-#: .\templates\student_applications\base.html.py:19
 msgid "You are logged in as"
 msgstr "אתה מחובר למערכת בתור"

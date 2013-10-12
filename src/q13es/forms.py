@@ -130,7 +130,7 @@ def parse_form(text, field_types=FIELD_TYPES):
     title, description = parse_form_head(head)
 
     get_field = lambda info, required: lookup_field_class_and_args(
-                              *parse_field(info, required=required), 
+                              *parse_field(info, required=required),
                               field_types=field_types)
 
     fields_def = [(k, get_field(info, required)) for
@@ -144,10 +144,24 @@ def parse_form(text, field_types=FIELD_TYPES):
 
 
 def get_pretty_answer(form_class, data):
+
+    # get field labels from original form
+
+    fields = [{
+                        "key": k,
+
+                        "label": form_class.base_fields[k].label if k in
+                            form_class.base_fields else k,
+
+                        "html": v  # TODO FORMAT
+
+                       } for (k, v) in data.items()]
+
+    # order form formss base_fields SortedDict.
+    sortkey = dict([(k, i) for i, k in enumerate(form_class.base_fields)])
+    fields.sort(key=lambda x: sortkey[x['key']] if x['key'] in sortkey else -1)
+
     return {
             "title": form_class.form_title,
-            "fields": [{
-                        "label": form_class.base_fields[k].label,
-                        "html": v
-                       } for (k, v) in data.items()]
+            "fields": fields
            }

@@ -1,0 +1,38 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="register row">
+    <div class="small-12 columns">
+
+        <div class="panel q13e">
+
+            <div class="row q13e-top">
+
+                <div class="large-3 columns">
+                    {% include 'student_applications/_progress.html' %}
+                </div>
+
+                <div class="large-9 columns">
+                    <h1>{{form.form_title}}</h1>
+                </div>
+
+            </div>
+
+            {% if form.form_description %}
+                {{form.form_description|linebreaks}}
+            {% endif %}
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {{form.as_p}}
+                <p>
+                    <input class="button" type="submit" value="{% trans "Send" %}"/>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
