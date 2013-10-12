@@ -93,8 +93,3 @@ msgstr "שאלון"
 msgid "of"
 msgstr "מתוך"
 
-msgid "Sign Out"
-msgstr "יציאה"
-
-msgid "You are logged in as"
-msgstr "אתה מחובר למערכת בתור"
