@@ -33,3 +33,6 @@ class HackitaUserManager(UserManager):
 class HackitaUser(AbstractUser):
 
     objects = HackitaUserManager()
+
+    def __unicode__(self):
+        return self.email

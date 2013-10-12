@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-12 21:49+0300\n"
+"POT-Creation-Date: 2013-10-12 23:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,24 +64,32 @@ msgstr "9"
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\views.py:139
+#: .\views.py:147
+msgid "Registration completed! Thank you very much!"
+msgstr "ההרשמה הסתיימה! תודה רבה!"
+
+#: .\views.py:150
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: .\views.py:147
+#: .\views.py:156
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
 
-#: .\templates\dashboard.html.py:37
+#: .\templates\dashboard.html.py:12
+msgid "Registration Details"
+msgstr "פרטי ההרשמה"
+
+#: .\templates\dashboard.html.py:21
 msgid "Continue Registration"
 msgstr "המשך בהרשמה"
 
-#: .\templates\dashboard.html.py:39
+#: .\templates\dashboard.html.py:23
 msgid "Start Registration"
 msgstr "התחל הרשמה"
 
-#: .\templates\fill-form.html.py:31
+#: .\templates\register.html.py:31
 msgid "Send"
 msgstr "שלח"
 
@@ -92,4 +100,3 @@ msgstr "שאלון"
 #: .\templates\student_applications\_progress.html.py:7
 msgid "of"
 msgstr "מתוך"
-

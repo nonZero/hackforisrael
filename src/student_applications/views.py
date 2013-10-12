@@ -56,6 +56,7 @@ FORM_NAMES = (
     'software-development',
     'web-technologies',
     'social-activity',
+    'cohort1',
     'program',
     )
 
@@ -138,9 +139,15 @@ class RegisterView(UserViewMixin, FormView):
 
         Answer.objects.create(user=self.request.user, q13e_slug=form_name,
                               data=form.cleaned_data)
-        messages.success(self.request, _("'%s' was saved.") % form.form_title)
 
         # TODO: save personal details in User model
+
+        if get_user_next_form(self.request.user) is None:
+            messages.success(self.request,
+                             _("Registration completed! Thank you very much!"))
+            return redirect('dashboard')
+
+        messages.success(self.request, _("'%s' was saved.") % form.form_title)
 
         return redirect('register')
 

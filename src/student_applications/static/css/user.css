@@ -1,3 +1,8 @@
+h2 {
+    margin-top: 5px;
+    color: black;
+}
+
 .alert-box.warning {
     background-color: #c60f13;
     border-color: #970b0e;
