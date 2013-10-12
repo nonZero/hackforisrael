@@ -20,7 +20,7 @@ msgstr ""
 
 #: models.py:6
 msgid "Title"
-msgstr "שם"
+msgstr "כותרת"
 
 #: models.py:7
 msgid "Description"
