@@ -20,17 +20,21 @@
     border: #ddd 1px solid;
     padding: 0.2em 1em 0;
     background: white;
-    margin-top: 0.5em;
+    margin-top: 0;
 }
 
 @media only screen and (min-width: 768px) {
     .row.register .qprogress {
-        margin-top: 0em;
     }
 }
 
 .qprogress p{
     margin-bottom: 0
+}
+
+.q13e {
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
 }
 
 .q13e h1 {
@@ -75,7 +79,7 @@
     margin-bottom: 0;
 }
 
-.q13e .error .choices {
+.q13e .error .choices, .q13e .error .controlfield {
     border: 1px solid #c60f13;
 }
 
@@ -98,8 +102,19 @@
     margin-top: 0;
 }
 
+.q13e .form-actions input {
+    margin:0;
+}
 
-.section-container.vertical-tabs > section > .title, 
+.control-legend label {
+    display:inline-block;
+    background: #e0e0e0;
+    padding: 3px 2px;
+    margin-left:5px
+}
+
+
+.section-container.vertical-tabs > section > .title,
 .section-container.vertical-tabs > .section > .title {
     overflow: hidden;
 }

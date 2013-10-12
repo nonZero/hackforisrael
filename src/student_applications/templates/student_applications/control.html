@@ -1,30 +1,34 @@
-{% for group_name, choices in optgroups %}
-    <div class="row">
-        {% for choice in choices %}
-            <div class="columns small-1 text-center">
-                <label for="{{ attrs.id }}_{{ forloop.counter }}">
-                    <input type="radio" id="{{ attrs.id }}_{{ forloop.counter }}" value="{{ choice.0 }}" name="{{ name }}"{% if required %} required{% endif %}{% if choice.0 in value %} checked{% endif %}>
-                    {{ choice.0 }}
-                </label>
-            </div>
-            <div class="columns small-2">
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="row">
-
-        <div class="columns large-12">
+<div class="controlfield clearfix">
+    {% for group_name, choices in optgroups %}
+        <div class="row">
             {% for choice in choices %}
-                    {% if choice.1|length > 1 %}
-                        <label for="{{ attrs.id }}_{{ forloop.counter }}" style="display:inline;background: #eee;margin-left:5px">
-                            {{ choice.1 }}
-                        </label>
-                        {% if not forloop.last %}
-                        
-                        {% endif %}
-                    {% endif %}
+                <div class="columns small-1 text-center">
+                    <label for="{{ attrs.id }}_{{ forloop.counter }}">
+                        <input type="radio" 
+                            id="{{ attrs.id }}_{{ forloop.counter }}" 
+                            value="{{ choice.0 }}" 
+                            name="{{ name }}"
+                            {% if required %} required{% endif %}
+                            {% if choice.0 in value %} checked{% endif %}>
+                        {{ choice.0 }}
+                    </label>
+                </div>
+                <div class="columns small-2">
+                </div>
             {% endfor %}
         </div>
-    </div>
-{% endfor %}
+
+        <div class="row clearfix">
+
+            <div class="columns large-12 control-legend">
+                {% for choice in choices %}
+                        {% if choice.1|length > 1 %}
+                            <label for="{{ attrs.id }}_{{ forloop.counter }}">
+                                {{ choice.1 }}
+                            </label>
+                        {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

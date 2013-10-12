@@ -27,9 +27,9 @@
             <form method="post" novalidate>
                 {% csrf_token %}
                 {{form.as_p}}
-                <p>
+                <div class="form-actions">
                     <input class="button" type="submit" value="{% trans "Send" %}"/>
-                </p>
+                </div>
             </form>
         </div>
     </div>
