@@ -171,11 +171,26 @@ h2 {
 }
 
 #sponsors {
-    background: white;
-    padding: 10px 0;
+    background: #F7F7F7;
+    padding: 20px;
     color: black;
 }
-#sponsors img {
+
+.hasadna {
+    font-size: 40px;
+}
+
+#sponsors .x {
+    background: white;
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+#sponsors .ctlvtxt {
+    line-height: 100px;
+}
+
+#sponsors .ctlv {
     height: 100px;
 }
 #sponsors .sponsor {
