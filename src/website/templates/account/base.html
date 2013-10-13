@@ -1,21 +1,11 @@
-{% extends 'website/base.html' %}
-{% load i18n %}
+{% extends 'users/basebase.html' %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
-{% endblock %}
-
-{% block content_container %}
-    <div class="user-container">
-
-        {% include 'users/_messages.html' %}
-
-        <div class="row">
-            <div class="columns large-12">
-                <div class="panel">
-                    {% block content %}
-                    {% endblock %}
-                </div>
+{% block page_content %}
+    <div class="row">
+        <div class="columns large-12">
+            <div class="panel">
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </div>
