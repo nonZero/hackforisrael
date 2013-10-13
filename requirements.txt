@@ -1,7 +1,10 @@
 Django==1.5.4
 django-extensions==1.2.1
-django-allauth==0.13.0
 django-floppyforms==1.1
 django-debug-toolbar==0.9.4
+
+# allauth with trnslation to hebrew, requires git installed :-)
+# django-allauth==0.13.0
+-e git+git@github.com:nonZero/django-allauth.git@3a40e195b8b9a559eea8ab935a787139087995b9#egg=django_allauth-dev
 
 ipython==1.1.0
