@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from website import views
-from student_applications.views import Dashboard, AllFormsView, RegisterView
+from student_applications import views as sa_views
 
 from django.contrib import admin
 admin.autodiscover()
@@ -17,9 +17,9 @@ urlpatterns = patterns('',
 
     # url(r'^h4il/', include('h4il.foo.urls')),
 
-    url(r'^dashboard/$', Dashboard.as_view(), name='dashboard'),
-    url(r'^register/$', RegisterView.as_view(), name='register'),
-    url(r'^all-forms/$', AllFormsView.as_view(), name='all_forms'),
+    url(r'^dashboard/$', sa_views.Dashboard.as_view(), name='dashboard'),
+    url(r'^register/$', sa_views.RegisterView.as_view(), name='register'),
+    #url(r'^all-forms/$', sa_views.AllFormsView.as_view(), name='all_forms'),
 
     url(r'^accounts/', include('allauth.urls')),
 

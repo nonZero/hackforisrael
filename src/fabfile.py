@@ -3,7 +3,7 @@ from contextlib import contextmanager as _contextmanager
 
 env.code_dir = '~/hackforisrael/'
 env.venv_command = '. bin/activate'
-env.log_dir = '/var/log/opencommunity/'
+env.log_dir = '/home/udi/hackforisrael/logs/'
 
 
 def qa():
@@ -33,6 +33,10 @@ def freeze():
         run("pip freeze")
 
 
+def reload_app():
+    run("sudo kill -HUP `cat ~hasadna/h4il.pid`")
+
+
 def deploy():
     with virtualenv(env.code_dir):
         run("git pull")
@@ -42,12 +46,11 @@ def deploy():
         run("cd src && python manage.py collectstatic --noinput")
         run("git log -n 1 > static/version.txt")
         #run("cd src && kill -HUP `cat masterpid`")
-        run("sudo kill -HUP `cat ~hasadna/h4il.pid`")
-
+        reload_app()
 
 def hard_reload():
     run("sudo supervisorctl restart h4il")
 
 
 def log():
-    run("tail %s*" % env.log_dir)
+    run("tail -n 50 %s*" % env.log_dir)
