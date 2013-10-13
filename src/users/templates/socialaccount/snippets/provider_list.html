@@ -1,0 +1,20 @@
+{% load socialaccount %}
+{% load i18n %}
+
+{% for provider in socialaccount.providers %}
+{% if provider.id == "openid" %}
+{% for brand in provider.get_brands %}
+<div class="text-center">
+  <a title="{{brand.name}}" 
+     class="button success socialaccount_provider {{provider.id}} {{brand.id}}" 
+     href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+     >{% trans "Quick signup or login with" %}{{brand.name}}</a>
+</div>
+{% endfor %}
+{% endif %}
+<div class="text-center">
+  <a title="{{provider.name}}" class="button success socialaccount_provider {{provider.id}}" 
+     href="{% provider_login_url provider.id process=process %}">{% trans "Quick signup or login with" %} {{provider.name}}</a>
+</div>
+{% endfor %}
+

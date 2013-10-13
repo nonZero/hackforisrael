@@ -3,49 +3,43 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 23:55+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2013-10-13 14:54+0300\n"
+"PO-Revision-Date: 2013-10-13 14:54+0200\n"
+"Last-Translator: Udi Oron <udioron@gmail.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.7\n"
 
-#: models.py:6
+#: .\models.py:11
 msgid "Title"
 msgstr "כותרת"
 
-#: models.py:7
-msgid "Description"
-msgstr "תאור"
+#: .\models.py:12
+msgid "Content"
+msgstr "תוכן"
 
-#: models.py:8 templates/hashmabir/hashmabir_detail.html:26
-msgid "Contact info"
-msgstr "פרטי התקשרות"
-
-#: templates/hashmabir/hashmabir_detail.html:14
-msgid "Content domain"
-msgstr "נושא"
-
-#: templates/hashmabir/hashmabir_detail.html:17
-msgid "Vision"
-msgstr "חזון"
-
-#: templates/hashmabir/hashmabir_detail.html:20
-msgid "Target audience"
-msgstr "קהל יעד"
-
-#: templates/hashmabir/hashmabir_detail.html:23
-msgid "Similar projects"
-msgstr "דוגמאות קיימות"
-
-#: templates/hashmabir/hashmabir_form.html:14
+#: .\templates\hashmabir\hashmabir_form.html.py:15
 msgid "save"
 msgstr "שמור"
+
+#~ msgid "Description"
+#~ msgstr "תאור"
+
+#~ msgid "Contact info"
+#~ msgstr "פרטי התקשרות"
+
+#~ msgid "Vision"
+#~ msgstr "חזון"
+
+#~ msgid "Target audience"
+#~ msgstr "קהל יעד"
+
+#~ msgid "Similar projects"
+#~ msgstr "דוגמאות קיימות"

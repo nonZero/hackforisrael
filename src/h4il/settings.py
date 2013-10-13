@@ -177,7 +177,7 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_USER_DISPLAY = lambda u: u.email
 ACCOUNT_USERNAME_REQUIRED = False
 
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+#SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

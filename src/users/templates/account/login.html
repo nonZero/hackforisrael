@@ -1,0 +1,63 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load url from future %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<h1>{% trans "Sign In" %}</h1>
+
+<div class="row">
+
+    <div class="columns large-6">
+
+        <div class="panel">
+            <h3>
+                {% trans "Quick login" %}
+            </h3>
+
+            <div class="socialaccount_ballot">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </div>
+            {% include "socialaccount/snippets/login_extra.html" %}
+
+        </div>
+        <div class="text-center">
+            <a class="button" href="{{ signup_url }}">{% trans "Sign up using other email" %}</a>
+        </div>
+
+    </div>
+
+        <div class="columns large-6">
+
+            <div class="panel">
+                <h3>
+                    {% trans "login with email" %}
+                </h3>
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <a class="button secondary left" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                    <button class="primaryAction" type="submit">
+                        {% trans "Sign In" %}
+                    </button>
+                </form>
+            </div>
+
+
+        </div>
+
+
+
+
+        {% endblock %}
+
+</div>
+
+

@@ -1,18 +1,23 @@
 {% extends 'website/base.html' %}
 {% load i18n %}
 
-{% block content %}
-
+{% block content_container %}
 
 <div class="row">
     <div class="columns large-16">
         <h1>החשמבירים:</h1>
-        <ul>
-        {% for o in object_list %}
-            <li><a href="{{ o.get_absolute_url}}">{{ o }}</a></li>
-        {% endfor %}
-        </ul>
-		{% include "website/_add_idea_button.html" %}
+
+        {% include "website/_add_idea_button.html" %}
+
+        <div class="panel">
+            <ul class="disc">
+                {% for o in object_list %}
+                <li>
+                    <a href="{{ o.get_absolute_url}}">{{ o }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 

@@ -12,7 +12,9 @@
 
             {{ form.as_p }}
 
-            <input type="submit" value={% trans 'save' %}>
+            <br/>
+            
+            <input class="button" type="submit" value={% trans 'save' %}>
 
         </form>
     </div>
@@ -21,7 +23,11 @@
 {% endblock %}
 
 {% block scripts %}
-
+<style>
+    .mce-tinymce, .mce-tinymce div {
+        box-sizing: content-box
+    } 
+</style>
 <script src="{{STATIC_URL}}tinymce/tinymce.min.js"></script>
 <script>
     $(function() {
@@ -32,8 +38,9 @@
             language : 'he_IL',
             menubar : false,
             toolbar_items_size : 'small',
-            content_css : "/static/m/tinymce.css",
+//            content_css : "/static/m/tinymce.css",
             toolbar : "numlist bullist | alignjustify alignright aligncenter alignleft | underline italic bold",
+            height: 300
         });
     });
 </script>
