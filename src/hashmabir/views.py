@@ -9,7 +9,7 @@ class HashmabirListView(ListView):
     model = Hashmabir
 
 
-class HashmabirCreateView(CreateView, ProtectedMixin):
+class HashmabirCreateView(ProtectedMixin, CreateView):
     model = Hashmabir
     form_class = forms.HashmabirForm
 
