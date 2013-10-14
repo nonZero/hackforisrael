@@ -6,17 +6,17 @@
 
 
 [linkedin_profile_url?]
-כתובת פרופיל ב-linkedin
+כתובת פרופיל ב-LinkedIn
 
 [github_profile_url?]
-כתובת פרופיל ב-github
+כתובת פרופיל ב-GitHub
 
 [stackoverflow_profile_url?]
-כתובת פרופיל ב-stackoverflow
+כתובת פרופיל ב-StackOverflow
 
 
 [twitter?]
-שם משתמש ב-twitter
+שם משתמש ב-Twitter
 
 [personal_website_url?]
 כתובת אתר אישי
