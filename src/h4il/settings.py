@@ -15,6 +15,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+EMAIL_SUBJECT_PREFIX = '[Hackita] '
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -29,7 +31,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['h.10x.org.il']
+ALLOWED_HOSTS = ['h.10x.org.il', 'hackita.hasadna.org.il']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
