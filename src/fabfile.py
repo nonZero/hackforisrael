@@ -42,6 +42,7 @@ def deploy():
         run("git pull")
         run("find . -name '*.pyc' -delete")
         run("pip install -r requirements.txt")
+        run("pip install -r requirements-production.txt")
 #         run("pip install -r deploy-requirements.txt")
 #         run("cd src && python manage.py migrate")
         run("cd src && python manage.py collectstatic --noinput")
