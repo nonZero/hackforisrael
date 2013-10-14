@@ -40,6 +40,7 @@ def reload_app():
 def deploy():
     with virtualenv(env.code_dir):
         run("git pull")
+        run("find . -name '*.pyc' -delete")
         run("pip install -r requirements.txt")
 #         run("pip install -r deploy-requirements.txt")
 #         run("cd src && python manage.py migrate")
