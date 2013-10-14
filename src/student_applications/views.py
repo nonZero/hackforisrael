@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import mail_managers
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from h4il.base_views import ProtectedMixin
 from q13es.forms import parse_form, FIELD_TYPES, get_pretty_answer
@@ -133,18 +134,35 @@ class RegisterView(UserViewMixin, FormView):
         return FORMS[form_name]
 
     def form_valid(self, form):
-        form_name = get_user_next_form(self.request.user)
+        u = self.request.user
+        data = form.cleaned_data
+        form_name = get_user_next_form(u)
 
-        logger.info("User %s filled %s" % (self.request.user, form_name))
+        logger.info("User %s filled %s" % (u, form_name))
 
-        Answer.objects.create(user=self.request.user, q13e_slug=form_name,
-                              data=form.cleaned_data)
+        Answer.objects.create(user=u, q13e_slug=form_name, data=data)
 
-        # TODO: save personal details in User model
+        # Save personal information
+        if form_name == FORM_NAMES[0]:
+            dirty = False
+            if not u.first_name:
+                u.first_name = data['hebrew_first_name']
+                dirty = True
+            if not u.last_name:
+                u.last_name = data['hebrew_last_name']
+                dirty = True
+            if dirty:
+                u.save()
 
-        if get_user_next_form(self.request.user) is None:
+            message = "\n".join(u"{label}: {html}".format(**fld) for fld in
+                                get_pretty_answer(form, data)['fields'])
+            mail_managers(u"{}: {hebrew_last_name} {hebrew_first_name}".format(
+                                           _("New User"), **data), message)
+
+        if get_user_next_form(u) is None:
             messages.success(self.request,
                              _("Registration completed! Thank you very much!"))
+            mail_managers(_("User registered: %s") % u, ":-)")
             return redirect('dashboard')
 
         messages.success(self.request, _("'%s' was saved.") % form.form_title)
