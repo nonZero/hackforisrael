@@ -81,7 +81,8 @@ h2 {
 }
 
 #howitworks {
-    background: blue;
+    background: url('../img/program-bg.png')  no-repeat center center;
+    background-size: cover;
     color: white !important;
     padding: 10px 0;
 }
@@ -93,19 +94,24 @@ h2 {
 }
 
 #luz {
-    background: brown;
+    background: url('../img/program2-bg.png')  no-repeat center center;
+    background-size: cover;
     color: white !important;
     padding: 10px 0;
 }
 
 #techs {
-    background: green;
-    color: white !important;
-    padding: 10px 0;
+}
+
+#techs .box {
+    background: none;
+}
+
+#techs .box li{
 }
 
 .box {
-    background: white;
+    background: rgba(255,255,255,0.8);
     color: black;
     padding: 0 15px;
 }
@@ -131,7 +137,6 @@ h2 {
 }
 
 #howitworks .box li {
-    border-bottom: #ddd solid 1px;
     padding:0.6em 0;
 }
 #howitworks .box li:last-child {
