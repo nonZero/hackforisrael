@@ -181,8 +181,17 @@ h2 {
     color: black;
 }
 
-.hasadna {
-    font-size: 40px;
+.b4hasadna, .hasadna {
+    font-size: 30px;
+}
+
+.b4hasadna {
+    color: #444;
+}
+
+.hasadna img {
+    width: 20px;
+    height: 20px;
 }
 
 #sponsors .x {

@@ -111,6 +111,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
+    "h4il.context_processors.hackita_processor",
 )
 
 MIDDLEWARE_CLASSES = (
