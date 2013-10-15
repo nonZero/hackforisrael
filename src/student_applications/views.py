@@ -5,10 +5,13 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
-from h4il.base_views import ProtectedMixin
+from django.views.generic.list import ListView
+from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import parse_form, FIELD_TYPES, get_pretty_answer
 from q13es.models import Answer
+from users.models import HackitaUser
 import floppyforms as forms
 import logging
 import os.path
@@ -96,21 +99,20 @@ class UserViewMixin(ProtectedMixin):
         return d
 
 
+def get_user_pretty_answers(u):
+    return [a.get_pretty(FORMS[a.q13e_slug]) for a in u.answers.all()]
+
+
 class Dashboard(UserViewMixin, TemplateView):
     template_name = 'dashboard.html'
 
     def get_context_data(self, **kwargs):
         d = super(Dashboard, self).get_context_data(**kwargs)
 
-        def pretty(answer):
-            dct = get_pretty_answer(FORMS[a.q13e_slug], a.data)
-            dct['answer'] = answer
-            return dct
-
         d['registered'] = get_user_next_form(self.request.user) is None
 
         if d['registered']:
-            d['answers'] = [pretty(a) for a in self.request.user.answers.all()]
+            d['answers'] = get_user_pretty_answers(self.request.user)
 
         return d
 
@@ -183,3 +185,20 @@ class AllFormsView(TemplateView, ProtectedMixin):
         d = super(AllFormsView, self).get_context_data(**kwargs)
         d['forms'] = [(k, FORMS[k]) for k in FORM_NAMES]
         return d
+
+
+class UsersListView(StaffOnlyMixin, ListView):
+    model = HackitaUser
+
+
+class UserDashboard(StaffOnlyMixin, DetailView):
+    model = HackitaUser
+
+    def get_context_data(self, **kwargs):
+        d = super(UserDashboard, self).get_context_data(**kwargs)
+
+        d['answers'] = get_user_pretty_answers(self.get_object())
+
+        return d
+
+

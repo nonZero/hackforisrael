@@ -18,8 +18,11 @@ urlpatterns = patterns('',
     # url(r'^h4il/', include('h4il.foo.urls')),
 
     url(r'^dashboard/$', sa_views.Dashboard.as_view(), name='dashboard'),
+    url(r'^dashboard/(?P<pk>\d+)/$', sa_views.UserDashboard.as_view(), name='user_dashboard'),
     url(r'^register/$', sa_views.RegisterView.as_view(), name='register'),
     #url(r'^all-forms/$', sa_views.AllFormsView.as_view(), name='all_forms'),
+
+    url(r'^users/$', sa_views.UsersListView.as_view(), name='users'),
 
     url(r'^accounts/', include('allauth.urls')),
 
