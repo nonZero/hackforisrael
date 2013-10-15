@@ -2,6 +2,10 @@ body {
     font-family: 'Alef', sans-serif;
 }
 
+.ib {
+    display: inline-block;
+}
+
 .top-bar {
 }
 
@@ -177,7 +181,7 @@ h2 {
 }
 
 .b4hasadna, .hasadna {
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .b4hasadna {
@@ -185,8 +189,8 @@ h2 {
 }
 
 .hasadna img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 
 #sponsors .x {
@@ -196,11 +200,11 @@ h2 {
 }
 
 #sponsors .ctlvtxt {
-    line-height: 100px;
+    line-height: 80px;
 }
 
 #sponsors .ctlv {
-    height: 100px;
+    height: 80px;
 }
 #sponsors .sponsor {
     text-align: center;
