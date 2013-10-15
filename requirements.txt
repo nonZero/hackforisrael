@@ -5,7 +5,7 @@ django-debug-toolbar==0.9.4
 
 # allauth with trnslation to hebrew, requires git installed :-)
 # django-allauth==0.13.0
--e git+git@github.com:nonZero/django-allauth.git@f6996d7ab781532547b468ddc200811bfe2a8089#egg=django_allauth-dev
+-e git+https://github.com/nonZero/django-allauth.git#egg=django_allauth-dev
 
 bleach==1.2.2
 
