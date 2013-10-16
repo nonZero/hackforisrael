@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
+from django.db.models.aggregates import Count, Max
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
@@ -188,7 +189,10 @@ class AllFormsView(TemplateView, ProtectedMixin):
 
 
 class UsersListView(StaffOnlyMixin, ListView):
-    model = HackitaUser
+    queryset = HackitaUser.objects.annotate(
+                                    answer_count=Count('answers'),
+                                        last_answer=Max('answers__created_at')
+                                    ).order_by('-answer_count','-last_answer')
 
 
 class UserDashboard(StaffOnlyMixin, DetailView):
@@ -200,5 +204,4 @@ class UserDashboard(StaffOnlyMixin, DetailView):
         d['answers'] = get_user_pretty_answers(self.get_object())
 
         return d
-
 

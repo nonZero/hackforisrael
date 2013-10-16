@@ -5,22 +5,22 @@
 
     <div class="row">
         <div class="columns large-12">
-            
+
             <h2>{% trans "Users" %}</h2>
 
             <div class="panel">
 
                 <ul>
                     {% for u in object_list %}
-    
+
                         <li>
                             <a href="{% url "user_dashboard" u.id %}">
                                 {{u.email}} 
                             </a>
                             {{u.first_name}} {{u.last_name}}
-                            ({{u.answers.count}})
+                            ({{u.answer_count}}) {{u.last_answer|default:''}}
                         </li>
-    
+
                     {% endfor %}
                 </ul>
             </div>
