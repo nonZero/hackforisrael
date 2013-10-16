@@ -101,7 +101,8 @@ class UserViewMixin(ProtectedMixin):
 
 
 def get_user_pretty_answers(u):
-    return [a.get_pretty(FORMS[a.q13e_slug]) for a in u.answers.all()]
+    return [a.get_pretty(FORMS[a.q13e_slug]) for a in
+            u.answers.order_by('created_at')]
 
 
 class Dashboard(UserViewMixin, TemplateView):
