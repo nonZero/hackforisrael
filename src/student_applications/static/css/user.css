@@ -123,3 +123,15 @@ h2 {
 .section-container.vertical-tabs > .section > .title {
     overflow: hidden;
 }
+
+table.users {
+    width: 100%;
+}
+
+table.users td.uid,  table.users td.uanswers {
+    width: 50px;
+}
+
+table.users td.uemail,  table.users td.uname {
+    width: 250px;
+}

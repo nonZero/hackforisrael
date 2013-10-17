@@ -8,22 +8,34 @@
 
             <h2>{% trans "Users" %}</h2>
 
-            <div class="panel">
-
-                <ul>
+                <table class="users">
                     {% for u in object_list %}
-
-                        <li>
-                            <a href="{% url "user_dashboard" u.id %}">
-                                {{u.email}} 
-                            </a>
-                            {{u.first_name}} {{u.last_name}}
-                            ({{u.answer_count}}) {{u.last_answer|default:''}}
-                        </li>
+                        {% ifchanged u.answer_count %}
+                        </table>
+                        <table>
+                        {% endifchanged %}
+                        <tr>
+                            <td>
+                                #{{u.id}}
+                            </td>
+                            <td>
+                                <a href="{% url "user_dashboard" u.id %}">
+                                    {{u.email}} 
+                                </a>
+                            </td>
+                            <td>
+                                {{u.first_name}} {{u.last_name}}
+                            </td>
+                            <td>
+                                {{u.answer_count}}
+                            </td>
+                            <td>
+                                {{u.last_answer|default:''}}
+                            </td>
+                        </tr>
 
                     {% endfor %}
-                </ul>
-            </div>
+                </table>
         </div>
     </div>
 
