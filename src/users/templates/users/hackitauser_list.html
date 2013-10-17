@@ -10,23 +10,26 @@
 
                 <table class="users">
                     {% for u in object_list %}
-                        {% ifchanged u.answer_count %}
-                        </table>
-                        <table>
-                        {% endifchanged %}
+
+                          {% ifchanged u.answer_count %}
+                            {% if forloop.counter0 %}
+                              </table>
+                              <table class="users">
+                             {% endif %}
+                          {% endifchanged %}
                         <tr>
-                            <td>
+                            <td class="uid">
                                 #{{u.id}}
                             </td>
-                            <td>
+                            <td class="uemail">
                                 <a href="{% url "user_dashboard" u.id %}">
                                     {{u.email}} 
                                 </a>
                             </td>
-                            <td>
+                            <td class="uname">
                                 {{u.first_name}} {{u.last_name}}
                             </td>
-                            <td>
+                            <td class="uanswers">
                                 {{u.answer_count}}
                             </td>
                             <td>
