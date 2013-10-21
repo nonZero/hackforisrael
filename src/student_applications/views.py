@@ -7,12 +7,13 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 from django.views.generic.list import ListView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import parse_form, FIELD_TYPES, get_pretty_answer
 from q13es.models import Answer
 from users.models import HackitaUser
+from student_applications.models import UserNote
 import floppyforms as forms
 import logging
 import os.path
@@ -111,6 +112,11 @@ class Dashboard(UserViewMixin, TemplateView):
     def get_context_data(self, **kwargs):
         d = super(Dashboard, self).get_context_data(**kwargs)
 
+        def pretty(answer):
+            dct = get_pretty_answer(FORMS[a.q13e_slug], a.data)
+            dct['answer'] = answer
+            return dct
+
         d['registered'] = get_user_next_form(self.request.user) is None
 
         if d['registered']:
@@ -187,22 +193,3 @@ class AllFormsView(TemplateView, ProtectedMixin):
         d = super(AllFormsView, self).get_context_data(**kwargs)
         d['forms'] = [(k, FORMS[k]) for k in FORM_NAMES]
         return d
-
-
-class UsersListView(StaffOnlyMixin, ListView):
-    queryset = HackitaUser.objects.annotate(
-                                    answer_count=Count('answers'),
-                                        last_answer=Max('answers__created_at')
-                                    ).order_by('-answer_count','-last_answer')
-
-
-class UserDashboard(StaffOnlyMixin, DetailView):
-    model = HackitaUser
-
-    def get_context_data(self, **kwargs):
-        d = super(UserDashboard, self).get_context_data(**kwargs)
-
-        d['answers'] = get_user_pretty_answers(self.get_object())
-
-        return d
-
