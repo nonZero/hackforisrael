@@ -154,6 +154,8 @@ INSTALLED_APPS = (
     'floppyforms_foundation',
     'floppyforms',
 
+    'south',
+
     'users',
     'website',
     'q13es',
