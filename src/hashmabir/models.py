@@ -16,4 +16,4 @@ class Hashmabir(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ("hashmabir_detail", str(self.id))
+        return ("hashmabir_detail", (str(self.id),))
