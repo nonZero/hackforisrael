@@ -1,4 +1,5 @@
 Django==1.5.4
+South==0.8.2
 django-extensions==1.2.1
 django-floppyforms==1.1
 django-debug-toolbar==0.9.4
