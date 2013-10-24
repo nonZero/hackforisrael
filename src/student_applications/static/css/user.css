@@ -137,22 +137,23 @@ table.users td.uemail,  table.users td.uname {
 }
 
 
-.user-answers dt{
-    margin-bottom: 0;
-}
-
-.user-answers dd {
-    border-bottom: 1px solid #eee;
+.user-answers.section-container.vertical-tabs > section > .content {
+    background: #fcfcfc;
 }
 
 .user-answer  {
-    border-bottom: 1px solid #eee;
-    padding: 9px 3px;
+    margin-bottom: 1.4em;
 }
 
 .user-answer-title  {
     font-weight: bold;
-    margin-bottom:6px;
+    margin-bottom:2px;
+}
+
+.user-answer-content  {
+    padding: 6px;
+    background: white;
+    border: 1px solid #ccc;
 }
 
 
