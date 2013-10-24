@@ -211,20 +211,35 @@ class AllFormsView(TemplateView, ProtectedMixin):
 
 class UsersListView(StaffOnlyMixin, ListView):
 
+    def get_cohort(self):
+        if 'cohort' not in self.request.GET:
+            return None
+
+        if not hasattr(self, '_cohort'):
+            try:
+                self._cohort = Cohort.objects.get(ordinal=int(self.request.GET['cohort']))
+            except ValueError, Cohort.DoesNotExist:
+                self._cohort = None
+
+        return self._cohort
+
+    def get_context_data(self, **kwargs):
+        d = super(UsersListView, self).get_context_data(**kwargs)
+        d['cohort'] = self.get_cohort()
+        d['cohorts'] = Cohort.objects.order_by('ordinal')
+        return d
+
     def get_queryset(self):
         qs = HackitaUser.objects.order_by('-forms_filled', '-last_form_filled')
 
-        if 'cohort' in self.request.GET:
-            try:
-                cohort = int(self.request.GET['cohort'])
-                qs = qs.filter(cohorts__cohort__ordinal=cohort,
-                               cohorts__status__in=[
-                                        UserCohortStatus.AVAILABLE,
-                                        UserCohortStatus.INVITED_TO_INTERVIEW,
-                                        UserCohortStatus.ACCEPTED,
-                                        ])
-            except ValueError:
-                pass
+        cohort = self.get_cohort()
+        if cohort:
+            qs = qs.filter(cohorts__cohort=cohort,
+                           cohorts__status__in=[
+                                    UserCohortStatus.AVAILABLE,
+                                    UserCohortStatus.INVITED_TO_INTERVIEW,
+                                    UserCohortStatus.ACCEPTED,
+                                    ])
 
         return qs
 

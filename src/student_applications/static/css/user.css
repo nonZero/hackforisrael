@@ -156,4 +156,12 @@ table.users td.uemail,  table.users td.uname {
     border: 1px solid #ccc;
 }
 
+.cohort-list li a{
+    background: #f0f0f0;
+}
+
+.cohort-list li.active a{
+    background: none;
+    color: black;
+}
 

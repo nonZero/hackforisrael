@@ -8,40 +8,54 @@
 
             <h2>{% trans "Users" %} ({{object_list.count}})</h2>
 
-                <table class="users">
-                    {% for u in object_list %}
+            <ul class="cohort-list inline-list">
+                <li>
+                    {% trans "Filter" %}:
+                </li>
+                <li{% if not cohort %} class="active"{% endif %}>
+                    <a href="?">{% trans "All" %}</a>
+                </li>
+                {% for c in cohorts %}
+                    <li{% if c == cohort %} class="active"{% endif %}>
+                        <a href="?cohort={{c.ordinal}}">{{c.title}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
 
-                          {% ifchanged u.forms_filled %}
-                            {% if forloop.counter0 %}
-                              </table>
-                              <table class="users">
-                             {% endif %}
-                          {% endifchanged %}
-                        <tr>
-                            <td class="uname">
-                                <a href="{% url "user_dashboard" u.id %}">
-                                    #{{u.id}}: {{u}}
-                                </a>
-                            </td>
-                            <td class="uanswers">
-                                {{u.forms_filled}}
-                            </td>
-                            <td>
-                                {{u.last_form_filled|default:'---'}}
-                            </td>
+            <table class="users">
+                {% for u in object_list %}
 
-                            {% for ordinal, uc in u.all_cohorts.items  %}
-                              <td>{{ordinal}}: {{uc.get_status_display}}</td>
-                            {% endfor %}
+                      {% ifchanged u.forms_filled %}
+                        {% if forloop.counter0 %}
+                          </table>
+                          <table class="users">
+                         {% endif %}
+                      {% endifchanged %}
+                    <tr>
+                        <td class="uname">
+                            <a href="{% url "user_dashboard" u.id %}">
+                                #{{u.id}}: {{u}}
+                            </a>
+                        </td>
+                        <td class="uanswers">
+                            {{u.forms_filled}}
+                        </td>
+                        <td>
+                            {{u.last_form_filled|default:'---'}}
+                        </td>
 
-                            <td>
-                                {{u.get_gender_display}}
-                            </td>
+                        {% for ordinal, uc in u.all_cohorts.items  %}
+                          <td>{{ordinal}}: {{uc.get_status_display}}</td>
+                        {% endfor %}
 
-                        </tr>
+                        <td>
+                            {{u.get_gender_display}}
+                        </td>
 
-                    {% endfor %}
-                </table>
+                    </tr>
+
+                {% endfor %}
+            </table>
         </div>
     </div>
 
