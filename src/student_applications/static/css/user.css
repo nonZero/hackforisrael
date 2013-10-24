@@ -135,3 +135,24 @@ table.users td.uid,  table.users td.uanswers {
 table.users td.uemail,  table.users td.uname {
     width: 250px;
 }
+
+
+.user-answers dt{
+    margin-bottom: 0;
+}
+
+.user-answers dd {
+    border-bottom: 1px solid #eee;
+}
+
+.user-answer  {
+    border-bottom: 1px solid #eee;
+    padding: 9px 3px;
+}
+
+.user-answer-title  {
+    font-weight: bold;
+    margin-bottom:6px;
+}
+
+
