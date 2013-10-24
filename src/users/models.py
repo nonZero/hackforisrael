@@ -1,3 +1,4 @@
+# coding: utf8
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.utils import timezone
@@ -81,9 +82,9 @@ class HackitaUser(AbstractUser):
 
 
 def update_personal_details(user, data):
-    if data['gender'] == _('Male'):
+    if data['gender'] == u'זכר':
         user.gender = Gender.MALE
-    elif data['gender'] == _('Female'):
+    elif data['gender'] == u'נקבה':
         user.gender = Gender.FEMALE
     for k in [
         'hebrew_first_name',
