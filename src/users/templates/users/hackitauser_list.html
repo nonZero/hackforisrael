@@ -11,30 +11,33 @@
                 <table class="users">
                     {% for u in object_list %}
 
-                          {% ifchanged u.answer_count %}
+                          {% ifchanged u.forms_filled %}
                             {% if forloop.counter0 %}
                               </table>
                               <table class="users">
                              {% endif %}
                           {% endifchanged %}
                         <tr>
-                            <td class="uid">
-                                #{{u.id}}
-                            </td>
-                            <td class="uemail">
+                            <td class="uname">
                                 <a href="{% url "user_dashboard" u.id %}">
-                                    {{u.email}} 
+                                    #{{u.id}}: {{u}}
                                 </a>
                             </td>
-                            <td class="uname">
-                                {{u.first_name}} {{u.last_name}}
-                            </td>
                             <td class="uanswers">
-                                {{u.answer_count}}
+                                {{u.forms_filled}}
                             </td>
                             <td>
-                                {{u.last_answer|default:''}}
+                                {{u.last_form_filled|default:'---'}}
                             </td>
+
+                            {% for ordinal, uc in u.all_cohorts.items  %}
+                              <td>{{ordinal}}: {{uc.get_status_display}}</td>
+                            {% endfor %}
+
+                            <td>
+                                {{u.get_gender_display}}
+                            </td>
+
                         </tr>
 
                     {% endfor %}

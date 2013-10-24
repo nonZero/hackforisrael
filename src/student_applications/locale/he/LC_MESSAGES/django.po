@@ -1,79 +1,124 @@
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-12 23:49+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2013-10-24 22:40+0300\n"
+"PO-Revision-Date: 2013-10-24 22:42+0200\n"
+"Last-Translator: Udi Oron <udioron@gmail.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.7\n"
 
-#: .\views.py:15
+#: .\models.py:30
+msgid "Invited"
+msgstr "הוזמן"
+
+#: .\models.py:31
+msgid "Unavailable"
+msgstr "לא פנוי"
+
+#: .\models.py:32
+msgid "Available"
+msgstr "פנוי"
+
+#: .\models.py:33
+msgid "Invited to interview"
+msgstr "מוזמן לראיון"
+
+#: .\models.py:34
+msgid "Rejected"
+msgstr "נדחה"
+
+#: .\models.py:35
+msgid "Accepted"
+msgstr "התקבל"
+
+#: .\models.py:36
+msgid "Registered"
+msgstr "נרשם"
+
+#: .\models.py:37
+msgid "In process"
+msgstr "במסלול"
+
+#: .\models.py:38
+msgid "Graduated"
+msgstr "סיים"
+
+#: .\views.py:20
 msgid "Required field"
 msgstr "שדה חובה"
 
-#: .\views.py:32
+#: .\views.py:37
 msgid "control"
 msgstr "שליטה"
 
-#: .\views.py:35
+#: .\views.py:40
 msgid "0 - No knowledge"
 msgstr "0 - ללא ידע בתחום"
 
-#: .\views.py:36
+#: .\views.py:41
 msgid "1"
 msgstr "1"
 
-#: .\views.py:37
+#: .\views.py:42
 msgid "2 - Some knowledge"
 msgstr "2 - הכרות מסוימת"
 
-#: .\views.py:38
+#: .\views.py:43
 msgid "3"
 msgstr "3"
 
-#: .\views.py:39
+#: .\views.py:44
 msgid "4 - Good informal knowledge or Formal Education"
 msgstr "4 - ידע פורמלי בלבד"
 
-#: .\views.py:40
+#: .\views.py:45
 msgid "5"
 msgstr "5"
 
-#: .\views.py:41
+#: .\views.py:46
 msgid "6 - Some parctical work experience"
 msgstr "6 - נסיון פרקטי מועט"
 
-#: .\views.py:42
+#: .\views.py:47
 msgid "7"
 msgstr "7"
 
-#: .\views.py:43
+#: .\views.py:48
 msgid "8 - Considerable work experience (2+ years)"
 msgstr "8 - נסיון משמעותי (2+ שנים)"
 
-#: .\views.py:44
+#: .\views.py:49
 msgid "9"
 msgstr "9"
 
-#: .\views.py:45
+#: .\views.py:50
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\views.py:147
+#: .\views.py:164
+msgid "New User"
+msgstr "משתמש חדש"
+
+#: .\views.py:168
 msgid "Registration completed! Thank you very much!"
 msgstr "ההרשמה הסתיימה! תודה רבה!"
 
-#: .\views.py:150
+#: .\views.py:169
+#, python-format
+msgid "User registered: %s"
+msgstr ""
+
+#: .\views.py:172
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: .\views.py:156
+#: .\views.py:178
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
 

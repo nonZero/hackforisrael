@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 14:53+0300\n"
-"PO-Revision-Date: 2013-10-13 13:36+0200\n"
+"POT-Creation-Date: 2013-10-25 00:36+0300\n"
+"PO-Revision-Date: 2013-10-25 00:38+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
+
+#: .\admin.py:9
+msgid "Personal info"
+msgstr "פרטים אישיים"
+
+#: .\admin.py:10
+msgid "Permissions"
+msgstr "הרשאות"
+
+#: .\admin.py:11
+msgid "Important dates"
+msgstr "תאריכים חשובים"
+
+#: .\models.py:41 .\models.py:84
+msgid "Male"
+msgstr "זכר"
+
+#: .\models.py:42 .\models.py:86
+msgid "Female"
+msgstr "נקבה"
+
+#: .\models.py:50
+msgid "Hebrew first name"
+msgstr "שם פרטי בעברית"
+
+#: .\models.py:52
+msgid "Hebrew last name"
+msgstr "שם משפחה בעברית"
+
+#: .\models.py:55
+msgid "English first name"
+msgstr "שם פרטי באנגלית"
+
+#: .\models.py:57
+msgid "English last name"
+msgstr "שם משפחה באנגלית"
 
 #: .\templates\account\login.html.py:7 .\templates\account\login.html.py:11
 #: .\templates\account\login.html.py:48
@@ -43,13 +79,18 @@ msgstr "שכחת סיסמא?"
 msgid "Quick signup or login with"
 msgstr "כניסה/הרשמה מהירה באמצעות חשבון"
 
-#: .\templates\users\base.html.py:17
+#: .\templates\users\base.html.py:19 .\templates\users\basebase.html.py:19
 msgid "Sign Out"
 msgstr "יציאה"
 
-#: .\templates\users\base.html.py:20
+#: .\templates\users\base.html.py:22 .\templates\users\basebase.html.py:22
 msgid "You are logged in as"
 msgstr "אתה מחובר למערכת בתור"
+
+#: .\templates\users\hackitauser_detail.html.py:10
+#: .\templates\users\hackitauser_list.html.py:9
+msgid "Users"
+msgstr "משתמשים"
 
 #~ msgid ""
 #~ "For easy access, please sign in or sign up with one of your existing "

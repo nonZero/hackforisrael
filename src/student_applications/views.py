@@ -1,6 +1,9 @@
+# coding: utf8
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
+from django.core.urlresolvers import reverse
 from django.db.models.aggregates import Count, Max
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
@@ -12,7 +15,8 @@ from django.views.generic.list import ListView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import parse_form, FIELD_TYPES, get_pretty_answer
 from q13es.models import Answer
-from users.models import HackitaUser
+from student_applications.models import UserCohortStatus, Cohort, UserCohort
+from users.models import HackitaUser, update_personal_details
 import floppyforms as forms
 import logging
 import os.path
@@ -144,29 +148,45 @@ class RegisterView(UserViewMixin, FormView):
 
         logger.info("User %s filled %s" % (u, form_name))
 
-        Answer.objects.create(user=u, q13e_slug=form_name, data=data)
+        a = Answer.objects.create(user=u, q13e_slug=form_name, data=data)
 
         # Save personal information
         if form_name == FORM_NAMES[0]:
-            dirty = False
             if not u.first_name:
                 u.first_name = data['hebrew_first_name']
-                dirty = True
             if not u.last_name:
                 u.last_name = data['hebrew_last_name']
-                dirty = True
-            if dirty:
-                u.save()
+            update_personal_details(u, data)
+            u.save()  # keep it on the safe side
 
             message = "\n".join(u"{label}: {html}".format(**fld) for fld in
                                 get_pretty_answer(form, data)['fields'])
             mail_managers(u"{}: {hebrew_last_name} {hebrew_first_name}".format(
-                                           _("New User"), **data), message)
+                               _("New User").decode('utf8'), **data), message)
+
+        elif form_name == 'cohort1':
+            COHORTS = (
+                        ('group_monday_morning', 1),
+                        ('group_thursday_morning', 2),
+                        ('group_evenings', 3),
+                      )
+            cohorts = {x[1]: Cohort.objects.get(ordinal=x[1]) for x in COHORTS}
+            for k, ordinal in COHORTS:
+                v = data[k] == u"כן"
+                UserCohort.objects.create(user=u, cohort=cohorts[ordinal],
+                          status=UserCohortStatus.AVAILABLE if v else
+                          UserCohortStatus.UNAVAILABLE)
+
+        # update denormalized index fields
+        u.forms_filled = u.answers.count()
+        u.last_form_filled = a.created_at
+        u.save()
 
         if get_user_next_form(u) is None:
             messages.success(self.request,
                              _("Registration completed! Thank you very much!"))
-            mail_managers(_("User registered: %s") % u, ":-)")
+            url = self.request.build_absolute_uri(reverse('user_dashboard', args=(u.id,)))
+            mail_managers(_("User registered: %s") % u.email, url)
             return redirect('dashboard')
 
         messages.success(self.request, _("'%s' was saved.") % form.form_title)
@@ -190,10 +210,23 @@ class AllFormsView(TemplateView, ProtectedMixin):
 
 
 class UsersListView(StaffOnlyMixin, ListView):
-    queryset = HackitaUser.objects.annotate(
-                                    answer_count=Count('answers'),
-                                        last_answer=Max('answers__created_at')
-                                    ).order_by('-answer_count','-last_answer')
+
+    def get_queryset(self):
+        qs = HackitaUser.objects.order_by('-forms_filled', '-last_form_filled')
+
+        if 'cohort' in self.request.GET:
+            try:
+                cohort = int(self.request.GET['cohort'])
+                qs = qs.filter(cohorts__cohort__ordinal=cohort,
+                               cohorts__status__in=[
+                                        UserCohortStatus.AVAILABLE,
+                                        UserCohortStatus.INVITED_TO_INTERVIEW,
+                                        UserCohortStatus.ACCEPTED,
+                                        ])
+            except ValueError:
+                pass
+
+        return qs
 
 
 class UserDashboard(StaffOnlyMixin, DetailView):
