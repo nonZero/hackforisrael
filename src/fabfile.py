@@ -2,19 +2,18 @@ from fabric.api import *
 from contextlib import contextmanager as _contextmanager
 
 env.code_dir = '~/hackforisrael/'
-env.venv_command = '. bin/activate'
-env.log_dir = '/home/udi/hackforisrael/logs/'
+env.venv_command = 'source activate'
+env.log_dir = '%slogs/' % env.code_dir
 
 
 def qa():
-    env.venv_command = '. /home/udi/.virtualenvs/h4il/bin/activate'
     env.hosts = ['udi@h.10x.org.il']
-    env.log_dir = '%slogs/' % env.code_dir
-# 
-# 
-# def prod():
-#     env.hosts = ['oc@ny1.opencommunity.org.il']
-#     env.venv_command = '. ~/.virtualenvs/oc/bin/activate'
+    env.web_user = 'hasadna'
+
+
+def prod():
+    env.hosts = ['udi@hackita.hasadna.org.il']
+    env.web_user = 'h4il'
 
 
 @_contextmanager
@@ -34,7 +33,7 @@ def freeze():
 
 
 def reload_app():
-    run("sudo kill -HUP `cat ~hasadna/h4il.pid`")
+    run("sudo kill -HUP `cat ~%s/h4il.pid`" % env.web_user)
 
 
 def deploy():
@@ -43,12 +42,11 @@ def deploy():
         run("find . -name '*.pyc' -delete")
         run("pip install -r requirements.txt")
         run("pip install -r requirements-production.txt")
-#         run("pip install -r deploy-requirements.txt")
 #         run("cd src && python manage.py migrate")
         run("cd src && python manage.py collectstatic --noinput")
         run("git log -n 1 > static/version.txt")
-        #run("cd src && kill -HUP `cat masterpid`")
         reload_app()
+
 
 def hard_reload():
     run("sudo supervisorctl restart h4il")
