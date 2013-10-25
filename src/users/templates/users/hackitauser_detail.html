@@ -12,6 +12,39 @@
             <a href="mailto:{{object.email}}">{{object}}</a>
          </h2>
 
+        <div class="row">
+
+            <div class="columns large-3">
+                <form method="post">
+                    {% csrf_token %}
+                    <select name="tag" onchange="form.submit()">
+                        <option value="{{tag.id}}">{% trans "Add tag" %}</option>
+                        {% for tag, b in all_tags %}
+                           {% if not b %}
+                              <option value="{{tag.id}}">{{tag.name}}</option>
+                           {% endif %}
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+
+            <div class="columns large-9 tagged">
+                 {% for ut in tagged %}
+                   <span class="round label secondary tag tag-{{ut.tag.get_group_display}}">
+                       {{ut.tag.name}}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="tag" value="{{ut.tag.id}}">
+                            <button name="delete" class="tiny" value="1">X</button>
+                        </form>
+
+                   </span>
+                 {% endfor %}
+            </div>
+
+
+        </div>
+
         {% include "student_applications/_answers.html" %}
 
     </div>

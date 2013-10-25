@@ -165,3 +165,22 @@ table.users td.uemail,  table.users td.uname {
     color: black;
 }
 
+.tagged .tag {
+    margin: 3px 0;
+}
+
+.tag form {
+    display:inline;
+}
+
+.tag form button{
+    margin:0;
+    color: black;
+    background: none;
+    border: none;
+    padding: 1px;
+}
+
+.users .label {
+    margin: 3px;
+}

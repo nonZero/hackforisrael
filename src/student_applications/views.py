@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse
 from django.db.models.aggregates import Count, Max
-from django.shortcuts import redirect
+from django.http.response import HttpResponseBadRequest
+from django.shortcuts import redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
@@ -15,11 +16,13 @@ from django.views.generic.list import ListView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import parse_form, FIELD_TYPES, get_pretty_answer
 from q13es.models import Answer
-from student_applications.models import UserCohortStatus, Cohort, UserCohort
+from student_applications.models import UserCohortStatus, Cohort, UserCohort, \
+    Tag, UserTag
 from users.models import HackitaUser, update_personal_details
 import floppyforms as forms
 import logging
 import os.path
+from django.db.utils import IntegrityError
 
 REQUIRED_FIELD = _("Required field")  # override floppyforms-foundation i18n
 
@@ -249,8 +252,27 @@ class UserDashboard(StaffOnlyMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         d = super(UserDashboard, self).get_context_data(**kwargs)
-
-        d['answers'] = get_user_pretty_answers(self.get_object())
+        user = self.get_object()
+        d['answers'] = get_user_pretty_answers(user)
+        d['tagged'] = user.tags.filter(created_by=self.request.user)
+        tagged_ids = [ut.tag.id for ut in d['tagged']]
+        d['all_tags'] = [(tag, tag.id in tagged_ids) for tag in Tag.objects.all()]
 
         return d
 
+    def post(self, request, *args, **kwargs):
+        try:
+            tag_id = int(request.POST.get('tag', ''))
+        except ValueError:
+            return HttpResponseBadRequest("Tag field is missing or invalid")
+
+        tag = get_object_or_404(Tag, pk=tag_id)
+
+        u = self.get_object()
+
+        if request.POST.get('delete'):
+            UserTag.objects.untag(u, tag, request.user)
+        else:
+            UserTag.objects.tag(u, tag, request.user)
+
+        return redirect('user_dashboard', pk=u.id)

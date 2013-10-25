@@ -36,6 +36,15 @@
                             <a href="{% url "user_dashboard" u.id %}">
                                 #{{u.id}}: {{u}}
                             </a>
+                            <br/>
+                            {% for t in u.grouped_tags %}
+                                <span class="label secondary">
+                                    {{t.name}}
+                                    {% if t.count > 1 %}
+                                      ({{t.count}})
+                                    {% endif %}
+                                </span>
+                            {% endfor %}
                         </td>
                         <td class="uanswers">
                             {{u.forms_filled}}

@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from student_applications.models import Tag, TagGroup, UserTag
 from users.models import HackitaUser
 
 
@@ -7,6 +8,7 @@ class RegiterTest(TestCase):
 
     def setUp(self):
         self.u = HackitaUser.objects.create_user("xxx", "foo@bar.com", "foobar")
+        self.staff = HackitaUser.objects.create_user("STAFF", "staff@bar.com", "staff")
 
     def test_register(self):
         self.assertEquals(0, self.u.answers.count())
@@ -36,3 +38,38 @@ class RegiterTest(TestCase):
         self.assertEquals(302, r.status_code)
         self.assertEquals(1, self.u.answers.count())
 
+    def test_tagging(self):
+
+        cool = Tag.objects.create(name="Cool", group=TagGroup.SILVER)
+        yuck = Tag.objects.create(name="Yuck", group=TagGroup.NEGATIVE)
+
+        self.assertEquals(0, self.u.tags.count())
+
+        UserTag.objects.tag(self.u, cool, self.staff)
+
+        self.assertEquals(1, self.u.tags.count())
+        self.assertEquals(1, self.u.logs.count())
+
+        UserTag.objects.tag(self.u, yuck, self.staff)
+
+        self.assertEquals(2, self.u.tags.count())
+        self.assertEquals(2, self.u.logs.count())
+
+        UserTag.objects.tag(self.u, yuck, self.staff)
+
+        self.assertEquals(2, self.u.tags.count())
+        self.assertEquals(2, self.u.logs.count())
+
+        UserTag.objects.untag(self.u, cool, self.staff)
+
+        self.assertEquals(1, self.u.tags.count())
+        self.assertEquals(3, self.u.logs.count())
+        UserTag.objects.untag(self.u, yuck, self.staff)
+
+        self.assertEquals(0, self.u.tags.count())
+        self.assertEquals(4, self.u.logs.count())
+
+        UserTag.objects.untag(self.u, yuck, self.staff)
+
+        self.assertEquals(0, self.u.tags.count())
+        self.assertEquals(4, self.u.logs.count())

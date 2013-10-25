@@ -1,6 +1,10 @@
 # coding: utf8
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models.aggregates import Count
 from django.utils import timezone
 from django.utils.datastructures import SortedDict
 from django.utils.translation import ugettext_lazy as _
@@ -80,6 +84,11 @@ class HackitaUser(AbstractUser):
 
         return cohorts
 
+    def grouped_tags(self):
+        from student_applications.models import Tag
+        return Tag.objects.filter(users__user=self).annotate(
+                                             count=Count('users__created_by'))
+
 
 def update_personal_details(user, data):
     if data['gender'] == u'זכר':
@@ -94,3 +103,28 @@ def update_personal_details(user, data):
         setattr(user, k, data[k][:50])
 
 
+class UserLogOperation(object):
+    OTHER = 0
+    ADD = 1
+    CHANGE = 2
+    REMOVE = 3
+
+    choices = (
+               (OTHER, _('Other')),
+               (ADD, _('Add')),
+               (CHANGE, _('Change')),
+               (REMOVE, _('Remove')),
+              )
+
+
+class UserLog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="logs")
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                  related_name="logs_created", null=True)
+    message = models.TextField(null=True)
+    content_type = models.ForeignKey(ContentType, null=True)
+    object_id = models.PositiveIntegerField(null=True)
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    operation = models.IntegerField(choices=UserLogOperation.choices,
+                                    default=UserLogOperation.OTHER)

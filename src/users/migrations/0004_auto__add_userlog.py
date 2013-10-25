@@ -7,32 +7,24 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
-    depends_on = (
-        ("users", "0001_initial"),
-    )
-
-
     def forwards(self, orm):
-        # Adding model 'Answer'
-        db.create_table(u'q13es_answer', (
+        # Adding model 'UserLog'
+        db.create_table(u'users_userlog', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='answers', to=orm['users.HackitaUser'])),
-            ('q13e_slug', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='logs', to=orm['users.HackitaUser'])),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('data', self.gf('django.db.models.fields.TextField')(default='{}')),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='logs_created', null=True, to=orm['users.HackitaUser'])),
+            ('message', self.gf('django.db.models.fields.TextField')(null=True)),
+            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'], null=True)),
+            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')(null=True)),
+            ('operation', self.gf('django.db.models.fields.IntegerField')(default=0)),
         ))
-        db.send_create_signal(u'q13es', ['Answer'])
-
-        # Adding unique constraint on 'Answer', fields ['user', 'q13e_slug']
-        db.create_unique(u'q13es_answer', ['user_id', 'q13e_slug'])
+        db.send_create_signal(u'users', ['UserLog'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'Answer', fields ['user', 'q13e_slug']
-        db.delete_unique(u'q13es_answer', ['user_id', 'q13e_slug'])
-
-        # Deleting model 'Answer'
-        db.delete_table(u'q13es_answer')
+        # Deleting model 'UserLog'
+        db.delete_table(u'users_userlog')
 
 
     models = {
@@ -56,30 +48,40 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'q13es.answer': {
-            'Meta': {'unique_together': "(('user', 'q13e_slug'),)", 'object_name': 'Answer'},
-            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'data': ('django.db.models.fields.TextField', [], {'default': "'{}'"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'q13e_slug': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'answers'", 'to': u"orm['users.HackitaUser']"})
-        },
         u'users.hackitauser': {
             'Meta': {'object_name': 'HackitaUser'},
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
+            'english_first_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            'english_last_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'forms_filled': ('django.db.models.fields.IntegerField', [], {'default': '0', 'db_index': 'True'}),
+            'gender': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'hebrew_first_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            'hebrew_last_name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'last_form_filled': ('django.db.models.fields.DateTimeField', [], {'db_index': 'True', 'null': 'True', 'blank': 'True'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+        },
+        u'users.userlog': {
+            'Meta': {'object_name': 'UserLog'},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']", 'null': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'logs_created'", 'null': 'True', 'to': u"orm['users.HackitaUser']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'message': ('django.db.models.fields.TextField', [], {'null': 'True'}),
+            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True'}),
+            'operation': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'logs'", 'to': u"orm['users.HackitaUser']"})
         }
     }
 
-    complete_apps = ['q13es']
+    complete_apps = ['users']
