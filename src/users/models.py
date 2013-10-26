@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.contenttypes import generic
@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models.aggregates import Count
 from django.utils import timezone
 from django.utils.datastructures import SortedDict
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 import random
 import string
 import student_applications.models
@@ -89,6 +89,9 @@ class HackitaUser(AbstractUser):
         return Tag.objects.filter(users__user=self).annotate(
                                              count=Count('users__created_by'))
 
+    def get_absolute_url(self):
+        return "/users/%d/" % self.id
+
 
 def update_personal_details(user, data):
     if data['gender'] == u'זכר':
@@ -110,10 +113,10 @@ class UserLogOperation(object):
     REMOVE = 3
 
     choices = (
-               (OTHER, _('Other')),
-               (ADD, _('Add')),
-               (CHANGE, _('Change')),
-               (REMOVE, _('Remove')),
+               (OTHER, pgettext_lazy('userlog', 'Other')),
+               (ADD, pgettext_lazy('userlog', 'Add')),
+               (CHANGE, pgettext_lazy('userlog', 'Change')),
+               (REMOVE, pgettext_lazy('userlog', 'Remove')),
               )
 
 
@@ -128,3 +131,6 @@ class UserLog(models.Model):
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     operation = models.IntegerField(choices=UserLogOperation.choices,
                                     default=UserLogOperation.OTHER)
+
+    class Meta:
+        ordering = ['-created_at']

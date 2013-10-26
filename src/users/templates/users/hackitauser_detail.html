@@ -47,6 +47,8 @@
 
         {% include "student_applications/_answers.html" %}
 
+        {% include 'users/_userlog.html' with object_list=object.logs.all %}
+
     </div>
 </div>
 

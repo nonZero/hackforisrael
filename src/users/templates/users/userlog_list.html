@@ -1,0 +1,47 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+
+            <h2>
+                {% trans "Log" context "users" %} 
+            </h2>
+
+            {% include 'users/_userlog.html' with show_user='1' %}
+
+            <div>
+                <div class="row">
+                    <div class="columns large-3">
+                        <ul class="pagination">
+                            <li class="current">
+                                {{page_obj.start_index}} - {{page_obj.end_index}}
+                                {% trans "of" %} {{paginator.count}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="columns large-9">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="arrow unavailable">
+                                    <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                                </li>
+                            {% endif %}
+                            <li class="current">
+                                {% trans "page" context "pagination" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li>
+                                    <a class="arrow" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

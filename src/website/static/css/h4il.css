@@ -41,7 +41,7 @@ h2 {
     text-shadow: 2px 2px black;
     color: white;
 }
-#intro h1, h3 {
+#intro h1, #intro h3 {
     color: white;
     font-family: 'Montserrat', 'Alef', sans-serif;
 }

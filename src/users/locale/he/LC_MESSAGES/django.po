@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-25 00:36+0300\n"
-"PO-Revision-Date: 2013-10-25 00:38+0200\n"
+"POT-Creation-Date: 2013-10-26 22:19+0300\n"
+"PO-Revision-Date: 2013-10-26 22:20+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,29 +29,49 @@ msgstr "הרשאות"
 msgid "Important dates"
 msgstr "תאריכים חשובים"
 
-#: .\models.py:41 .\models.py:84
+#: .\models.py:46
 msgid "Male"
 msgstr "זכר"
 
-#: .\models.py:42 .\models.py:86
+#: .\models.py:47
 msgid "Female"
 msgstr "נקבה"
 
-#: .\models.py:50
+#: .\models.py:55
 msgid "Hebrew first name"
 msgstr "שם פרטי בעברית"
 
-#: .\models.py:52
+#: .\models.py:57
 msgid "Hebrew last name"
 msgstr "שם משפחה בעברית"
 
-#: .\models.py:55
+#: .\models.py:60
 msgid "English first name"
 msgstr "שם פרטי באנגלית"
 
-#: .\models.py:57
+#: .\models.py:62
 msgid "English last name"
 msgstr "שם משפחה באנגלית"
+
+#: .\models.py:116
+msgctxt "userlog"
+msgid "Other"
+msgstr "אחר"
+
+#: .\models.py:117
+msgctxt "userlog"
+msgid "Add"
+msgstr "הוספה"
+
+#: .\models.py:118
+msgctxt "userlog"
+msgid "Change"
+msgstr "שינוי"
+
+#: .\models.py:119
+msgctxt "userlog"
+msgid "Remove"
+msgstr "הסרה"
 
 #: .\templates\account\login.html.py:7 .\templates\account\login.html.py:11
 #: .\templates\account\login.html.py:48
@@ -91,6 +111,33 @@ msgstr "אתה מחובר למערכת בתור"
 #: .\templates\users\hackitauser_list.html.py:9
 msgid "Users"
 msgstr "משתמשים"
+
+#: .\templates\users\hackitauser_detail.html.py:21
+msgid "Add tag"
+msgstr "הוסף תג"
+
+#: .\templates\users\hackitauser_list.html.py:13
+msgid "Filter"
+msgstr "סינון"
+
+#: .\templates\users\hackitauser_list.html.py:16
+msgid "All"
+msgstr "הכל"
+
+#: .\templates\users\userlog_list.html.py:10
+msgctxt "users"
+msgid "Log"
+msgstr "יומן"
+
+#: .\templates\users\userlog_list.html.py:49
+#: .\templates\users\userlog_list.html.py:61
+msgid "of"
+msgstr "מתוך"
+
+#: .\templates\users\userlog_list.html.py:61
+msgctxt "pagination"
+msgid "page"
+msgstr "עמוד"
 
 #~ msgid ""
 #~ "For easy access, please sign in or sign up with one of your existing "
