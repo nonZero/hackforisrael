@@ -23,26 +23,41 @@
                 {% endfor %}
             </ul>
 
-            <table class="users">
                 {% for u in object_list %}
-
-                      {% ifchanged u.forms_filled %}
-                        {% if forloop.counter0 %}
-                          </table>
-                          <table class="users">
-                         {% endif %}
-                      {% endifchanged %}
+                  {% ifchanged u.forms_filled %}
+                    {% if not forloop.first %}
+                      </table>
+                     {% endif %}
+                     <h4>{{u.forms_filled}}</h4>
+                     <table class="users">
+                         <tr>
+                             <th colspan="3">{{u.forms_filled}}</th>
+                            {% for ordinal, uc in u.all_cohorts.items  %}
+                              <th>{{uc.cohort}}</th>
+                            {% endfor %}
+                         </tr>
+                  {% endifchanged %}
                     <tr>
-                        {% if u.score != None %}
-                          <td>
-                              {{u.score}}
-                          </td>
-                        {% endif %}
+                        <td class="text-center">
+                            {{forloop.counter}}
+                            {% if u.score != None %}
+                                  <span class="label rounded">{{u.score}}</span>
+                            {% endif %}
+
+                        </td>
                         <td class="uname">
-                            <a href="{% url "user_dashboard" u.id %}">
-                                #{{u.id}}: {{u}}
+                            <a href="{% url "user_dashboard" u.id %}" title="#{{u.id}} {{u.email}}">
+                                {{u}}
                             </a>
+                            ({{u.get_gender_display}})
+                            {% if u.last_form_filled %}
                             <br/>
+                                <span title="{{u.last_form_filled}}">
+                                    {{u.last_form_filled|naturaltime}}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
                             {% for t in u.grouped_tags %}
                                 <span class="label secondary">
                                     {{t.name}}
@@ -52,29 +67,14 @@
                                 </span>
                             {% endfor %}
                         </td>
-                        <td class="uanswers">
-                            {{u.forms_filled}}
-                        </td>
-                        <td>
-                            {% if u.last_form_filled %}
-                                <span title="{{u.last_form_filled}}">
-                                    {{u.last_form_filled|naturaltime}}
-                                </span>
-                            {% else %}
-                              ---
-                            {% endif %}
-                        </td>
 
                         {% for ordinal, uc in u.all_cohorts.items  %}
-                          <td>{{ordinal}}: {{uc.get_status_display}}</td>
+                            {% if uc %}
+                                <td class="text-center">{{uc.get_status_display}}</td>
+                            {% endif %}
                         {% endfor %}
 
-                        <td>
-                            {{u.get_gender_display}}
-                        </td>
-
                     </tr>
-
                 {% endfor %}
             </table>
         </div>
