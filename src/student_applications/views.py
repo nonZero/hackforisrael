@@ -1,97 +1,24 @@
-# coding: utf8
+# coding: utf-8
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse
-from django.db.models.aggregates import Count, Max
-from django.http.response import HttpResponseBadRequest
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
-from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
-from django.views.generic.list import ListView
-from h4il.base_views import ProtectedMixin, StaffOnlyMixin
-from q13es.forms import parse_form, FIELD_TYPES, get_pretty_answer
+from h4il.base_views import ProtectedMixin
+from q13es.forms import get_pretty_answer
 from q13es.models import Answer
-from student_applications.models import UserCohortStatus, Cohort, UserCohort, \
-    Tag, UserTag
-from users.models import HackitaUser, update_personal_details
-import floppyforms as forms
+from student_applications.consts import get_user_progress, FORMS, \
+    get_user_next_form, FORM_NAMES, get_user_pretty_answers
+from student_applications.models import UserCohortStatus, Cohort, UserCohort
+from users.models import update_personal_details
 import logging
-import os.path
-from django.db.utils import IntegrityError
 
-REQUIRED_FIELD = _("Required field")  # override floppyforms-foundation i18n
-
-FORMS_DIR = os.path.join(os.path.dirname(__file__), 'forms')
 logger = logging.getLogger(__name__)
-
-
-def read_file(k):
-    with open(os.path.join(FORMS_DIR, k + '.txt')) as f:
-        return f.read()
-
-CUSTOM_FIELD_TYPES = FIELD_TYPES.copy()
-
-
-class ControlSelect(forms.RadioSelect):
-    template_name = 'student_applications/control.html'
-
-
-CUSTOM_FIELD_TYPES[_("control")] = (forms.ChoiceField, {
-       'widget': ControlSelect,
-       'choices': (
-                   (0, _('0 - No knowledge')),
-                   (1, _('1')),
-                   (2, _('2 - Some knowledge')),
-                   (3, _('3')),
-                   (4, _('4 - Good informal knowledge or Formal Education')),
-                   (5, _('5')),
-                   (6, _('6 - Some parctical work experience')),
-                   (7, _('7')),
-                   (8, _('8 - Considerable work experience (2+ years)')),
-                   (9, _('9')),
-                   (10, _('10 - Full control of the technology')),
-                   ),
-      }
-)
-
-FORM_NAMES = (
-    'personal-details',
-    'about',
-    'public-profiles',
-    'work-experience',
-    'programming-langs',
-    'software-development',
-    'web-technologies',
-    'social-activity',
-    'cohort1',
-    'program',
-    )
-
-FORMS = {k: parse_form(read_file(k), CUSTOM_FIELD_TYPES) for k in FORM_NAMES}
-
-
-def get_user_forms(user):
-    return user.answers.values_list('q13e_slug', flat=True)
-
-
-def get_user_next_form(user):
-
-    filled = get_user_forms(user)
-
-    for f in FORM_NAMES:
-        if f not in filled:
-            return f
-
-    return None
-
-
-def get_user_progress(user):
-    return len(get_user_forms(user)), len(FORMS)
 
 
 class UserViewMixin(ProtectedMixin):
@@ -105,11 +32,6 @@ class UserViewMixin(ProtectedMixin):
                              (d['total_count'] + 1))
 
         return d
-
-
-def get_user_pretty_answers(u):
-    return [a.get_pretty(FORMS[a.q13e_slug]) for a in
-            u.answers.order_by('created_at')]
 
 
 class Dashboard(UserViewMixin, TemplateView):
@@ -188,7 +110,8 @@ class RegisterView(UserViewMixin, FormView):
         if get_user_next_form(u) is None:
             messages.success(self.request,
                              _("Registration completed! Thank you very much!"))
-            url = self.request.build_absolute_uri(reverse('user_dashboard', args=(u.id,)))
+            url = self.request.build_absolute_uri(reverse('user_dashboard',
+                                                           args=(u.id,)))
             mail_managers(_("User registered: %s") % u.email, url)
             return redirect('dashboard')
 
@@ -210,69 +133,3 @@ class AllFormsView(TemplateView, ProtectedMixin):
         d = super(AllFormsView, self).get_context_data(**kwargs)
         d['forms'] = [(k, FORMS[k]) for k in FORM_NAMES]
         return d
-
-
-class UsersListView(StaffOnlyMixin, ListView):
-
-    def get_cohort(self):
-        if 'cohort' not in self.request.GET:
-            return None
-
-        if not hasattr(self, '_cohort'):
-            try:
-                self._cohort = Cohort.objects.get(ordinal=int(self.request.GET['cohort']))
-            except ValueError, Cohort.DoesNotExist:
-                self._cohort = None
-
-        return self._cohort
-
-    def get_context_data(self, **kwargs):
-        d = super(UsersListView, self).get_context_data(**kwargs)
-        d['cohort'] = self.get_cohort()
-        d['cohorts'] = Cohort.objects.order_by('ordinal')
-        return d
-
-    def get_queryset(self):
-        qs = HackitaUser.objects.order_by('-forms_filled', '-last_form_filled')
-
-        cohort = self.get_cohort()
-        if cohort:
-            qs = qs.filter(cohorts__cohort=cohort,
-                           cohorts__status__in=[
-                                    UserCohortStatus.AVAILABLE,
-                                    UserCohortStatus.INVITED_TO_INTERVIEW,
-                                    UserCohortStatus.ACCEPTED,
-                                    ])
-
-        return qs
-
-
-class UserDashboard(StaffOnlyMixin, DetailView):
-    model = HackitaUser
-
-    def get_context_data(self, **kwargs):
-        d = super(UserDashboard, self).get_context_data(**kwargs)
-        user = self.get_object()
-        d['answers'] = get_user_pretty_answers(user)
-        d['tagged'] = user.tags.filter(created_by=self.request.user)
-        tagged_ids = [ut.tag.id for ut in d['tagged']]
-        d['all_tags'] = [(tag, tag.id in tagged_ids) for tag in Tag.objects.all()]
-
-        return d
-
-    def post(self, request, *args, **kwargs):
-        try:
-            tag_id = int(request.POST.get('tag', ''))
-        except ValueError:
-            return HttpResponseBadRequest("Tag field is missing or invalid")
-
-        tag = get_object_or_404(Tag, pk=tag_id)
-
-        u = self.get_object()
-
-        if request.POST.get('delete'):
-            UserTag.objects.untag(u, tag, request.user)
-        else:
-            UserTag.objects.tag(u, tag, request.user)
-
-        return redirect('user_dashboard', pk=u.id)

@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 {% load i18n %}
+{% load humanize %}
 
 {% block content %}
 
@@ -50,7 +51,13 @@
                             {{u.forms_filled}}
                         </td>
                         <td>
-                            {{u.last_form_filled|default:'---'}}
+                            {% if u.last_form_filled %}
+                                <span title="{{u.last_form_filled}}">
+                                    {{u.last_form_filled|naturaltime}}
+                                </span>
+                            {% else %}
+                              ---
+                            {% endif %}
                         </td>
 
                         {% for ordinal, uc in u.all_cohorts.items  %}

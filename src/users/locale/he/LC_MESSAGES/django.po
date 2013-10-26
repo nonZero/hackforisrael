@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 22:19+0300\n"
-"PO-Revision-Date: 2013-10-26 22:20+0200\n"
+"POT-Creation-Date: 2013-10-26 22:47+0300\n"
+"PO-Revision-Date: 2013-10-26 22:47+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -129,12 +129,12 @@ msgctxt "users"
 msgid "Log"
 msgstr "יומן"
 
-#: .\templates\users\userlog_list.html.py:49
-#: .\templates\users\userlog_list.html.py:61
+#: .\templates\users\userlog_list.html.py:21
+#: .\templates\users\userlog_list.html.py:33
 msgid "of"
 msgstr "מתוך"
 
-#: .\templates\users\userlog_list.html.py:61
+#: .\templates\users\userlog_list.html.py:33
 msgctxt "pagination"
 msgid "page"
 msgstr "עמוד"

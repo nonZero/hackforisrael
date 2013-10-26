@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 22:40+0300\n"
-"PO-Revision-Date: 2013-10-24 22:42+0200\n"
+"POT-Creation-Date: 2013-10-26 22:47+0300\n"
+"PO-Revision-Date: 2013-10-26 22:48+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -12,113 +12,113 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: .\models.py:30
-msgid "Invited"
-msgstr "הוזמן"
-
-#: .\models.py:31
-msgid "Unavailable"
-msgstr "לא פנוי"
-
-#: .\models.py:32
-msgid "Available"
-msgstr "פנוי"
-
-#: .\models.py:33
-msgid "Invited to interview"
-msgstr "מוזמן לראיון"
-
-#: .\models.py:34
-msgid "Rejected"
-msgstr "נדחה"
-
-#: .\models.py:35
-msgid "Accepted"
-msgstr "התקבל"
-
-#: .\models.py:36
-msgid "Registered"
-msgstr "נרשם"
-
-#: .\models.py:37
-msgid "In process"
-msgstr "במסלול"
-
-#: .\models.py:38
-msgid "Graduated"
-msgstr "סיים"
-
-#: .\views.py:20
+#: .\consts.py:6
 msgid "Required field"
 msgstr "שדה חובה"
 
-#: .\views.py:37
+#: .\consts.py:18
 msgid "control"
 msgstr "שליטה"
 
-#: .\views.py:40
+#: .\consts.py:21
 msgid "0 - No knowledge"
 msgstr "0 - ללא ידע בתחום"
 
-#: .\views.py:41
+#: .\consts.py:22
 msgid "1"
 msgstr "1"
 
-#: .\views.py:42
+#: .\consts.py:23
 msgid "2 - Some knowledge"
 msgstr "2 - הכרות מסוימת"
 
-#: .\views.py:43
+#: .\consts.py:24
 msgid "3"
 msgstr "3"
 
-#: .\views.py:44
+#: .\consts.py:25
 msgid "4 - Good informal knowledge or Formal Education"
 msgstr "4 - ידע פורמלי בלבד"
 
-#: .\views.py:45
+#: .\consts.py:26
 msgid "5"
 msgstr "5"
 
-#: .\views.py:46
+#: .\consts.py:27
 msgid "6 - Some parctical work experience"
 msgstr "6 - נסיון פרקטי מועט"
 
-#: .\views.py:47
+#: .\consts.py:28
 msgid "7"
 msgstr "7"
 
-#: .\views.py:48
+#: .\consts.py:29
 msgid "8 - Considerable work experience (2+ years)"
 msgstr "8 - נסיון משמעותי (2+ שנים)"
 
-#: .\views.py:49
+#: .\consts.py:30
 msgid "9"
 msgstr "9"
 
-#: .\views.py:50
+#: .\consts.py:31
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\views.py:164
+#: .\models.py:32
+msgid "Invited"
+msgstr "הוזמן"
+
+#: .\models.py:33
+msgid "Unavailable"
+msgstr "לא פנוי"
+
+#: .\models.py:34
+msgid "Available"
+msgstr "פנוי"
+
+#: .\models.py:35
+msgid "Invited to interview"
+msgstr "מוזמן לראיון"
+
+#: .\models.py:36
+msgid "Rejected"
+msgstr "נדחה"
+
+#: .\models.py:37
+msgid "Accepted"
+msgstr "התקבל"
+
+#: .\models.py:38
+msgid "Registered"
+msgstr "נרשם"
+
+#: .\models.py:39
+msgid "In process"
+msgstr "במסלול"
+
+#: .\models.py:40
+msgid "Graduated"
+msgstr "סיים"
+
+#: .\views.py:90
 msgid "New User"
 msgstr "משתמש חדש"
 
-#: .\views.py:168
+#: .\views.py:112
 msgid "Registration completed! Thank you very much!"
 msgstr "ההרשמה הסתיימה! תודה רבה!"
 
-#: .\views.py:169
+#: .\views.py:115
 #, python-format
 msgid "User registered: %s"
 msgstr ""
 
-#: .\views.py:172
+#: .\views.py:118
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: .\views.py:178
+#: .\views.py:124
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
 

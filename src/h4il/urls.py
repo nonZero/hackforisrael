@@ -23,8 +23,8 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
 
     # STAFF ONLY
-    url(r'^users/$', sa_views.UsersListView.as_view(), name='users'),
-    url(r'^users/(?P<pk>\d+)/$', sa_views.UserDashboard.as_view(),
+    url(r'^users/$', users_views.UsersListView.as_view(), name='users'),
+    url(r'^users/(?P<pk>\d+)/$', users_views.UserView.as_view(),
         name='user_dashboard'),
     url(r'^users/log/$', users_views.AllUsersLogView.as_view(),
         name='users_log'),
