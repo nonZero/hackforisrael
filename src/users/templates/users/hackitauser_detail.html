@@ -47,7 +47,9 @@
 
         {% include "student_applications/_answers.html" %}
 
-        {% include 'users/_userlog.html' with object_list=object.logs.all %}
+        {% include 'users/_userlog.html' with object_list=object.logs.all hide_user=1 %}
+
+        {% include 'users/_userlog.html' with object_list=object.logs_created.all hide_by=1 %}
 
     </div>
 </div>

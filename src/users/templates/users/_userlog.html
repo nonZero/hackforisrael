@@ -11,17 +11,18 @@
             <span title="#{{l.id}}">
                 {{l.created_at|time:"H:i"}}
             </span>
-                {% if show_user %}
+                {% if not hide_user %}
                   <a href="{{l.user.get_absolute_url}}">
                       {{l.user}}
                   </a>
                 {% endif %}
             {{l.get_operation_display}}
             <b>{{l.content_object}}</b>
-            <small>
-                (<a href="{{l.created_by.get_absolute_url}}">{{l.created_by}}</a>)
-            </small>
-
+            {% if not hide_by %}
+                <small>
+                    (<a href="{{l.created_by.get_absolute_url}}">{{l.created_by}}</a>)
+                </small>
+            {% endif %}
         </li>
         {% if forloop.last %}
             </ul>
