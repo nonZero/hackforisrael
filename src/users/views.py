@@ -1,3 +1,4 @@
+from django.db.models.aggregates import Sum
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.detail import DetailView
@@ -36,7 +37,14 @@ class UsersListView(StaffOnlyMixin, ListView):
         return d
 
     def get_queryset(self):
-        qs = HackitaUser.objects.order_by('-forms_filled', '-last_form_filled')
+        qs = HackitaUser.objects.all()
+
+        if 'score' in self.request.GET:
+            qs = qs.filter(tags__created_by=self.request.user).annotate(
+                  score=Sum('tags__tag__group')
+                     ).order_by('-forms_filled', '-score', '-last_form_filled')
+        else:
+            qs = qs.order_by('-forms_filled', '-last_form_filled')
 
         cohort = self.get_cohort()
         if cohort:

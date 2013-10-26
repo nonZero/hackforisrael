@@ -33,6 +33,11 @@
                          {% endif %}
                       {% endifchanged %}
                     <tr>
+                        {% if u.score != None %}
+                          <td>
+                              {{u.score}}
+                          </td>
+                        {% endif %}
                         <td class="uname">
                             <a href="{% url "user_dashboard" u.id %}">
                                 #{{u.id}}: {{u}}

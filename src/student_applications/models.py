@@ -76,6 +76,9 @@ class Tag(models.Model):
     group = models.IntegerField(choices=TagGroup.choices,
                                 default=TagGroup.NEUTRAL)
 
+    class Meta:
+        ordering = ['-group', 'name']
+
     def __unicode__(self):
         return self.name
 
