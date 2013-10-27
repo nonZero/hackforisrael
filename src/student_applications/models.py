@@ -14,6 +14,9 @@ class Cohort(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        ordering = ['ordinal']
+
 
 class UserCohortStatus(object):
     INVITED = 1
