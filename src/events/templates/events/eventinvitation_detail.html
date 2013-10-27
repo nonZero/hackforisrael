@@ -5,65 +5,79 @@
 {% block content %}
 
     <div class="row">
-        <div class="columns large-12">
+        <div class="columns large-4">
 
-        <p>
-            <b>{% trans "You are invited to" %} {{object.event.title}}</b>
-        </p>
+            <p>
+                <b>{% trans "You are invited to" %} {{object.event.title}}</b>
+            </p>
 
-        <ul class="no-bullet">
-            <li>
-                {% trans "at" %}: {{object.event.location}}
-            </li>
-            <li>
-                {% trans "From" %} {{object.event.starts_at}}
-            </li>
-            <li>
-                {% trans "To" %} {{object.event.ends_at}}
-            </li>
-        </ul>
+            <ul class="no-bullet">
+                <li>
+                    {% trans "at" %}: {{object.event.location}}
+                </li>
+                <li>
+                    {% trans "From" %}: {{object.event.starts_at|date:"d/n/Y H:i"}}
+                </li>
+                <li>
+                    {% trans "To" %}: {{object.event.ends_at|date:"d/n/Y H:i"}}
+                </li>
 
-        <div style="margin:6px; padding:6px; border: 1px solid #ccc;">
-            {{object.event.description|urlize|linebreaksbr}}
+            </ul>
+
+            <form method="post">
+                {% csrf_token %}
+                <h4>
+                    {% trans "Will you attend the event?" %}
+                </h4>
+
+                {% if object.status == object.statuses.APPROVED or object.status == object.statuses.DECLINED or object.status == object.statuses.MAYBE %}
+                    <div class="panel">
+                        {% trans "Your current answer" %}:<b>
+                            {% if object.status == object.statuses.APPROVED %}{% trans "Yes" %}{% endif %}
+                            {% if object.status == object.statuses.MAYBE %}{% trans "Maybe" %}{% endif %}
+                            {% if object.status == object.statuses.DECLINED %}{% trans "No" %}{% endif %}
+                        </b>
+                        {% if object.note %}
+                          <br/>
+                          {% trans "Note" %}:<br/>
+                          {{object.note|linebreaksbr}}
+                        {% endif %}
+                   </div>
+                {% endif %}
+
+                {% if object.registration_allowed %}
+                  {% if object.event.registration_ends_at %}
+                    <p>
+                        {% trans "Registartion ends at" %}:
+                        {{object.event.registration_ends_at|date:"d/n/Y H:i"}}
+                    </p>
+                {% endif %}
+                  <div class="row">
+                      <div class="columns large-2 text-left">
+                          <label for="id_note">{% trans "Note" %}</label>
+                      </div>
+                      <div class="columns large-10">
+                          <textarea style="height:100px;" id="id_note" name="note">{{object.note|default:''}}</textarea>
+                          <button name="status" value="{{object.statuses.APPROVED}}">{% trans "Yes" %}</button>
+                          <button name="status" value="{{object.statuses.MAYBE}}">{% trans "Maybe" %}</button>
+                          <button name="status" value="{{object.statuses.DECLINED}}">{% trans "No" %}</button>
+                      </div>
+                  </div>
+
+                {% else %}
+                    <div class="alert-box">
+                        {% trans "Registration already closed." %}
+                    </div>
+                {% endif %}
+
+            </form>
+
         </div>
-
-
-        <form method="post">
-            {% csrf_token %}
-            <h4>
-                {% trans "Will you attend the event?" %}
-            </h4>
-            {% if 1 or object.status == object.statuses.APPROVED or object.status == object.statuses.DECLINED or object.status == object.statuses.MAYBE %}
-                <div class="panel">
-                    {% trans "Your current answer" %}:<b>
-                        {% if object.status == object.statuses.APPROVED %}{% trans "Yes" %}{% endif %}
-                        {% if object.status == object.statuses.MAYBE %}{% trans "Maybe" %}{% endif %}
-                        {% if object.status == object.statuses.DECLINED %}{% trans "No" %}{% endif %}
-                    </b>
-                    {% if object.note %}
-                      <br/>
-                      {% trans "Note" %}:<br/>
-                      {{object.note|linebreaksbr}}
-                    {% endif %}
-               </div>
-            {% endif %}
-
-            <div class="row">
-                <div class="columns large-2 text-left">
-                    <label for="id_note">{% trans "Note" %}</label>
-                </div>
-                <div class="columns large-4">
-                    <textarea style="height:100px;" id="id_note" name="note">{{object.note|default:''}}</textarea>
-                    <button name="status" value="{{object.statuses.APPROVED}}">{% trans "Yes" %}</button>
-                    <button name="status" value="{{object.statuses.MAYBE}}">{% trans "Maybe" %}</button>
-                    <button name="status" value="{{object.statuses.DECLINED}}">{% trans "No" %}</button>
-                </div>
-                <div class="columns large-6">
-                </div>
+        <div class="columns large-8">
+            <div class="panel">
+                {{object.event.description|urlize|linebreaksbr}}
             </div>
-
-        </form>
-
+        </div>
     </div>
 </div>
 

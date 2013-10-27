@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.mail.message import EmailMultiAlternatives
 from django.db import models
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 import logging
 import random
@@ -27,11 +28,27 @@ class Event(models.Model):
                                    related_name="events_created")
     starts_at = models.DateTimeField(_("Starts at"))
     ends_at = models.DateTimeField(_("Ends at"))
+    registration_ends_at = models.DateTimeField(_("Registartion ends at"),
+                                                null=True, blank=True)
     location = models.CharField(_('Location'), max_length=400, null=True)
     description = models.TextField(null=True)
 
     def __unicode__(self):
         return self.title
+
+    def is_open_for_registration(self, dt=None):
+
+        if dt is None:
+            dt = timezone.now()
+
+        if self.registration_ends_at:
+            if self.registration_ends_at < dt:
+                return False
+        else:
+            if self.starts_at < dt:
+                return False
+
+        return True
 
     def invite_user(self, user, created_by=None, base_url=None):
 
@@ -90,6 +107,20 @@ class EventInvitation(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return "invitation", (self.slug,)
+
+    def registration_allowed(self, dt=None):
+        """ returns True if user is allowed to register or modify her
+            registration """
+
+        if self.event.is_open_for_registration(dt):
+            # still allowed.
+            return True
+
+        if self.status == EventInvitationStatus.APPROVED:
+            # approved users can always change their mind.
+            return True
+
+        return False
 
     def send(self, base_url=""):
         """ sends an email to user and updated the invitaiton status """

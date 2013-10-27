@@ -11,10 +11,10 @@
             {% trans "at" %} {{object.event.location}}
         </li>
         <li>
-            {% trans "From" %} {{object.event.starts_at}}
+            {% trans "From" %} {{object.event.starts_at|date:"d/n/Y H:i"}}
         </li>
         <li>
-            {% trans "To" %} {{object.event.ends_at}}
+            {% trans "To" %} {{object.event.ends_at|date:"d/n/Y H:i"}}
         </li>
     </ul>
 
