@@ -23,6 +23,12 @@ urlpatterns = patterns('',
 
     url(r'^accounts/', include('allauth.urls')),
 
+    url(r'^event/$',
+        events_views.EventListView.as_view(), name='events'),
+
+    url(r'^event/(?P<slug>[-_\w\d]+)/$',
+        events_views.EventDetailView.as_view(), name='event'),
+
     url(r'^invitation/(?P<slug>[a-z]+)/$',
         events_views.InvitationDetailView.as_view(), name='invitation'),
 

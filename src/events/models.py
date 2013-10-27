@@ -36,6 +36,10 @@ class Event(models.Model):
     def __unicode__(self):
         return self.title
 
+    @models.permalink
+    def get_absolute_url(self):
+        return "event", (self.slug, )
+
     def is_open_for_registration(self, dt=None):
 
         if dt is None:
@@ -85,7 +89,7 @@ def random_slug(length=40):
 
 
 class EventInvitation(models.Model):
-    event = models.ForeignKey(Event)
+    event = models.ForeignKey(Event, related_name="invitations")
     slug = models.SlugField(default=random_slug)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -100,6 +104,7 @@ class EventInvitation(models.Model):
     statuses = EventInvitationStatus
 
     class Meta:
+        ordering = ['event', 'status', 'created_at']
         unique_together = (
                            ('event', 'user'),
                           )

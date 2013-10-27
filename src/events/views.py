@@ -5,8 +5,17 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic.detail import DetailView
-from events.models import EventInvitation, EventInvitationStatus
+from django.views.generic.list import ListView
+from events.models import EventInvitation, EventInvitationStatus, Event
 from h4il.base_views import StaffOnlyMixin
+
+
+class EventListView(StaffOnlyMixin, ListView):
+    model = Event
+
+
+class EventDetailView(StaffOnlyMixin, DetailView):
+    model = Event
 
 
 class InvitationDetailView(DetailView):

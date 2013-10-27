@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+            <h2>
+                {% trans "Events" %}
+            </h2>
+
+            <ul class="no-bullet">
+                {% for e in object_list %}
+                    <li>
+                        <a href="{{e.get_absolute_url}}">{{e.title}}</a>
+                        - {{e.starts_at|date:"d/n/Y H:i"}}
+                        ({{e.invitations.count}})
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

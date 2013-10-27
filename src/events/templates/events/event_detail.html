@@ -1,0 +1,67 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+            <h2>
+                {{object.title}}
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="columns large-4">
+
+
+            <ul class="no-bullet">
+                <li>
+                    {% trans "at" %}: {{object.location}}
+                </li>
+                <li>
+                    {% trans "From" %}: {{object.starts_at|date:"d/n/Y H:i"}}
+                </li>
+                <li>
+                    {% trans "To" %}: {{object.ends_at|date:"d/n/Y H:i"}}
+                </li>
+                {% if object.registration_ends_at %}
+                    <li>
+                        {% trans "Registartion ends at" %}:
+                        {{object.registration_ends_at|date:"d/n/Y H:i"}}
+                    </li>
+                {% endif %}
+            </ul>
+
+                {% for i in object.invitations.all %}
+                    {% ifchanged i.status %}
+                    {% if not forloop.first %}
+                        </ol>
+                    {% endif %}
+                       <h4>
+                           {{i.get_status_display}}
+                       </h4>
+                      <ol>
+                    {% endifchanged %}
+                  <li>
+                      <a href="{{i.user.get_absolute_url}}" title="{{i.created_at}}">{{i.user}}</a>
+                        {% if i.note %}
+                        <div class="panel">
+                          {{i.note|linebreaksbr}}
+                        </div>
+                        {% endif %}
+                  </li>
+                {% endfor %}
+            </ol>
+
+        </div>
+        <div class="columns large-8">
+            <div class="panel">
+                {{object.description|urlize|linebreaksbr}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
