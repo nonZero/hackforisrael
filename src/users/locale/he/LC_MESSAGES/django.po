@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 22:47+0300\n"
-"PO-Revision-Date: 2013-10-26 22:47+0200\n"
+"POT-Creation-Date: 2013-10-27 03:06+0200\n"
+"PO-Revision-Date: 2013-10-27 03:07+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgid "You are logged in as"
 msgstr "אתה מחובר למערכת בתור"
 
 #: .\templates\users\hackitauser_detail.html.py:10
-#: .\templates\users\hackitauser_list.html.py:9
+#: .\templates\users\hackitauser_list.html.py:10
 msgid "Users"
 msgstr "משתמשים"
 
@@ -116,13 +116,29 @@ msgstr "משתמשים"
 msgid "Add tag"
 msgstr "הוסף תג"
 
-#: .\templates\users\hackitauser_list.html.py:13
+#: .\templates\users\hackitauser_list.html.py:14
 msgid "Filter"
 msgstr "סינון"
 
-#: .\templates\users\hackitauser_list.html.py:16
+#: .\templates\users\hackitauser_list.html.py:17
 msgid "All"
 msgstr "הכל"
+
+#: .\templates\users\hackitauser_list.html.py:101
+msgid "Invite"
+msgstr "הזמן"
+
+#: .\templates\users\invite_success.html.py:10
+msgid "Invitations Sent"
+msgstr "הזמנות שנשלחו"
+
+#: .\templates\users\invite_success.html.py:20
+msgid "sent"
+msgstr "נשלחה"
+
+#: .\templates\users\invite_success.html.py:22
+msgid "already sent"
+msgstr "כבר נשלחה"
 
 #: .\templates\users\userlog_list.html.py:10
 msgctxt "users"

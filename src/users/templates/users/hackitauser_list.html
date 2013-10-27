@@ -23,6 +23,8 @@
                 {% endfor %}
             </ul>
 
+            <form method="post">
+
                 {% for u in object_list %}
                   {% ifchanged u.forms_filled %}
                     {% if not forloop.first %}
@@ -40,6 +42,7 @@
                     <tr>
                         <td class="text-center">
                             {{forloop.counter}}
+                            <input class="user-checkbox" type="checkbox" name="users" value="{{u.id}}"/>
                             {% if u.score != None %}
                                   <span class="label rounded">{{u.score}}</span>
                             {% endif %}
@@ -76,7 +79,29 @@
 
                     </tr>
                 {% endfor %}
-            </table>
+                </table>
+                <div class="row">
+                    <div class="columns large-4">
+                        {% csrf_token %}
+                        <select name='event'>
+                            {% for e in events %}
+                              <option value="{{e.id}}">{{e.title}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="columns large-4">
+                        <select name='cohort'>
+                          <option value="0">---</option>
+                            {% for c in cohorts %}
+                              <option value="{{c.id}}">{{c}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="columns large-4">
+                        <button class="small" name='invite'>{% trans "Invite" %}</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

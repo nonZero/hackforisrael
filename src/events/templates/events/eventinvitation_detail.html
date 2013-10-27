@@ -1,0 +1,54 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+
+        <p>
+            {% trans "You are invited to" %} {{object.event.title}}
+        </p>
+
+        <ul class="no-bullet">
+            <li>
+                {% trans "at" %} {{object.event.location}}
+            </li>
+            <li>
+                {% trans "From" %} {{object.event.starts_at}}
+            </li>
+            <li>
+                {% trans "To" %} {{object.event.ends_at}}
+            </li>
+        </ul>
+
+        <div style="margin:6px; padding:6px; border: 1px solid #ccc;">
+            {{object.event.description|urlize|linebreaksbr}}
+        </div>
+
+
+        <form method="post">
+            {% csrf_token %}
+            <h4>
+                {% trans "Will you attend the event?" %}
+            </h4>
+            {% if 1 or object.status == object.statuses.APPROVED or object.status == object.statuses.DECLINED or object.status == object.statuses.MAYBE %}
+                <div class="panel">
+                    {% trans "Your current answer" %}:<b>
+                        {% if object.status == object.statuses.APPROVED %}{% trans "Yes" %}{% endif %}
+                        {% if object.status == object.statuses.MAYBE %}{% trans "Maybe" %}{% endif %}
+                        {% if object.status == object.statuses.DECLINED %}{% trans "No" %}{% endif %}
+                    </b>
+               </div>
+            {% endif %}
+
+            <button name="status" value="{{object.statuses.APPROVED}}">{% trans "Yes" %}</button>
+            <button name="status" value="{{object.statuses.MAYBE}}">{% trans "Maybe" %}</button>
+            <button name="status" value="{{object.statuses.DECLINED}}">{% trans "No" %}</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from website import views
 from student_applications import views as sa_views
 from users import views as users_views
+from events import views as events_views
 
 from django.contrib import admin
 admin.autodiscover()
@@ -21,6 +22,13 @@ urlpatterns = patterns('',
     #url(r'^all-forms/$', sa_views.AllFormsView.as_view(), name='all_forms'),
 
     url(r'^accounts/', include('allauth.urls')),
+
+    url(r'^invitation/(?P<slug>[a-z]+)/$',
+        events_views.InvitationDetailView.as_view(), name='invitation'),
+
+    url(r'^invitation/(?P<slug>[a-z]+)/preview$',
+        events_views.InvitationPreviewView.as_view(), name='invitation_preview'),
+
 
     # STAFF ONLY
     url(r'^users/$', users_views.UsersListView.as_view(), name='users'),

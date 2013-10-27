@@ -184,3 +184,7 @@ table.users td.uemail,  table.users td.uname {
 .users .label {
     margin: 3px;
 }
+
+input.user-checkbox {
+    margin-bottom:0;
+}

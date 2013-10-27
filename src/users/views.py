@@ -1,11 +1,15 @@
+from django.contrib.sites.models import get_current_site
+from django.db import transaction
 from django.db.models.aggregates import Sum
 from django.http.response import HttpResponseBadRequest
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from events.models import Event
 from h4il.base_views import StaffOnlyMixin
 from student_applications.consts import get_user_pretty_answers
-from student_applications.models import Cohort, UserCohortStatus, Tag, UserTag
+from student_applications.models import Cohort, UserCohortStatus, Tag, UserTag, \
+    UserCohort
 from users import models
 from users.models import HackitaUser
 
@@ -34,6 +38,7 @@ class UsersListView(StaffOnlyMixin, ListView):
         d = super(UsersListView, self).get_context_data(**kwargs)
         d['cohort'] = self.get_cohort()
         d['cohorts'] = Cohort.objects.order_by('ordinal')
+        d['events'] = Event.objects.order_by('starts_at')
         return d
 
     def get_queryset(self):
@@ -56,6 +61,37 @@ class UsersListView(StaffOnlyMixin, ListView):
                                     ])
 
         return qs
+
+    def post(self, request, *args, **kwargs):
+
+        event = Event.objects.get(pk=int(request.POST['event']))
+
+        cohort_id = int(request.POST['cohort'])
+        cohort = Cohort.objects.get(pk=cohort_id) if cohort_id else None
+
+        user_ids = [int(x) for x in request.POST.getlist('users')]
+
+        results = []
+
+        base_url = request.build_absolute_uri('/')[:-1]
+
+        for uid in user_ids:
+            with transaction.commit_on_success():
+                user = HackitaUser.objects.get(pk=uid)
+                o, created = event.invite_user(user, request.user, base_url)
+                results.append((o, created))
+                if cohort:
+                    try:
+                        uc = UserCohort.objects.get(user=user, cohort=cohort)
+                        if uc.status < UserCohortStatus.INVITED_TO_INTERVIEW:
+                            uc.status = UserCohortStatus.INVITED_TO_INTERVIEW
+                            uc.save()
+                    except UserCohort.DoesNotExist:
+                        pass
+
+        return render(request, "users/invite_success.html", {
+                                                     'results': results
+                                                     })
 
 
 class UserView(StaffOnlyMixin, DetailView):

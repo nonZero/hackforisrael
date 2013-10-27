@@ -1,0 +1,33 @@
+{% load i18n %}
+
+<div dir="rtl" style="padding:3px;">
+
+    <p>
+        {% trans "You are invited to" %} {{object.event.title}}
+    </p>
+
+    <ul>
+        <li>
+            {% trans "at" %} {{object.event.location}}
+        </li>
+        <li>
+            {% trans "From" %} {{object.event.starts_at}}
+        </li>
+        <li>
+            {% trans "To" %} {{object.event.ends_at}}
+        </li>
+    </ul>
+
+    <div style="margin:6px; padding:6px; border: 1px solid #ccc;">
+        {{object.event.description|urlize|linebreaksbr}}
+    </div>
+
+    <p>
+        {% trans "Click here to confirm your invitation" %}:
+        <br/>
+        <a href="{{base_url}}{{object.get_absolute_url}}">
+            {{base_url}}{{object.get_absolute_url}}
+        </a>
+    </p>
+
+</div>
