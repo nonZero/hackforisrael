@@ -97,7 +97,7 @@ class EventInvitation(models.Model):
 
         context = {'base_url': base_url, 'object': self}
 
-        subject = "%s: %s" % (_("Invitation"), self.event.title)
+        subject = "%s: %s" % (unicode(_("Invitation")), self.event.title)
 
         html_message = render_to_string("emails/invitation.html", context)
 
