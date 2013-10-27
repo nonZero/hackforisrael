@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 03:06+0200\n"
-"PO-Revision-Date: 2013-10-27 03:07+0200\n"
+"POT-Creation-Date: 2013-10-27 12:56+0200\n"
+"PO-Revision-Date: 2013-10-27 12:57+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,49 +29,65 @@ msgstr "הרשאות"
 msgid "Important dates"
 msgstr "תאריכים חשובים"
 
-#: .\models.py:46
+#: .\models.py:47
 msgid "Male"
 msgstr "זכר"
 
-#: .\models.py:47
+#: .\models.py:48
 msgid "Female"
 msgstr "נקבה"
 
-#: .\models.py:55
+#: .\models.py:56
 msgid "Hebrew first name"
 msgstr "שם פרטי בעברית"
 
-#: .\models.py:57
+#: .\models.py:58
 msgid "Hebrew last name"
 msgstr "שם משפחה בעברית"
 
-#: .\models.py:60
+#: .\models.py:61
 msgid "English first name"
 msgstr "שם פרטי באנגלית"
 
-#: .\models.py:62
+#: .\models.py:63
 msgid "English last name"
 msgstr "שם משפחה באנגלית"
 
-#: .\models.py:116
+#: .\models.py:118
 msgctxt "userlog"
 msgid "Other"
 msgstr "אחר"
 
-#: .\models.py:117
+#: .\models.py:119
 msgctxt "userlog"
 msgid "Add"
 msgstr "הוספה"
 
-#: .\models.py:118
+#: .\models.py:120
 msgctxt "userlog"
 msgid "Change"
 msgstr "שינוי"
 
-#: .\models.py:119
+#: .\models.py:121
 msgctxt "userlog"
 msgid "Remove"
 msgstr "הסרה"
+
+#: .\models.py:143
+msgid "Creation time"
+msgstr "תאריך יצירה"
+
+#: .\models.py:148 .\templates\users\hackitauser_detail.html.py:56
+msgid "Visible to the user"
+msgstr "גלוי למשתמש"
+
+#: .\models.py:150
+msgid "Content"
+msgstr "תוכן"
+
+#: .\views.py:151
+msgid "Note added."
+msgstr "ההערה נרשמה."
 
 #: .\templates\account\login.html.py:7 .\templates\account\login.html.py:11
 #: .\templates\account\login.html.py:48
@@ -108,13 +124,27 @@ msgid "You are logged in as"
 msgstr "אתה מחובר למערכת בתור"
 
 #: .\templates\users\hackitauser_detail.html.py:10
+#: .\templates\users\usernote_form.html.py:14
+msgid "Add Note"
+msgstr "הוספת הערה"
+
+#: .\templates\users\hackitauser_detail.html.py:14
 #: .\templates\users\hackitauser_list.html.py:10
+#: .\templates\users\usernote_form.html.py:10
 msgid "Users"
 msgstr "משתמשים"
 
-#: .\templates\users\hackitauser_detail.html.py:21
+#: .\templates\users\hackitauser_detail.html.py:25
 msgid "Add tag"
 msgstr "הוסף תג"
+
+#: .\templates\users\hackitauser_detail.html.py:54
+msgid "at"
+msgstr "ב:"
+
+#: .\templates\users\hackitauser_detail.html.py:60
+msgid "Invisible to the user"
+msgstr "נסתר מהמשתמש"
 
 #: .\templates\users\hackitauser_list.html.py:14
 msgid "Filter"
@@ -154,6 +184,10 @@ msgstr "מתוך"
 msgctxt "pagination"
 msgid "page"
 msgstr "עמוד"
+
+#: .\templates\users\usernote_form.html.py:20
+msgid "Add"
+msgstr "הוספה"
 
 #~ msgid ""
 #~ "For easy access, please sign in or sign up with one of your existing "

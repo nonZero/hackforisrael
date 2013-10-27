@@ -8,6 +8,7 @@ from django.db.models.aggregates import Count
 from django.utils import timezone
 from django.utils.datastructures import SortedDict
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from h4il.base_models import random_slug
 import random
 import string
 import student_applications.models
@@ -93,6 +94,7 @@ class HackitaUser(AbstractUser):
         return "/users/%d/" % self.id
 
 
+
 def update_personal_details(user, data):
     if data['gender'] == u'זכר':
         user.gender = Gender.MALE
@@ -134,3 +136,21 @@ class UserLog(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class UserNote(models.Model):
+    """ Used for keeping track on stuff related to user - phone calls etc. """
+    created_at = models.DateTimeField(_("Creation time"), auto_now_add=True)
+    slug = models.SlugField(default=random_slug)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="notes")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                related_name="notes_authored")
+    visible_to_user = models.BooleanField(_("Visible to the user"),
+                                          default=False)
+    content = models.TextField(_("Content"))
+
+    def __unicode__(self):
+        return self.content
+
+    class Meta:
+        ordering = ('-created_at', 'user')

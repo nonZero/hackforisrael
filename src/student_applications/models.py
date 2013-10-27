@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models, transaction
-from django.db.utils import IntegrityError
 from django.utils.translation import ugettext_lazy as _
 from users.models import UserLogOperation, UserLog
 
@@ -126,4 +125,3 @@ class UserTag(models.Model):
         unique_together = (
                            ('user', 'tag', 'created_by'),
                           )
-

@@ -4,9 +4,9 @@ from django.db import models
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from h4il.base_models import random_slug
 import logging
-import random
-import string
+
 logger = logging.getLogger(__name__)
 
 
@@ -84,10 +84,6 @@ class EventInvitationStatus(object):
                )
 
 
-def random_slug(length=40):
-    return "".join([random.choice(string.lowercase) for _ in range(length)])
-
-
 class EventInvitation(models.Model):
     event = models.ForeignKey(Event, related_name="invitations")
     slug = models.SlugField(default=random_slug)
@@ -146,4 +142,3 @@ class EventInvitation(models.Model):
         self.save()
 
         return True
-

@@ -1,17 +1,19 @@
-from django.contrib.sites.models import get_current_site
+from django.contrib import messages
 from django.db import transaction
 from django.db.models.aggregates import Sum
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from events.models import Event
 from h4il.base_views import StaffOnlyMixin
 from student_applications.consts import get_user_pretty_answers
 from student_applications.models import Cohort, UserCohortStatus, Tag, UserTag, \
     UserCohort
-from users import models
-from users.models import HackitaUser
+from users import models, forms
+from users.models import HackitaUser, UserNote, UserLog, UserLogOperation
 
 
 class AllUsersLogView(StaffOnlyMixin, ListView):
@@ -124,3 +126,27 @@ class UserView(StaffOnlyMixin, DetailView):
             UserTag.objects.tag(u, tag, request.user)
 
         return redirect('user_dashboard', pk=u.id)
+
+
+class CreateUserNoteView(StaffOnlyMixin, CreateView):
+    model = UserNote
+    form_class = forms.UserNoteForm
+
+    def get_user(self):
+        return get_object_or_404(HackitaUser, pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        d = super(CreateUserNoteView, self).get_context_data(**kwargs)
+        d['object'] = self.get_user()
+        return d
+
+    def form_valid(self, form):
+        u = self.get_user()
+        form.instance.user = u
+        form.instance.author = self.request.user
+        o = form.save()
+        UserLog.objects.create(user=u, created_by=self.request.user,
+                       content_object=o,
+                       operation=UserLogOperation.ADD)
+        messages.success(self.request, _('Note added.'))
+        return redirect(u)
