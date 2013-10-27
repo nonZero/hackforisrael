@@ -8,12 +8,12 @@
         <div class="columns large-12">
 
         <p>
-            {% trans "You are invited to" %} {{object.event.title}}
+            <b>{% trans "You are invited to" %} {{object.event.title}}</b>
         </p>
 
         <ul class="no-bullet">
             <li>
-                {% trans "at" %} {{object.event.location}}
+                {% trans "at" %}: {{object.event.location}}
             </li>
             <li>
                 {% trans "From" %} {{object.event.starts_at}}
@@ -40,12 +40,28 @@
                         {% if object.status == object.statuses.MAYBE %}{% trans "Maybe" %}{% endif %}
                         {% if object.status == object.statuses.DECLINED %}{% trans "No" %}{% endif %}
                     </b>
+                    {% if object.note %}
+                      <br/>
+                      {% trans "Note" %}:<br/>
+                      {{object.note|linebreaksbr}}
+                    {% endif %}
                </div>
             {% endif %}
 
-            <button name="status" value="{{object.statuses.APPROVED}}">{% trans "Yes" %}</button>
-            <button name="status" value="{{object.statuses.MAYBE}}">{% trans "Maybe" %}</button>
-            <button name="status" value="{{object.statuses.DECLINED}}">{% trans "No" %}</button>
+            <div class="row">
+                <div class="columns large-2 text-left">
+                    <label for="id_note">{% trans "Note" %}</label>
+                </div>
+                <div class="columns large-4">
+                    <textarea style="height:100px;" id="id_note" name="note">{{object.note|default:''}}</textarea>
+                    <button name="status" value="{{object.statuses.APPROVED}}">{% trans "Yes" %}</button>
+                    <button name="status" value="{{object.statuses.MAYBE}}">{% trans "Maybe" %}</button>
+                    <button name="status" value="{{object.statuses.DECLINED}}">{% trans "No" %}</button>
+                </div>
+                <div class="columns large-6">
+                </div>
+            </div>
+
         </form>
 
     </div>

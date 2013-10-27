@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from events.models import EventInvitation, EventInvitationStatus
 from h4il.base_views import StaffOnlyMixin
 from django.utils.translation import ugettext as _
+from django.core.mail import mail_managers
 
 
 class InvitationDetailView(DetailView):
@@ -21,9 +22,19 @@ class InvitationDetailView(DetailView):
                           EventInvitationStatus.MAYBE]:
             return HttpResponseBadRequest("Bad status value")
 
+        note = request.POST.get('note')
+
         o = self.get_object()
-        o.status = status
-        o.save()
+
+        if status != o.status or note != o.note:
+            o.status = status
+            o.note = note
+            o.save()
+            subject = u"%s: %s - %s" % (o.user, o.get_status_display(), o.event)
+            message = u"%s (%s): %s - %s\n%s" % (o.user, o.user.email,
+                                         o.get_status_display(), o.event,
+                                         o.note)
+            mail_managers(subject, message)
 
         messages.success(request, _('Thank you!'))
 
