@@ -53,6 +53,7 @@ class Command(BaseCommand):
                 except Answer.DoesNotExist:
                     pass
 
-            all_users.append(d)
+            if d:
+                all_users.append(d)
 
         print json.dumps(all_users)
