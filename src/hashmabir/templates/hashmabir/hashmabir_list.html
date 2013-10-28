@@ -9,7 +9,7 @@
 
         {% include "website/_add_idea_button.html" %}
             {% for o in object_list %}
-            {% ifchanged o.craeted_at.date %}
+            {% ifchanged o.created_at.date %}
                 {% if not forloop.first %}
                 <ul>
                 {% endif %}
