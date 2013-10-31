@@ -1,0 +1,16 @@
+{% load i18n %}
+<div dir="rtl">
+
+    <h1> {{object}} </h1>
+
+    <div>
+        {{object.content|safe}}
+    </div>
+
+    <div>
+        <a href="{{user_url}}">{{object.created_by}}</a>
+        <br/>
+        <a href="{{url}}">{{url}}</a>
+    </div>
+
+</div>
