@@ -30,4 +30,10 @@
         </a>
     </p>
 
+    {% if object.event.registration_ends_at %}
+    <p><i>
+        ({% trans "Registartion ends at" %}:
+        {{object.event.registration_ends_at|date:"d/n/Y H:i"}})
+    </i></p>
+    {% endif %}
 </div>
