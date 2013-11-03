@@ -45,6 +45,7 @@
                       <ol>
                     {% endifchanged %}
                   <li>
+                      <input class="user-email" type="checkbox" value="{{i.user.email}}"{% if i.status == i.statuses.APPROVED %} checked="1"{% endif %}/>
                       <a href="{{i.user.get_absolute_url}}" title="{{i.created_at}}">{{i.user}}</a>
                       {% if i.attendance %}
                         ({{i.get_attendance_display}})
@@ -59,6 +60,11 @@
                 {% endfor %}
             </ol>
 
+            <div>
+                 <textarea id="emails" dir="ltr" style="text-align: left;">
+                 </textarea>
+            </div>
+
         </div>
         <div class="columns large-8">
             <div class="panel">
@@ -67,5 +73,26 @@
         </div>
     </div>
 </div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(function(){
+
+        function refreshEmails() {
+            $('#emails').val($('.user-email:checked').map(function(){
+                return $(this).val();
+            }).get().join('\n'));
+        }
+
+        $('.user-email').change(refreshEmails);
+
+        refreshEmails();
+    });
+</script>
 
 {% endblock %}
