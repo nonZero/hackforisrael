@@ -45,6 +45,8 @@ urlpatterns = patterns('',
         name='user_dashboard'),
     url(r'^users/(?P<pk>\d+)/add-note/$', users_views.CreateUserNoteView.as_view(),
         name='user_add_note'),
+    url(r'^users/(?P<pk>\d+)/edit/$', sa_views.UserCohortUpdateView.as_view(),
+        name='user_edit'),
     url(r'^users/log/$', users_views.AllUsersLogView.as_view(),
         name='users_log'),
 

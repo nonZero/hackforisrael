@@ -17,6 +17,18 @@
             <a href="mailto:{{object.email}}">{{object}}</a>
          </h2>
 
+        {% if object.cohorts.all %}
+         <p>
+           {% for c in object.cohorts.all %}
+           <span class="label">
+             <b>{{c.cohort}}</b>: {{c.get_status_display}}
+             </span>
+           {% endfor %}
+           &nbsp;
+           <a href="{% url "user_edit" object.id %}"><i class="fi-pencil" title="{% trans "Edit" %}"></i></a>
+         </p>
+       {% endif %}
+
         <div class="row">
 
             <div class="columns large-3">

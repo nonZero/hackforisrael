@@ -3,6 +3,7 @@ South==0.8.2
 django-extensions==1.2.1
 django-floppyforms==1.1
 django-debug-toolbar==0.9.4
+django-extra-views==0.6.3
 
 # allauth with trnslation to hebrew, requires git installed :-)
 # django-allauth==0.13.0

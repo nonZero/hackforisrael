@@ -57,6 +57,7 @@ class UserCohort(models.Model):
         unique_together = (
                            ('user', 'cohort'),
                           )
+        ordering = ['cohort']
 
 
 class TagGroup(object):

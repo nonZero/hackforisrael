@@ -9,13 +9,14 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
-from h4il.base_views import ProtectedMixin
+from extra_views.formsets import InlineFormSetView
+from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import get_pretty_answer
 from q13es.models import Answer
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES, get_user_pretty_answers
 from student_applications.models import UserCohortStatus, Cohort, UserCohort
-from users.models import update_personal_details
+from users.models import update_personal_details, HackitaUser
 import logging
 
 logger = logging.getLogger(__name__)
@@ -133,3 +134,15 @@ class AllFormsView(TemplateView, ProtectedMixin):
         d = super(AllFormsView, self).get_context_data(**kwargs)
         d['forms'] = [(k, FORMS[k]) for k in FORM_NAMES]
         return d
+
+
+class UserCohortUpdateView(StaffOnlyMixin, InlineFormSetView):
+    model = HackitaUser
+    inline_model = UserCohort
+    template_name = 'student_applications/usercohort_formset.html'
+    extra = 0
+    can_delete = False
+    fields = ('status',)
+
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()

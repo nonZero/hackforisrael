@@ -1,0 +1,30 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load hackita %}
+
+{% block content %}
+
+<div class="row">
+    <div class="columns large-12">
+
+        <h2>
+            <a href="{% url "users" %}">{% trans "Users" %}</a>
+            &gt;
+            {{object|u}}
+            &gt;
+            {% trans "Edit" %}
+         </h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+              {{form.instance.cohort}}
+              {{form.id}}
+              {{form.status}}
+            {% endfor %}
+            <button>{% trans "Save" %}</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
