@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 11:12+0200\n"
-"PO-Revision-Date: 2013-10-27 11:12+0200\n"
+"POT-Creation-Date: 2013-11-03 13:11+0200\n"
+"PO-Revision-Date: 2013-11-03 13:12+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -37,8 +37,9 @@ msgstr "מועד התחלה"
 msgid "Ends at"
 msgstr "מועד סיום"
 
-#: .\models.py:31 .\templates\events\event_detail.html.py:31
-#: .\templates\events\eventinvitation_detail.html.py:51
+#: .\models.py:31 .\templates\emails\invitation.html.py:35
+#: .\templates\events\event_detail.html.py:31
+#: .\templates\events\eventinvitation_detail.html.py:54
 msgid "Registartion ends at"
 msgstr "ההרשמה נסגרת ב"
 
@@ -66,42 +67,71 @@ msgstr "ההזמנה סומנה כ\"אולי\""
 msgid "Invitation declined"
 msgstr "ההזמנה נדחתה"
 
-#: .\models.py:136
+#: .\models.py:93
+msgid "Attended"
+msgstr "הגיע"
+
+#: .\models.py:94
+msgid "Partially attended"
+msgstr "הגיע באופן חלקי"
+
+#: .\models.py:95
+msgid "Did not attend"
+msgstr "לא הגיע"
+
+#: .\models.py:108
+msgid "Status"
+msgstr "סטטוס"
+
+#: .\models.py:110 .\templates\events\eventinvitation_detail.html.py:45
+#: .\templates\events\eventinvitation_detail.html.py:60
+msgid "Note"
+msgstr "הערה"
+
+#: .\models.py:114
+msgid "Attendance"
+msgstr "נוכחות"
+
+#: .\models.py:148
 msgid "Invitation"
 msgstr "הזמנה"
 
-#: .\views.py:40
+#: .\views.py:42
 msgid "Event already finished."
 msgstr "האירוע הסתיים"
 
-#: .\views.py:53 .\views.py:57
+#: .\views.py:55 .\views.py:59
 msgid "Thank you!"
 msgstr "תודה רבה!"
 
-#: .\views.py:55 .\templates\events\eventinvitation_detail.html.py:69
+#: .\views.py:57 .\templates\events\eventinvitation_detail.html.py:72
 msgid "Registration already closed."
 msgstr "ההרשמה נסגרה"
 
+#: .\views.py:75
+msgid "Invitation updated successfully"
+msgstr "ההזמנה עודכנה בהצלחה"
+
 #: .\templates\emails\invitation.html.py:6
-#: .\templates\events\eventinvitation_detail.html.py:11
+#: .\templates\events\eventinvitation_detail.html.py:15
 msgid "You are invited to"
 msgstr "אתה מוזמן ל:"
 
 #: .\templates\emails\invitation.html.py:11
 #: .\templates\events\event_detail.html.py:21
-#: .\templates\events\eventinvitation_detail.html.py:16
+#: .\templates\events\eventinvitation_detail.html.py:19
 msgid "at"
 msgstr "ב"
 
 #: .\templates\emails\invitation.html.py:14
 #: .\templates\events\event_detail.html.py:24
-#: .\templates\events\eventinvitation_detail.html.py:19
+#: .\templates\events\eventinvitation_detail.html.py:22
 msgid "From"
 msgstr "החל מ"
 
 #: .\templates\emails\invitation.html.py:17
 #: .\templates\events\event_detail.html.py:27
-#: .\templates\events\eventinvitation_detail.html.py:22
+#: .\templates\events\eventinvitation_detail.html.py:25
 msgid "To"
 msgstr "ועד"
 
@@ -109,34 +139,42 @@ msgstr "ועד"
 msgid "Click here to confirm your invitation"
 msgstr "לחץ כאן לאישור ההזמנה"
 
+#: .\templates\events\event_detail.html.py:49
+msgid "Edit"
+msgstr "עריכה"
+
 #: .\templates\events\event_list.html.py:10
 msgid "Events"
 msgstr "אירועים"
 
-#: .\templates\events\eventinvitation_detail.html.py:30
+#: .\templates\events\eventinvitation_detail.html.py:12
+msgctxt "invitation"
+msgid "to"
+msgstr "עבור"
+
+#: .\templates\events\eventinvitation_detail.html.py:33
 msgid "Will you attend the event?"
 msgstr "האם תגיע לאירוע?"
 
-#: .\templates\events\eventinvitation_detail.html.py:35
+#: .\templates\events\eventinvitation_detail.html.py:38
 msgid "Your current answer"
 msgstr "תשובתך הנוכחית"
 
-#: .\templates\events\eventinvitation_detail.html.py:36
-#: .\templates\events\eventinvitation_detail.html.py:61
+#: .\templates\events\eventinvitation_detail.html.py:39
+#: .\templates\events\eventinvitation_detail.html.py:64
 msgid "Yes"
 msgstr "כן"
 
-#: .\templates\events\eventinvitation_detail.html.py:37
-#: .\templates\events\eventinvitation_detail.html.py:62
+#: .\templates\events\eventinvitation_detail.html.py:40
+#: .\templates\events\eventinvitation_detail.html.py:65
 msgid "Maybe"
 msgstr "אולי"
 
-#: .\templates\events\eventinvitation_detail.html.py:38
-#: .\templates\events\eventinvitation_detail.html.py:63
+#: .\templates\events\eventinvitation_detail.html.py:41
+#: .\templates\events\eventinvitation_detail.html.py:66
 msgid "No"
 msgstr "לא"
 
-#: .\templates\events\eventinvitation_detail.html.py:42
-#: .\templates\events\eventinvitation_detail.html.py:57
-msgid "Note"
-msgstr "הערה"
+#: .\templates\events\eventinvitation_form.html.py:21
+msgid "Save"
+msgstr "שמירה"

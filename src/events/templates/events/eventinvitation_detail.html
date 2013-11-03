@@ -7,13 +7,16 @@
     <div class="row">
         <div class="columns large-4">
 
-            <p>
-                <b>{% trans "You are invited to" %} {{object.event.title}}</b>
-            </p>
-
             <ul class="no-bullet">
                 <li>
-                    {% trans "at" %}: {{object.event.location}}
+                    {% trans "to" context "invitation" %}: {{object.user}} ({{object.user.email}})
+                </li>
+                <li>
+                    <b>{% trans "You are invited to" %} {{object.event.title}}</b>
+                </li>
+
+                <li>
+                    {% trans "at" %} {{object.event.location}}
                 </li>
                 <li>
                     {% trans "From" %}: {{object.event.starts_at|date:"d/n/Y H:i"}}

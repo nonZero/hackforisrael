@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 {% load i18n %}
+{% load hackita %}
 
 {% block content %}
 
@@ -48,6 +49,23 @@
 
 
         </div>
+
+         {% for i in object.invitations.all %}
+           <div class="panel">
+               <b>{{i.event|u}}</b>
+               <a href="{% url "invitation" i.slug %}">{{i.get_status_display}}</a>
+                {% if i.attendance %}
+                    ({{i.get_attendance_display}})
+                {% endif %}
+               <a href="{% url "invitation_edit" i.slug %}"><i class="fi-pencil" title="{% trans "Edit" %}"></i></a>
+
+               {% if i.note %}
+                <blockquote>
+                    {{i.note|urlize|linebreaksbr}}
+                </blockquote>
+               {% endif %}
+           </div>
+         {% endfor %}
 
          {% for n in object.notes.all %}
            <div class="panel">

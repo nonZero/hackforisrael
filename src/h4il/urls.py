@@ -32,8 +32,11 @@ urlpatterns = patterns('',
     url(r'^invitation/(?P<slug>[a-z]+)/$',
         events_views.InvitationDetailView.as_view(), name='invitation'),
 
-    url(r'^invitation/(?P<slug>[a-z]+)/preview$',
+    url(r'^invitation/(?P<slug>[a-z]+)/preview/$',
         events_views.InvitationPreviewView.as_view(), name='invitation_preview'),
+
+    url(r'^invitation/(?P<slug>[a-z]+)/edit/$',
+        events_views.InvitationUpdateView.as_view(), name='invitation_edit'),
 
 
     # STAFF ONLY

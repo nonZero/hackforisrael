@@ -155,6 +155,7 @@ INSTALLED_APPS = (
 
     'south',
 
+    'hackita_util',
     'users',
     'website',
     'q13es',

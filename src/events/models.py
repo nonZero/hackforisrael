@@ -38,7 +38,7 @@ class Event(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return "event", (self.slug, )
+        return "event", (self.slug,)
 
     def is_open_for_registration(self, dt=None):
 
@@ -84,6 +84,18 @@ class EventInvitationStatus(object):
                )
 
 
+class EventInvitationAttendance(object):
+    ATTENDED = 1
+    PARTIALLY_ATTENDED = 2
+    DID_NOT_ATTEND = 3
+
+    choices = (
+               (ATTENDED, _('Attended')),
+               (PARTIALLY_ATTENDED, _('Partially attended')),
+               (DID_NOT_ATTEND, _('Did not attend')),
+               )
+
+
 class EventInvitation(models.Model):
     event = models.ForeignKey(Event, related_name="invitations")
     slug = models.SlugField(default=random_slug)
@@ -93,11 +105,15 @@ class EventInvitation(models.Model):
                                    null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name="invitations")
-    status = models.IntegerField(choices=EventInvitationStatus.choices,
+    status = models.IntegerField(_('Status'), choices=EventInvitationStatus.choices,
                                  default=EventInvitationStatus.NEW)
-    note = models.TextField(null=True)
+    note = models.TextField(_('Note'), null=True, blank=True)
 
     statuses = EventInvitationStatus
+
+    attendance = models.IntegerField(_('Attendance'),
+                                     choices=EventInvitationAttendance.choices,
+                                     null=True, blank=True)
 
     class Meta:
         ordering = ['event', 'status', 'created_at']

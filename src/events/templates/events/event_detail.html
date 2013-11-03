@@ -46,6 +46,10 @@
                     {% endifchanged %}
                   <li>
                       <a href="{{i.user.get_absolute_url}}" title="{{i.created_at}}">{{i.user}}</a>
+                      {% if i.attendance %}
+                        ({{i.get_attendance_display}})
+                      {% endif %}
+                      <a href="{% url "invitation_edit" i.slug %}?from={{request.get_full_path}}"><i class="fi-pencil" title="{% trans "Edit" %}"></i></a>
                         {% if i.note %}
                         <div class="panel">
                           {{i.note|linebreaksbr}}

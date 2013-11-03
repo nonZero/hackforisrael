@@ -5,7 +5,9 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
+from events import forms
 from events.models import EventInvitation, EventInvitationStatus, Event
 from h4il.base_views import StaffOnlyMixin
 
@@ -62,3 +64,18 @@ class InvitationDetailView(DetailView):
 class InvitationPreviewView(StaffOnlyMixin, DetailView):
     model = EventInvitation
     template_name = "emails/invitation.html"
+
+
+class InvitationUpdateView(StaffOnlyMixin, UpdateView):
+    model = EventInvitation
+    form_class = forms.EventInvitationForm
+
+    def form_valid(self, form):
+        d = super(InvitationUpdateView, self).form_valid(form)
+        messages.success(self.request, _("Invitation updated successfully"))
+        return d
+
+    def get_success_url(self):
+        if 'from' in self.request.POST:
+            return self.request.POST['from']
+        return self.get_object().user.get_absolute_url()

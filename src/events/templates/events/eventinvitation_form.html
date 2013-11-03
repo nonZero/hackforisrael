@@ -1,0 +1,26 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load hackita %}
+
+{% block content %}
+
+<div class="row">
+    <div class="columns large-12">
+        <h2>
+            {{object.event|u}}
+            &gt;
+            {{object.user|u}}
+        </h2>
+        <form method="post">
+            {% csrf_token %}
+            {{form}}
+            
+            {% if request.GET.from %}
+              <input type="hidden" name="from" value="{{request.GET.from}}"/>
+            {% endif %}
+            <button>{% trans "Save" %}</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
