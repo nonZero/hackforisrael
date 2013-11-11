@@ -15,6 +15,9 @@
             {% trans "Edit" %}
          </h2>
         <form method="post">
+            {% if request.GET.from %}
+              <input type="hidden" name="from" value="{{request.GET.from}}"/>
+            {% endif %}
             {% csrf_token %}
             {{ formset.management_form }}
             {% for form in formset %}

@@ -8,7 +8,9 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
+from django.views.generic.list import ListView
 from extra_views.formsets import InlineFormSetView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import get_pretty_answer
@@ -145,4 +147,15 @@ class UserCohortUpdateView(StaffOnlyMixin, InlineFormSetView):
     fields = ('status',)
 
     def get_success_url(self):
+        if 'from' in self.request.POST:
+            return self.request.POST['from']
         return self.get_object().get_absolute_url()
+
+
+class CohortListView(StaffOnlyMixin, ListView):
+    model = Cohort
+
+
+class CohortDetailView(StaffOnlyMixin, DetailView):
+    model = Cohort
+    slug_field = 'code'

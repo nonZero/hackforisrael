@@ -16,6 +16,13 @@ class Cohort(models.Model):
     class Meta:
         ordering = ['ordinal']
 
+    @models.permalink
+    def get_absolute_url(self):
+        return "cohort", (self.code, )
+
+    def users_in_pipeline(self):
+        return self.users.filter(status__in=UserCohortStatus.PIPELINE)
+
 
 class UserCohortStatus(object):
     INVITED = 1
@@ -45,6 +52,8 @@ class UserCohortStatus(object):
                     (GRADUATED, _('Graduated')),
                )
 
+    PIPELINE = [AVAILABLE, INVITED_TO_INTERVIEW, ACCEPTED, REGISTERED,
+                  IN_PROCESS, GRADUATED]
     IGNORED = [INVITED, UNAVAILABLE, REJECTED]
 
 
@@ -52,12 +61,13 @@ class UserCohort(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="cohorts")
     cohort = models.ForeignKey(Cohort, related_name="users")
     status = models.IntegerField(choices=UserCohortStatus.choices)
+    statuses = UserCohortStatus
 
     class Meta:
         unique_together = (
                            ('user', 'cohort'),
                           )
-        ordering = ['cohort']
+        ordering = ['cohort', 'status']
 
 
 class TagGroup(object):

@@ -50,6 +50,10 @@ urlpatterns = patterns('',
     url(r'^users/log/$', users_views.AllUsersLogView.as_view(),
         name='users_log'),
 
+    url(r'^cohort/$', sa_views.CohortListView.as_view(), name='cohorts'),
+    url(r'^cohort/(?P<slug>\d+)/$', sa_views.CohortDetailView.as_view(),
+        name='cohort'),
+
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

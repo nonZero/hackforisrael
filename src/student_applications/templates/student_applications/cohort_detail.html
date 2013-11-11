@@ -1,0 +1,67 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+            <h2>
+                {{object.title}}
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="columns large-8">
+
+            {% for u in object.users_in_pipeline %}
+                {% ifchanged u.status %}
+                {% if not forloop.first %}
+                    </ol>
+                {% endif %}
+                   <h4>
+                       {{u.get_status_display}}
+                   </h4>
+                  <ol>
+                {% endifchanged %}
+              <li>
+                  <input class="user-email" type="checkbox" value="{{u.user.email}}"{% if u.status == u.statuses.ACCEPTED %} checked="1"{% endif %}/>
+                  <a href="{{u.user.get_absolute_url}}">{{u.user}}</a>
+                  <a href="{% url "user_edit" u.user.id %}?from={{request.get_full_path}}"><i class="fi-pencil" title="{% trans "Edit" %}"></i></a>
+              </li>
+              {% if forloop.last %}
+                  </ol>
+              {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="columns large-4">
+             <textarea id="emails" dir="ltr" style="text-align: left;">
+             </textarea>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(function(){
+
+        function refreshEmails() {
+            $('#emails').val($('.user-email:checked').map(function(){
+                return $(this).val();
+            }).get().join('\n'));
+        }
+
+        $('.user-email').change(refreshEmails);
+
+        refreshEmails();
+    });
+</script>
+
+{% endblock %}
