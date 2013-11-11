@@ -1,21 +1,13 @@
 from django.conf import settings
-from django.core.mail.message import EmailMultiAlternatives
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from h4il.base_models import random_slug
+from h4il.mail import send_html_mail
 import logging
 
 logger = logging.getLogger(__name__)
-
-
-def send_html_mail(subject, html_message, email):
-
-    alts = [(html_message, 'text/html')]
-
-    m = EmailMultiAlternatives(subject, to=[email], alternatives=alts)
-    return m.send()
 
 
 class Event(models.Model):

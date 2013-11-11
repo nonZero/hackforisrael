@@ -1,6 +1,6 @@
-import floppyforms as forms
 from django.utils.datastructures import SortedDict
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, gettext
+import floppyforms as forms
 import re
 
 FIELD_TYPES = {
@@ -91,7 +91,11 @@ def lookup_field_class_and_args(field_type, info, field_types=FIELD_TYPES):
         (field_class, kwargs)
     """
 
-    field_def = field_types[field_type if field_type else _('general')]
+    # FIXME: make everything work proerly as unicode
+    if type(field_type) is unicode:
+        field_type = field_type.encode('utf8')
+
+    field_def = field_types[field_type if field_type else gettext('general')]
 
     field_class, base_args = field_def if isinstance(field_def, tuple) \
                                         else (field_def, {})

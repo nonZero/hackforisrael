@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div dir="rtl" style="padding:3px;">
+
+    <h1>
+        {{object.survey.email_subject}}
+    </h1>
+
+    <div style="margin:6px; padding:6px; border: 1px solid #ccc;">
+        {{object.survey.email_content|urlize|linebreaksbr}}
+    </div>
+
+    <p>
+        <a href="{{base_url}}{{object.get_absolute_url}}">
+            {{base_url}}{{object.get_absolute_url}}
+        </a>
+    </p>
+
+</div>

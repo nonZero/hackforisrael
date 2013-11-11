@@ -162,6 +162,7 @@ INSTALLED_APPS = (
     'student_applications',
     'hashmabir',
     'events',
+    'surveys',
 
     'allauth',
     'allauth.account',

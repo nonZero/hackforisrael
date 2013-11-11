@@ -4,6 +4,7 @@
 
 {% block content %}
 
+    <form method="post">
     <div class="row">
         <div class="columns large-12">
             <h2>
@@ -26,8 +27,11 @@
                   <ol>
                 {% endifchanged %}
               <li>
-                  <input class="user-email" type="checkbox" value="{{u.user.email}}"{% if u.status == u.statuses.ACCEPTED %} checked="1"{% endif %}/>
-                  <a href="{{u.user.get_absolute_url}}">{{u.user}}</a>
+                  <input name="users" class="user-email" type="checkbox" 
+                  value="{{u.user.id}}" 
+                  data-email="{{u.user.email}}"
+                  {% if u.status == u.statuses.ACCEPTED %}checked="1"{% endif %}/>
+                      <a href="{{u.user.get_absolute_url}}">{{u.user}}</a>
                   <a href="{% url "user_edit" u.user.id %}?from={{request.get_full_path}}"><i class="fi-pencil" title="{% trans "Edit" %}"></i></a>
               </li>
               {% if forloop.last %}
@@ -39,8 +43,16 @@
         <div class="columns large-4">
              <textarea id="emails" dir="ltr" style="text-align: left;">
              </textarea>
+            {% csrf_token %}
+            <select name='survey'>
+                {% for s in surveys %}
+                  <option value="{{s.id}}">{{s}}</option>
+                {% endfor %}
+            </select>
+            <button class="small" name='send'>{% trans "Send" %}</button>
         </div>
     </div>
+    </form>
 </div>
 
 
@@ -54,7 +66,7 @@
 
         function refreshEmails() {
             $('#emails').val($('.user-email:checked').map(function(){
-                return $(this).val();
+                return $(this).data('email');
             }).get().join('\n'));
         }
 

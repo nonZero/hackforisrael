@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse
+from django.db import transaction
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
@@ -18,6 +19,7 @@ from q13es.models import Answer
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES, get_user_pretty_answers
 from student_applications.models import UserCohortStatus, Cohort, UserCohort
+from surveys.models import Survey
 from users.models import update_personal_details, HackitaUser
 import logging
 
@@ -159,3 +161,26 @@ class CohortListView(StaffOnlyMixin, ListView):
 class CohortDetailView(StaffOnlyMixin, DetailView):
     model = Cohort
     slug_field = 'code'
+
+    def get_context_data(self, **kwargs):
+        d = super(CohortDetailView, self).get_context_data(**kwargs)
+        d['surveys'] = Survey.objects.all()
+        return d
+
+    def post(self, request, *args, **kwargs):
+
+        survey = Survey.objects.get(pk=int(request.POST['survey']))
+
+        user_ids = [int(x) for x in request.POST.getlist('users')]
+
+        base_url = request.build_absolute_uri('/')[:-1]
+
+        for uid in user_ids:
+            user = HackitaUser.objects.get(pk=uid)
+            o, created = survey.add_user(user)
+            messages.success(request, "%s: %s" % (o.user,
+                                                  "+" if created else "-"))
+
+        return redirect(survey)
+
+

@@ -1,0 +1,93 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+            <h2>
+                {{object}}
+            </h2>
+            {% if object.email_content %}
+              <div style="margin:6px; padding:6px; border: 1px solid #ccc;">
+                  {{object.survey.email_content|urlize|linebreaksbr}}
+              </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="columns large-8">
+            <ol>
+            {% for u in object.answers.all %}
+              <li>
+
+                  <input class="user-email" type="checkbox" value="{{u.user.email}}"{% if not u.answered_at %} checked="1"{% endif %}/>
+                  <a href="{{u.user.get_absolute_url}}">{{u.user}}</a>
+
+                  <a href="{% url "user_edit" u.user.id %}?from={{request.get_full_path}}"><i class="fi-pencil" title="{% trans "Edit" %}"></i></a>
+
+                  {% if u.answered_at %}
+                      <span class="toggle-content" title="{{u.answered_at}}">{{u.answered_at|naturaltime}}</span>
+                  {% endif %}
+
+                  {% if u.answered_at %}
+                     <div class="content hide">
+                        {% with u.get_pretty as a %}
+                          {% for field in a.fields %}
+                              {% if field.html %}
+                                  <div class="user-answer">
+                                      <div class="user-answer-title">
+                                          {{field.label}}
+                                      </div>
+                                      <div class="user-answer-content">
+                                          {{field.html|urlize|linebreaksbr}}
+                                      </div>
+                                  </div>
+                              {% endif %}
+                          {% endfor %}
+                        {% endwith %}
+                     </div>
+                  {% endif %}
+              </li>
+              {% if forloop.last %}
+                  </ol>
+              {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="columns large-4">
+             <textarea id="emails" dir="ltr" style="text-align: left;">
+             </textarea>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(function(){
+
+        function refreshEmails() {
+            $('#emails').val($('.user-email:checked').map(function(){
+                return $(this).val();
+            }).get().join('\n'));
+        }
+
+        $('.user-email').change(refreshEmails);
+
+        $('.toggle-content').click(function() {
+            $(this).next().toggle();
+        });
+
+        refreshEmails();
+    });
+</script>
+
+{% endblock %}
