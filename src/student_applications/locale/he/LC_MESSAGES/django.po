@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 22:47+0300\n"
-"PO-Revision-Date: 2013-10-26 22:48+0200\n"
+"POT-Creation-Date: 2013-11-12 21:38+0200\n"
+"PO-Revision-Date: 2013-11-12 21:39+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -64,63 +64,71 @@ msgstr "9"
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\models.py:32
+#: .\models.py:44
 msgid "Invited"
 msgstr "הוזמן"
 
-#: .\models.py:33
+#: .\models.py:45
 msgid "Unavailable"
 msgstr "לא פנוי"
 
-#: .\models.py:34
+#: .\models.py:46
 msgid "Available"
 msgstr "פנוי"
 
-#: .\models.py:35
+#: .\models.py:47
 msgid "Invited to interview"
 msgstr "מוזמן לראיון"
 
-#: .\models.py:36
+#: .\models.py:48
 msgid "Rejected"
 msgstr "נדחה"
 
-#: .\models.py:37
+#: .\models.py:49
 msgid "Accepted"
 msgstr "התקבל"
 
-#: .\models.py:38
+#: .\models.py:50
 msgid "Registered"
 msgstr "נרשם"
 
-#: .\models.py:39
+#: .\models.py:51
 msgid "In process"
 msgstr "במסלול"
 
-#: .\models.py:40
+#: .\models.py:52
 msgid "Graduated"
 msgstr "סיים"
 
-#: .\views.py:90
+#: .\views.py:95
 msgid "New User"
 msgstr "משתמש חדש"
 
-#: .\views.py:112
+#: .\views.py:117
 msgid "Registration completed! Thank you very much!"
 msgstr "ההרשמה הסתיימה! תודה רבה!"
 
-#: .\views.py:115
+#: .\views.py:120
 #, python-format
 msgid "User registered: %s"
-msgstr ""
+msgstr "המשתמש נרשם: %s"
 
-#: .\views.py:118
+#: .\views.py:123
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: .\views.py:124
+#: .\views.py:129
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
+
+#: .\views.py:184
+msgid "Sent"
+msgstr "נשלח"
+
+#: .\views.py:184
+msgid "Already sent"
+msgstr "כבר נשלח"
 
 #: .\templates\dashboard.html.py:12
 msgid "Registration Details"
@@ -135,6 +143,7 @@ msgid "Start Registration"
 msgstr "התחל הרשמה"
 
 #: .\templates\register.html.py:31
+#: .\templates\student_applications\cohort_detail.html.py:52
 msgid "Send"
 msgstr "שלח"
 
@@ -145,3 +154,20 @@ msgstr "שאלון"
 #: .\templates\student_applications\_progress.html.py:7
 msgid "of"
 msgstr "מתוך"
+
+#: .\templates\student_applications\cohort_detail.html.py:35
+#: .\templates\student_applications\usercohort_formset.html.py:15
+msgid "Edit"
+msgstr "עריכה"
+
+#: .\templates\student_applications\cohort_list.html.py:10
+msgid "Cohorts"
+msgstr "דבוקות"
+
+#: .\templates\student_applications\usercohort_formset.html.py:11
+msgid "Users"
+msgstr "משתמשים"
+
+#: .\templates\student_applications\usercohort_formset.html.py:28
+msgid "Save"
+msgstr "שמירה"

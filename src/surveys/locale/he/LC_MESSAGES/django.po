@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-12 21:40+0200\n"
+"PO-Revision-Date: 2013-11-12 21:41+0200\n"
+"Last-Translator: Udi Oron <udioron@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: .\views.py:65
+#, python-format
+msgid "'%s' was saved."
+msgstr "'%s' נשמר בהצלחה."
+
+#: .\views.py:71
+msgid "Problems detected in form. Please fix your errors and try again."
+msgstr ""
+
+#: .\templates\surveys\survey_detail.html.py:30
+msgid "Edit"
+msgstr "עריכה"
+
+#: .\templates\surveys\survey_list.html.py:11
+msgid "Surveys"
+msgstr "סקרים"
+
+#: .\templates\surveys\surveyanswer_detail.html.py:28
+msgid "Send"
+msgstr "שליחה"

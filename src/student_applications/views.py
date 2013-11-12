@@ -181,7 +181,7 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
             if created:
                 o.send(base_url)
             messages.success(request, "%s: %s" % (o.user,
-                                                  "+" if created else "-"))
+                                                  _("Sent") if created else _("Already sent")))
 
         return redirect(survey)
 

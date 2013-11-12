@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 12:56+0200\n"
-"PO-Revision-Date: 2013-10-27 12:57+0200\n"
+"POT-Creation-Date: 2013-11-12 21:41+0200\n"
+"PO-Revision-Date: 2013-11-12 21:42+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "הסרה"
 msgid "Creation time"
 msgstr "תאריך יצירה"
 
-#: .\models.py:148 .\templates\users\hackitauser_detail.html.py:56
+#: .\models.py:148 .\templates\users\hackitauser_detail.html.py:86
 msgid "Visible to the user"
 msgstr "גלוי למשתמש"
 
@@ -123,26 +123,48 @@ msgstr "יציאה"
 msgid "You are logged in as"
 msgstr "אתה מחובר למערכת בתור"
 
-#: .\templates\users\hackitauser_detail.html.py:10
-#: .\templates\users\usernote_form.html.py:14
-msgid "Add Note"
-msgstr "הוספת הערה"
-
-#: .\templates\users\hackitauser_detail.html.py:14
+#: .\templates\users\base.html.py:25
+#: .\templates\users\hackitauser_detail.html.py:15
 #: .\templates\users\hackitauser_list.html.py:10
 #: .\templates\users\usernote_form.html.py:10
 msgid "Users"
 msgstr "משתמשים"
 
-#: .\templates\users\hackitauser_detail.html.py:25
+#: .\templates\users\base.html.py:27
+msgid "Cohorts"
+msgstr ""
+
+#: .\templates\users\base.html.py:29
+msgid "Events"
+msgstr ""
+
+#: .\templates\users\base.html.py:31
+msgid "Surveys"
+msgstr ""
+
+#: .\templates\users\base.html.py:33
+msgid "Log"
+msgstr "יומן"
+
+#: .\templates\users\hackitauser_detail.html.py:11
+#: .\templates\users\usernote_form.html.py:14
+msgid "Add Note"
+msgstr "הוספת הערה"
+
+#: .\templates\users\hackitauser_detail.html.py:28
+#: .\templates\users\hackitauser_detail.html.py:72
+msgid "Edit"
+msgstr ""
+
+#: .\templates\users\hackitauser_detail.html.py:38
 msgid "Add tag"
 msgstr "הוסף תג"
 
-#: .\templates\users\hackitauser_detail.html.py:54
+#: .\templates\users\hackitauser_detail.html.py:84
 msgid "at"
 msgstr "ב:"
 
-#: .\templates\users\hackitauser_detail.html.py:60
+#: .\templates\users\hackitauser_detail.html.py:90
 msgid "Invisible to the user"
 msgstr "נסתר מהמשתמש"
 
