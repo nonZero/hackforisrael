@@ -10,8 +10,8 @@
                 {{object}}
             </h2>
             {% if object.email_content %}
-              <div style="margin:6px; padding:6px; border: 1px solid #ccc;">
-                  {{object.survey.email_content|urlize|linebreaksbr}}
+              <div class="panel htmlcontent">
+                  {{object.email_content|safe}}
               </div>
             {% endif %}
 

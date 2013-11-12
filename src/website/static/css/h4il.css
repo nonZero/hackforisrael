@@ -221,3 +221,15 @@ h2 {
 
 #faq dl {
 }
+
+.htmlcontent {
+
+}
+
+.htmlcontent p {
+    margin-bottom: 0.25em;
+}
+
+.htmlcontent ul {
+    padding: 0 1.5em;
+}

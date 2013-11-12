@@ -13,7 +13,7 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('email_subject', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('email_content', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('email_content', self.gf('h4il.html.HTMLField')(null=True, blank=True)),
             ('q13e', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal(u'surveys', ['Survey'])
@@ -22,7 +22,7 @@ class Migration(SchemaMigration):
         db.create_table(u'surveys_surveyanswer', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(default='aolbdwkhioyqpmzxigckczyfbtbovsjivhskmrii', max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(default='xsatcosivsujftotqskbiarjmciyfkjjdmtgruit', max_length=50)),
             ('survey', self.gf('django.db.models.fields.related.ForeignKey')(related_name='answers', to=orm['surveys.Survey'])),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='survey_answers', to=orm['users.HackitaUser'])),
             ('answered_at', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
@@ -69,7 +69,7 @@ class Migration(SchemaMigration):
         u'surveys.survey': {
             'Meta': {'object_name': 'Survey'},
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'email_content': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'email_content': ('h4il.html.HTMLField', [], {'null': 'True', 'blank': 'True'}),
             'email_subject': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'q13e': ('django.db.models.fields.TextField', [], {})
@@ -80,7 +80,7 @@ class Migration(SchemaMigration):
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'data': ('django.db.models.fields.TextField', [], {'default': "'{}'", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'default': "'upcxsnzkpsyqaohsyrnxwefktyzawualzgjttoub'", 'max_length': '50'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'default': "'qnvoiwxlxehtrvxsttlddnnoxaywifhlusmkdnuw'", 'max_length': '50'}),
             'survey': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'answers'", 'to': u"orm['surveys.Survey']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'survey_answers'", 'to': u"orm['users.HackitaUser']"})
         },

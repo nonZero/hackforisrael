@@ -20,6 +20,18 @@
                             </form>
                         </div>
                         {% trans "You are logged in as" %} {{user.email}}
+                        {% if user.is_staff %}
+                            &bull;
+                            <a href="{% url "users" %}">{% trans "Users" %}</a>
+                            &bull;
+                            <a href="{% url "cohorts" %}">{% trans "Cohorts" %}</a>
+                            &bull;
+                            <a href="{% url "events" %}">{% trans "Events" %}</a>
+                            &bull;
+                            <a href="{% url "surveys" %}">{% trans "Surveys" %}</a>
+                            &bull;
+                            <a href="{% url "users_log" %}">{% trans "Log" %}</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

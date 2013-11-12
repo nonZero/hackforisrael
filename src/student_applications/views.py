@@ -178,6 +178,8 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
         for uid in user_ids:
             user = HackitaUser.objects.get(pk=uid)
             o, created = survey.add_user(user)
+            if created:
+                o.send(base_url)
             messages.success(request, "%s: %s" % (o.user,
                                                   "+" if created else "-"))
 

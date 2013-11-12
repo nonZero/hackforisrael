@@ -37,6 +37,10 @@ class SurveyAnswerView(ProtectedMixin, SingleObjectTemplateResponseMixin,
             return redirect('dashboard')
         return super(SurveyAnswerView, self).dispatch(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        return super(SurveyAnswerView, self).get_context_data(
+                                                object=self.object, **kwargs)
+
     def get_form_class(self):
         return self.get_object().survey.get_form_class()
 
@@ -51,6 +55,10 @@ class SurveyAnswerView(ProtectedMixin, SingleObjectTemplateResponseMixin,
 
         message = "\n\n".join(u"{label}:\n {html}".format(**fld) for fld in
                             get_pretty_answer(form, data)['fields'])
+
+        url = self.request.build_absolute_uri(self.survey.get_absolute_url)
+
+        message += "\n%s" % url
 
         mail_managers(u"{}: {}".format(form.form_title, u), message)
 

@@ -6,6 +6,7 @@ from h4il.base_models import random_slug
 from h4il.mail import send_html_mail
 from q13es.forms import get_pretty_answer, parse_form
 import logging
+from h4il.html import HTMLField
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ logger = logging.getLogger(__name__)
 class Survey(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     email_subject = models.CharField(max_length=250)
-    email_content = models.TextField(null=True, blank=True)
+    email_content = HTMLField(null=True, blank=True)
     q13e = models.TextField()
 
     def __unicode__(self):

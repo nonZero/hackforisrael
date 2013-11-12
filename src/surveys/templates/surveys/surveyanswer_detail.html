@@ -8,12 +8,19 @@
         <div class="columns large-12">
 
         <div class="panel q13e">
-            <h1>{{form.form_title}}</h1>
-    
+
+            <h1>{{object.survey.email_subject}}</h1>
+
+            <div>
+                {{object.survey.email_content|safe}}
+            </div>
+
+
+            <h3>{{form.form_title}}</h3>
+
             {% if form.form_description %}
                 {{form.form_description|linebreaks}}
             {% endif %}
-    
             <form method="post" novalidate>
                 {% csrf_token %}
                 {{form.as_p}}
