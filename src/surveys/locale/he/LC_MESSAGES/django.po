@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 21:40+0200\n"
-"PO-Revision-Date: 2013-11-12 21:41+0200\n"
+"POT-Creation-Date: 2013-11-12 22:15+0200\n"
+"PO-Revision-Date: 2013-11-12 22:16+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,12 +17,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: .\views.py:65
-#, python-format
-msgid "'%s' was saved."
-msgstr "'%s' נשמר בהצלחה."
+#: .\views.py:37
+msgid "Wrong user! Please login with the correct user to continue"
+msgstr "דף זה מיועד למשתמש אחר. אנא התחבר מחדש למערכת עם המשתמש המתאים."
 
-#: .\views.py:71
+#: .\views.py:66
+msgid "Thank you!"
+msgstr "תודה רבה!"
+
+#: .\views.py:72
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr ""
 
@@ -34,6 +37,9 @@ msgstr "עריכה"
 msgid "Surveys"
 msgstr "סקרים"
 
-#: .\templates\surveys\surveyanswer_detail.html.py:28
+#: .\templates\surveys\surveyanswer_detail.html.py:24
 msgid "Send"
 msgstr "שליחה"
+
+#~ msgid "'%s' was saved."
+#~ msgstr "'%s' נשמר בהצלחה."

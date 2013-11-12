@@ -6,14 +6,16 @@
         {{object.survey.email_subject}}
     </h1>
 
-    <div style="margin:6px; padding:6px; border: 1px solid #ccc;">
+    <div style="margin:3px; padding:3px;">
         {{object.survey.email_content|safe}}
     </div>
 
-    <p>
-        <a href="{{base_url}}{{object.get_absolute_url}}">
-            {{base_url}}{{object.get_absolute_url}}
-        </a>
+    <p style="text-align: center">
+        <strong>
+            <a href="{{base_url}}{{object.get_absolute_url}}">
+                {{base_url}}{{object.get_absolute_url}}
+            </a>
+        </strong>
     </p>
 
 </div>

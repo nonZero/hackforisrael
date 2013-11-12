@@ -12,6 +12,7 @@ from django.views.generic.list import ListView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import get_pretty_answer
 from surveys.models import SurveyAnswer, Survey
+from django.http.response import HttpResponseForbidden
 
 
 class SurveyListView(StaffOnlyMixin, ListView):
@@ -26,14 +27,14 @@ class SurveyAnswerView(ProtectedMixin, SingleObjectTemplateResponseMixin,
                        SingleObjectMixin, FormView):
     model = SurveyAnswer
 
-    def get_queryset(self):
-        return super(SurveyAnswerView, self).get_queryset().filter(
-                                                       user=self.request.user)
-
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         if self.object.answered_at:
+            return redirect('dashboard')
+        if self.object.user != self.request.user:
+            messages.warning(request,
+               _("Wrong user! Please login with the correct user to continue"))
             return redirect('dashboard')
         return super(SurveyAnswerView, self).dispatch(request, *args, **kwargs)
 
@@ -56,13 +57,13 @@ class SurveyAnswerView(ProtectedMixin, SingleObjectTemplateResponseMixin,
         message = "\n\n".join(u"{label}:\n {html}".format(**fld) for fld in
                             get_pretty_answer(form, data)['fields'])
 
-        url = self.request.build_absolute_uri(self.survey.get_absolute_url)
+        url = self.request.build_absolute_uri(o.survey.get_absolute_url())
 
         message += "\n%s" % url
 
         mail_managers(u"{}: {}".format(form.form_title, u), message)
 
-        messages.success(self.request, _("'%s' was saved.") % form.form_title)
+        messages.success(self.request, _("Thank you!"))
 
         return redirect('register')
 

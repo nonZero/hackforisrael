@@ -6,31 +6,34 @@
 
     <div class="row">
         <div class="columns large-12">
-
-        <div class="panel q13e">
-
             <h1>{{object.survey.email_subject}}</h1>
-
-            <div>
-                {{object.survey.email_content|safe}}
-            </div>
-
-
-            <h3>{{form.form_title}}</h3>
-
-            {% if form.form_description %}
-                {{form.form_description|linebreaks}}
-            {% endif %}
-            <form method="post" novalidate>
-                {% csrf_token %}
-                {{form.as_p}}
-                <div class="form-actions">
-                    <input class="button" type="submit" value="{% trans "Send" %}"/>
-                </div>
-            </form>
-
         </div>
     </div>
-</div>
+
+    <div class="row">
+
+        <div class="columns large-4">
+            <div class="q13e">
+                {% if form.form_description %}
+                    {{form.form_description|linebreaks}}
+                {% endif %}
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <div class="form-actions">
+                        <input class="button" type="submit" value="{% trans "Send" %}"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="columns large-8">
+            <div class="panel htmlcontent">
+                {{object.survey.email_content|safe}}
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}
