@@ -210,10 +210,8 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
             for uid in user_ids:
                 user = HackitaUser.objects.get(pk=uid)
                 o, created = event.invite_user(user, request.user, base_url)
-                # trying to fix a strange bug
-                messages.success(request, unicode(o.user) + u" " + unicode(
-                                      _("Invited") if created
-                                      else _("Already Invited")))
+                if created:
+                    messages.success(request, user)
 
             return redirect(event)
 
