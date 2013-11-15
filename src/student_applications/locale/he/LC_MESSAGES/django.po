@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 21:38+0200\n"
-"PO-Revision-Date: 2013-11-12 21:39+0200\n"
+"POT-Creation-Date: 2013-11-15 10:19+0200\n"
+"PO-Revision-Date: 2013-11-15 10:20+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -64,70 +64,78 @@ msgstr "9"
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\models.py:44
+#: .\models.py:45 .\views.py:199
 msgid "Invited"
 msgstr "הוזמן"
 
-#: .\models.py:45
+#: .\models.py:46
 msgid "Unavailable"
 msgstr "לא פנוי"
 
-#: .\models.py:46
+#: .\models.py:47
 msgid "Available"
 msgstr "פנוי"
 
-#: .\models.py:47
+#: .\models.py:48
 msgid "Invited to interview"
 msgstr "מוזמן לראיון"
 
-#: .\models.py:48
+#: .\models.py:50
 msgid "Rejected"
 msgstr "נדחה"
 
-#: .\models.py:49
+#: .\models.py:51
 msgid "Accepted"
 msgstr "התקבל"
 
-#: .\models.py:50
+#: .\models.py:52
+msgid "Accepted to another cohort"
+msgstr "התקבל לדבוקה אחרת"
+
+#: .\models.py:54
 msgid "Registered"
 msgstr "נרשם"
 
-#: .\models.py:51
+#: .\models.py:55
 msgid "In process"
 msgstr "במסלול"
 
-#: .\models.py:52
+#: .\models.py:56
 msgid "Graduated"
 msgstr "סיים"
 
-#: .\views.py:95
+#: .\views.py:96
 msgid "New User"
 msgstr "משתמש חדש"
 
-#: .\views.py:117
+#: .\views.py:118
 msgid "Registration completed! Thank you very much!"
 msgstr "ההרשמה הסתיימה! תודה רבה!"
 
-#: .\views.py:120
+#: .\views.py:121
 #, python-format
 msgid "User registered: %s"
 msgstr "המשתמש נרשם: %s"
 
-#: .\views.py:123
+#: .\views.py:124
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: .\views.py:129
+#: .\views.py:130
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
 
-#: .\views.py:184
+#: .\views.py:187
 msgid "Sent"
 msgstr "נשלח"
 
-#: .\views.py:184
+#: .\views.py:187
 msgid "Already sent"
+msgstr "כבר נשלח"
+
+#: .\views.py:199
+msgid "Already Invited"
 msgstr "כבר נשלח"
 
 #: .\templates\dashboard.html.py:12
@@ -143,7 +151,7 @@ msgid "Start Registration"
 msgstr "התחל הרשמה"
 
 #: .\templates\register.html.py:31
-#: .\templates\student_applications\cohort_detail.html.py:52
+#: .\templates\student_applications\cohort_detail.html.py:59
 msgid "Send"
 msgstr "שלח"
 

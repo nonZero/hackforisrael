@@ -35,6 +35,7 @@ class UserCohortStatus(object):
 
     REJECTED = 99
     ACCEPTED = 100
+    IN_OTHER_COHORT = 101
 
     REGISTERED = 110
     IN_PROCESS = 200
@@ -45,8 +46,11 @@ class UserCohortStatus(object):
                     (UNAVAILABLE, _('Unavailable')),
                     (AVAILABLE, _('Available')),
                     (INVITED_TO_INTERVIEW, _('Invited to interview')),
+
                     (REJECTED, _('Rejected')),
                     (ACCEPTED, _('Accepted')),
+                    (IN_OTHER_COHORT, _('Accepted to another cohort')),
+
                     (REGISTERED, _('Registered')),
                     (IN_PROCESS, _('In process')),
                     (GRADUATED, _('Graduated')),
@@ -54,7 +58,7 @@ class UserCohortStatus(object):
 
     PIPELINE = [AVAILABLE, INVITED_TO_INTERVIEW, ACCEPTED, REGISTERED,
                   IN_PROCESS, GRADUATED]
-    IGNORED = [INVITED, UNAVAILABLE, REJECTED]
+    IGNORED = [INVITED, UNAVAILABLE, REJECTED, IN_OTHER_COHORT]
 
 
 class UserCohort(models.Model):

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 21:41+0200\n"
-"PO-Revision-Date: 2013-11-12 21:42+0200\n"
+"POT-Creation-Date: 2013-11-15 10:20+0200\n"
+"PO-Revision-Date: 2013-11-15 10:21+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -132,15 +132,15 @@ msgstr "משתמשים"
 
 #: .\templates\users\base.html.py:27
 msgid "Cohorts"
-msgstr ""
+msgstr "דבוקות"
 
 #: .\templates\users\base.html.py:29
 msgid "Events"
-msgstr ""
+msgstr "אירועים"
 
 #: .\templates\users\base.html.py:31
 msgid "Surveys"
-msgstr ""
+msgstr "סקרים"
 
 #: .\templates\users\base.html.py:33
 msgid "Log"
@@ -154,7 +154,7 @@ msgstr "הוספת הערה"
 #: .\templates\users\hackitauser_detail.html.py:28
 #: .\templates\users\hackitauser_detail.html.py:72
 msgid "Edit"
-msgstr ""
+msgstr "עריכה"
 
 #: .\templates\users\hackitauser_detail.html.py:38
 msgid "Add tag"
