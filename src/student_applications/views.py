@@ -185,7 +185,7 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
                 if uc.status != status:
                     uc.status = status
                     uc.save()
-                    messages.success(request, "%s: %s" %
+                    messages.success(request, u"%s: %s" %
                                      (user, uc.get_status_display()))
             # fall thorugh.
 
@@ -198,7 +198,7 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
                 o, created = survey.add_user(user)
                 if created:
                     o.send(base_url)
-                messages.success(request, "%s: %s" % (o.user,
+                messages.success(request, u"%s: %s" % (o.user,
                                                       _("Sent") if created else _("Already sent")))
 
             return redirect(survey)
@@ -210,7 +210,7 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
             for uid in user_ids:
                 user = HackitaUser.objects.get(pk=uid)
                 o, created = event.invite_user(user, request.user, base_url)
-                messages.success(request, "%s: %s" % (o.user,
+                messages.success(request, u"%s: %s" % (o.user,
                                       _("Invited") if created else _("Already Invited")))
 
             return redirect(event)
