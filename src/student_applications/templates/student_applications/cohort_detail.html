@@ -56,6 +56,12 @@
                   <option value="{{e.id}}">{{e}}</option>
                 {% endfor %}
             </select>
+            <select name='status'>
+                <option value="">---</option>
+                {% for k, v in statuses %}
+                  <option value="{{k}}">{{v}}</option>
+                {% endfor %}
+            </select>
             <button class="small" name='send'>{% trans "Send" %}</button>
         </div>
     </div>

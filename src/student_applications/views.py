@@ -167,12 +167,27 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
         d = super(CohortDetailView, self).get_context_data(**kwargs)
         d['surveys'] = Survey.objects.all()
         d['events'] = Event.objects.filter(is_active=True)
+        d['statuses'] = UserCohortStatus.choices
         return d
 
     def post(self, request, *args, **kwargs):
 
+        cohort = self.get_object()
+
         user_ids = [int(x) for x in request.POST.getlist('users')]
         base_url = request.build_absolute_uri('/')[:-1]
+
+        if request.POST.get('status'):
+            status = int(request.POST.get('status'))
+            for uid in user_ids:
+                user = HackitaUser.objects.get(pk=uid)
+                uc = UserCohort.objects.get(user=user, cohort=cohort)
+                if uc.status != status:
+                    uc.status = status
+                    uc.save()
+                    messages.success(request, "%s: %s" %
+                                     (user, uc.get_status_display()))
+            # fall thorugh.
 
         # Send surveys
         if request.POST.get('survey'):
@@ -200,5 +215,5 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
 
             return redirect(event)
 
-        return HttpResponseBadRequest('missing survey or event')
+        return redirect(cohort)
 
