@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse
-from django.db import transaction
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
@@ -12,6 +11,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
+from events.models import Event
 from extra_views.formsets import InlineFormSetView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import get_pretty_answer
@@ -22,6 +22,7 @@ from student_applications.models import UserCohortStatus, Cohort, UserCohort
 from surveys.models import Survey
 from users.models import update_personal_details, HackitaUser
 import logging
+from django.http.response import HttpResponseBadRequest
 
 logger = logging.getLogger(__name__)
 
@@ -165,24 +166,39 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
     def get_context_data(self, **kwargs):
         d = super(CohortDetailView, self).get_context_data(**kwargs)
         d['surveys'] = Survey.objects.all()
+        d['events'] = Event.objects.filter(is_active=True)
         return d
 
     def post(self, request, *args, **kwargs):
 
-        survey = Survey.objects.get(pk=int(request.POST['survey']))
-
         user_ids = [int(x) for x in request.POST.getlist('users')]
-
         base_url = request.build_absolute_uri('/')[:-1]
 
-        for uid in user_ids:
-            user = HackitaUser.objects.get(pk=uid)
-            o, created = survey.add_user(user)
-            if created:
-                o.send(base_url)
-            messages.success(request, "%s: %s" % (o.user,
-                                                  _("Sent") if created else _("Already sent")))
+        # Send surveys
+        if request.POST.get('survey'):
+            survey = Survey.objects.get(pk=int(request.POST['survey']))
 
-        return redirect(survey)
+            for uid in user_ids:
+                user = HackitaUser.objects.get(pk=uid)
+                o, created = survey.add_user(user)
+                if created:
+                    o.send(base_url)
+                messages.success(request, "%s: %s" % (o.user,
+                                                      _("Sent") if created else _("Already sent")))
 
+            return redirect(survey)
+
+        # send event invitations
+        if request.POST.get('event'):
+            event = Event.objects.get(pk=int(request.POST['event']))
+
+            for uid in user_ids:
+                user = HackitaUser.objects.get(pk=uid)
+                o, created = event.invite_user(user, request.user, base_url)
+                messages.success(request, "%s: %s" % (o.user,
+                                      _("Invited") if created else _("Already Invited")))
+
+            return redirect(event)
+
+        return HttpResponseBadRequest('missing survey or event')
 

@@ -45,8 +45,15 @@
              </textarea>
             {% csrf_token %}
             <select name='survey'>
+                <option value="">---</option>
                 {% for s in surveys %}
                   <option value="{{s.id}}">{{s}}</option>
+                {% endfor %}
+            </select>
+            <select name='event'>
+                <option value="">---</option>
+                {% for e in events %}
+                  <option value="{{e.id}}">{{e}}</option>
                 {% endfor %}
             </select>
             <button class="small" name='send'>{% trans "Send" %}</button>
