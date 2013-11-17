@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+
+    <div dir="ltr" style="text-align: left;padding: 10px;">
+
+        <div class="row">
+            <h1>
+                {{object}}
+            </h1>
+
+            <div class="columns large-12">
+                {{object.md}}
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

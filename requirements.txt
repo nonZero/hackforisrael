@@ -10,5 +10,6 @@ django-extra-views==0.6.3
 -e git+https://github.com/nonZero/django-allauth.git#egg=django_allauth-dev
 
 bleach==1.2.2
+Markdown==2.3.1
 
 ipython==1.1.0

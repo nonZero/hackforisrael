@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+{% load humanize %}
+{% load hackita %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+            <h2>
+                {% trans "Trails" %}
+            </h2>
+
+            <ul class="no-bullet">
+                {% for o in object_list %}
+                    <li>
+                        {{o|u}}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
