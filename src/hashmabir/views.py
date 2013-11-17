@@ -1,6 +1,6 @@
 from django.core.mail import mail_managers
 from django.template.loader import render_to_string
-from django.utils.translation import pgettext, gettext as _
+from django.utils.translation import pgettext, ugettext as _
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from h4il.base_views import ProtectedMixin

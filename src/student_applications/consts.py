@@ -1,5 +1,6 @@
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext as _
 from q13es.forms import FIELD_TYPES, parse_form
+import codecs
 import floppyforms as forms
 import os.path
 
@@ -48,7 +49,7 @@ FORM_NAMES = (
 
 
 def read_file(k):
-    with open(os.path.join(FORMS_DIR, k + '.txt')) as f:
+    with codecs.open(os.path.join(FORMS_DIR, k + '.txt'), 'r', 'utf-8') as f:
         return f.read()
 
 FORMS = {k: parse_form(read_file(k), CUSTOM_FIELD_TYPES) for k in FORM_NAMES}

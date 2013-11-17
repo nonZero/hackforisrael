@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext as _
 from q13es.forms import create_form, split_form_file, parse_field, parse_form
 from q13es.models import Answer
 import os.path

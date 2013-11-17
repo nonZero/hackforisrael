@@ -4,7 +4,7 @@ from django.core.mail import mail_managers
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import SingleObjectMixin, DetailView, \
     SingleObjectTemplateResponseMixin
 from django.views.generic.edit import FormView
@@ -12,7 +12,6 @@ from django.views.generic.list import ListView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import get_pretty_answer
 from surveys.models import SurveyAnswer, Survey
-from django.http.response import HttpResponseForbidden
 
 
 class SurveyListView(StaffOnlyMixin, ListView):

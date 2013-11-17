@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-15 10:19+0200\n"
-"PO-Revision-Date: 2013-11-15 10:20+0200\n"
+"POT-Creation-Date: 2013-11-17 10:30+0200\n"
+"PO-Revision-Date: 2013-11-17 10:30+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgstr "9"
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
 
-#: .\models.py:45 .\views.py:199
+#: .\models.py:45 .\views.py:213
 msgid "Invited"
 msgstr "הוזמן"
 
@@ -104,38 +104,38 @@ msgstr "במסלול"
 msgid "Graduated"
 msgstr "סיים"
 
-#: .\views.py:96
+#: .\views.py:95
 msgid "New User"
 msgstr "משתמש חדש"
 
-#: .\views.py:118
+#: .\views.py:117
 msgid "Registration completed! Thank you very much!"
 msgstr "ההרשמה הסתיימה! תודה רבה!"
 
-#: .\views.py:121
+#: .\views.py:120
 #, python-format
 msgid "User registered: %s"
 msgstr "המשתמש נרשם: %s"
 
-#: .\views.py:124
+#: .\views.py:123
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: .\views.py:130
+#: .\views.py:129
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
 
-#: .\views.py:187
+#: .\views.py:201
 msgid "Sent"
 msgstr "נשלח"
 
-#: .\views.py:187
+#: .\views.py:201
 msgid "Already sent"
 msgstr "כבר נשלח"
 
-#: .\views.py:199
-msgid "Already Invited"
+#: .\views.py:213
+msgid "Already invited"
 msgstr "כבר נשלח"
 
 #: .\templates\dashboard.html.py:12
@@ -151,7 +151,7 @@ msgid "Start Registration"
 msgstr "התחל הרשמה"
 
 #: .\templates\register.html.py:31
-#: .\templates\student_applications\cohort_detail.html.py:59
+#: .\templates\student_applications\cohort_detail.html.py:65
 msgid "Send"
 msgstr "שלח"
 

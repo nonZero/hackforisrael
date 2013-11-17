@@ -6,7 +6,7 @@ from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext as _
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
@@ -22,7 +22,6 @@ from student_applications.models import UserCohortStatus, Cohort, UserCohort
 from surveys.models import Survey
 from users.models import update_personal_details, HackitaUser
 import logging
-from django.http.response import HttpResponseBadRequest
 
 logger = logging.getLogger(__name__)
 
@@ -93,7 +92,7 @@ class RegisterView(UserViewMixin, FormView):
             message = "\n".join(u"{label}: {html}".format(**fld) for fld in
                                 get_pretty_answer(form, data)['fields'])
             mail_managers(u"{}: {hebrew_last_name} {hebrew_first_name}".format(
-                               _("New User").decode('utf8'), **data), message)
+                               _("New User"), **data), message)
 
         elif form_name == 'cohort1':
             COHORTS = (
@@ -198,8 +197,8 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
                 o, created = survey.add_user(user)
                 if created:
                     o.send(base_url)
-                messages.success(request, u"%s: %s" % (o.user,
-                                                      _("Sent") if created else _("Already sent")))
+                messages.success(request, u"%s: %s" % (user,
+                                  _("Sent") if created else _("Already sent")))
 
             return redirect(survey)
 
@@ -210,10 +209,9 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
             for uid in user_ids:
                 user = HackitaUser.objects.get(pk=uid)
                 o, created = event.invite_user(user, request.user, base_url)
-                if created:
-                    messages.success(request, user)
+                messages.success(request, u"%s: %s" % (user,
+                           _("Invited") if created else _("Already invited")))
 
             return redirect(event)
 
         return redirect(cohort)
-
