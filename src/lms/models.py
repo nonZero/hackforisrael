@@ -15,12 +15,18 @@ class Trail(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ('ordinal',)
+
     def __unicode__(self):
         return self.title
 
     @models.permalink
     def get_absolute_url(self):
         return "trail", (self.slug,)
+
+    def md(self):
+        return mark_safe(markdown.markdown(self.content))
 
 
 class Item(models.Model):
@@ -35,6 +41,9 @@ class Item(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ('ordinal',)
+
     def __unicode__(self):
         return self.title
 
@@ -44,6 +53,7 @@ class Item(models.Model):
 
     def md(self):
         return mark_safe(markdown.markdown(self.content))
+
 
 class UserItem(models.Model):
     item = models.ForeignKey(Item)

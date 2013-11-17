@@ -1,0 +1,41 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %} / Hackita LMS </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+  </head>
+ <body>
+        {% if user.id %}
+
+        <div class="row-fluid">
+                <div class="col-lg-12">
+                    <div class="well">
+                        You are logged in as {{user.email}}
+                        <form method="post" action="{% url 'account_logout' %}">
+                          {% csrf_token %}
+                          <button type="submit" class="small">{% trans 'Sign Out' %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        {% include 'lms/_messages.html' %}
+
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

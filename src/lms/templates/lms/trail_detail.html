@@ -1,29 +1,27 @@
-{% extends 'users/base.html' %}
+{% extends 'lms/base.html' %}
 {% load i18n %}
 {% load humanize %}
 {% load hackita %}
 
 {% block content %}
 
-    <div class="row">
-        <div class="columns large-12">
+    <div class="row-fluid">
+        <div class="col-lg-12">
             <h2>
                 {{object}}
             </h2>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="columns large-12">
-            <ol>
+        {% if object.content %}
+          {{object.md}}
+        {% endif %}
+
+        <ul class="list-group">
             {% for i in object.items.all %}
-              <li>
+              <li class="list-group-item">
                   {{i|u}}
               </li>
             {% endfor %}
-            </ol>
-
-        </div>
+        </ul>
     </div>
 </div>
 
