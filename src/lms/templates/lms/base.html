@@ -8,21 +8,38 @@
     <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
   </head>
  <body>
-        {% if user.id %}
 
-        <div class="row-fluid">
-                <div class="col-lg-12">
-                    <div class="well">
-                        You are logged in as {{user.email}}
-                        <form method="post" action="{% url 'account_logout' %}">
-                          {% csrf_token %}
-                          <button type="submit" class="small">{% trans 'Sign Out' %}</button>
-                        </form>
-                    </div>
+    <div class="container">
+
+    <nav class="navbar navbar-inverse navbar-default" role="navigation">
+
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Hackita / הכיתה</a>
+      </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.id %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {{user}}
+                    <b class="caret"></b>
+                </a>
+                <div class="dropdown-menu">
+                      <form method="post" action="{% url 'account_logout' %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn" style="width:100%">Sign Out</button>
+                    </form>
                 </div>
-            </div>
-
-        {% endif %}
+              </li>
+          {% else %}
+              <li>
+                <a href="{% url 'account_login' %}">
+                    Log in 
+                </a>
+              </li>
+          {% endif %}
+        </ul>
+    </nav>
 
         {% include 'lms/_messages.html' %}
 
@@ -30,12 +47,12 @@
             {% block content %}
             {% endblock %}
         </div>
-    </div>
 
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
   </body>
 </html>
