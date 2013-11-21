@@ -11,8 +11,12 @@ from lms import models
 class LMSView(View):
 
     def dispatch(self, request, *args, **kwargs):
-        translation.activate('en-us')
-        return View.dispatch(self, request, *args, **kwargs)
+        cur_language = translation.get_language()
+        try:
+            translation.activate('en-us')
+            return View.dispatch(self, request, *args, **kwargs)
+        finally:
+            translation.activate(cur_language)
 
 
 class TrailListView(LMSView, ListView):
