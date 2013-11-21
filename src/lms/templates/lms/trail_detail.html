@@ -22,10 +22,14 @@
                     {{object.content_html|safe}}
                   </div>
                 {% endif %}
-        
+
                 <ul class="list-group">
-                    {% for i in object.items.all %}
-                      <li class="list-group-item">
+                    {% for i, ui in user_items %}
+                      <li id="lms-item-{{i.id}}" class="list-group-item{%if ui.checked %} item-done{% endif %}">
+                          <span class="glyphicon glyphicon-{% if ui.checked %}check{% else %}unchecked{% endif %}"></span>
+                          <span class="pull-right">
+                              {{ui.id}}
+                          </span>
                           {{i|u}}
                       </li>
                     {% endfor %}

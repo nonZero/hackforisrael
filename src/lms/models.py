@@ -36,6 +36,22 @@ class Trail(MarkdownContent, models.Model):
     def get_absolute_url(self):
         return "trail", (self.slug,)
 
+    def user_items(self, user):
+
+        qs = self.items.all()
+        if not user.is_staff:
+            qs = qs.filter(is_published=True)
+
+        def get_user_item(item):
+            if not user.id:
+                return None
+            try:
+                return item.users.get(user=user)
+            except UserItem.DoesNotExist:
+                return None
+
+        return [(x, get_user_item(x)) for x in qs]
+
 
 class Item(MarkdownContent, models.Model):
     trail = models.ForeignKey(Trail, related_name="items")
@@ -63,7 +79,7 @@ class Item(MarkdownContent, models.Model):
 
 class UserItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    item = models.ForeignKey(Item)
+    item = models.ForeignKey(Item, related_name='users')
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     liked = models.BooleanField(default=False)
     checked = models.BooleanField(default=False)

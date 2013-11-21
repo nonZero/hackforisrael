@@ -15,7 +15,7 @@
 
         <ul class="list-group">
                 {% for o in object_list %}
-                  <li class="list-group-item">
+                  <li class="list-group-item{% if not o.is_published %} unpublished{% endif %}">
                         {{o|u}}
                     </li>
                 {% endfor %}
