@@ -1,25 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from django.utils import timezone, translation
 from django.utils.decorators import method_decorator
-from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from lms import models
 
 
-class LMSView(View):
-
-    def dispatch(self, request, *args, **kwargs):
-        cur_language = translation.get_language()
-        try:
-            translation.activate('en-us')
-            return View.dispatch(self, request, *args, **kwargs)
-        finally:
-            translation.activate(cur_language)
-
-
-class TrailListView(LMSView, ListView):
+class TrailListView(ListView):
     model = models.Trail
 
     def get_queryset(self):
@@ -29,7 +16,7 @@ class TrailListView(LMSView, ListView):
         return qs
 
 
-class TrailDetailView(LMSView, DetailView):
+class TrailDetailView(DetailView):
     model = models.Trail
 
     def get_context_data(self, **kwargs):
@@ -38,7 +25,7 @@ class TrailDetailView(LMSView, DetailView):
         return d
 
 
-class LMSItemDetailView(LMSView, DetailView):
+class LMSItemDetailView(DetailView):
     model = models.Item
 
     def get_context_data(self, **kwargs):

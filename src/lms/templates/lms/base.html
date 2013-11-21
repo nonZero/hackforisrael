@@ -1,12 +1,13 @@
 {% load i18n %}
+{% language 'en-us' %}
 <!DOCTYPE html>
 <html>
   <head>
     <title>{% block title %}{% endblock %} / Hackita LMS </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
     <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/lms.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}img/favicon.ico" rel="icon" type="image/png"/>
   </head>
  <body>
 
@@ -15,7 +16,7 @@
     <nav class="navbar navbar-inverse navbar-default" role="navigation">
 
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Hackita / הכיתה</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Hackita / הכיתה</a>
       </div>
 
         <ul class="nav navbar-nav navbar-right">
@@ -58,3 +59,4 @@
 
   </body>
 </html>
+{% endlanguage %}
