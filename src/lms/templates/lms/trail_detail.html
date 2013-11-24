@@ -25,7 +25,7 @@
 
                 <ul class="list-group">
                     {% for i, ui in user_items %}
-                      <li id="lms-item-{{i.id}}" class="list-group-item{%if ui.checked %} item-done{% endif %}">
+                      <li id="lms-item-{{i.id}}" class="list-group-item{%if ui.checked %} item-done{% endif %}{% if not i.is_published %} unpublished{% endif %}">
                           <span class="glyphicon glyphicon-{% if ui.checked %}check{% else %}unchecked{% endif %}"></span>
                           <span class="pull-right">
                               {{ui.id}}
