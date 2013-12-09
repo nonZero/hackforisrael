@@ -1,10 +1,14 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
-from lms import models
+from django.utils.translation import ugettext as _
+from h4il.base_views import ProtectedMixin, StaffOnlyMixin
+from lms import models, forms
 
 
 class TrailListView(ListView):
@@ -57,3 +61,29 @@ class LMSItemDetailView(DetailView):
             ui.save()
 
         return redirect(o)
+
+
+class LMSItemEditView(StaffOnlyMixin, UpdateView):
+    model = models.Item
+    form_class = forms.EditItemForm
+
+
+class SolutionCreateView(ProtectedMixin, CreateView):
+    model = models.Solution
+    form_class = forms.PostSolutionForm
+
+    def get_item(self):
+        return get_object_or_404(models.Item, pk=int(self.kwargs['item_pk']))
+
+    def form_valid(self, form):
+        item = self.get_item()
+        form.instance.item = item 
+        form.instance.author = self.request.user
+        self.object = form.save()
+        messages.success(self.request, _('Soultion submitted.'))
+        return redirect(item)
+
+    def get_context_data(self, **kwargs):
+        d = super(SolutionCreateView, self).get_context_data(**kwargs)
+        d['item'] = self.get_item()
+        return d

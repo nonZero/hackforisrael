@@ -11,37 +11,39 @@
   </head>
  <body>
 
-    <div class="container">
-
     <nav class="navbar navbar-inverse navbar-default" role="navigation">
 
-      <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'home' %}">Hackita / הכיתה</a>
-      </div>
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'home' %}">Hackita / הכיתה</a>
+          </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          {% if user.id %}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    {{user}}
-                    <b class="caret"></b>
-                </a>
-                <div class="dropdown-menu">
-                      <form method="post" action="{% url 'account_logout' %}">
-                      {% csrf_token %}
-                      <button type="submit" class="btn" style="width:100%">Sign Out</button>
-                    </form>
-                </div>
-              </li>
-          {% else %}
-              <li>
-                <a href="{% url 'account_login' %}">
-                    Log in 
-                </a>
-              </li>
-          {% endif %}
-        </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {% if user.id %}
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{user}}
+                        <b class="caret"></b>
+                    </a>
+                    <div class="dropdown-menu">
+                          <form method="post" action="{% url 'account_logout' %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn" style="width:100%">Sign Out</button>
+                        </form>
+                    </div>
+                  </li>
+              {% else %}
+                  <li>
+                    <a href="{% url 'account_login' %}">
+                        Log in 
+                    </a>
+                  </li>
+              {% endif %}
+            </ul>
+        </div>
     </nav>
+
+    <div class="container">
 
         {% include 'lms/_messages.html' %}
 
@@ -49,6 +51,10 @@
             {% block content %}
             {% endblock %}
         </div>
+
+        <footer>
+            <p></p>
+        </footer>
 
     </div>
 

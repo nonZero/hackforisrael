@@ -17,7 +17,14 @@
                 {{object.trail|u}}
             </li>
         </ol>
-        <h2> {{object}} </h2>
+        {% if user.is_staff %}
+            <a href="{% url 'lms_item_edit' object.id %}" class="pull-right btn btn-success">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+        {% endif %}
+        <h2>
+            {{object}}
+        </h2>
 
         <div class="panel panel-default">
             <div class="panel-body">
@@ -39,6 +46,12 @@
                     {% endif %}
                 </form>
             </div>
+            {% with object.users_solved as x %}
+              {% if x %}
+                <span class="glyphicon glyphicon-bookmark"></span>
+                {{x}} User{{x|pluralize}} submitted solution{{x|pluralize}}.
+              {% endif %}
+            {% endwith %}
             {% if user_item.checked %}
                 <span class="glyphicon glyphicon-check"></span>
                 Completed {{user_item.checked_at|naturaltime}}

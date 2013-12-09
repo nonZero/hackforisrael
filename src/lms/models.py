@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import markdown
@@ -76,6 +77,9 @@ class Item(MarkdownContent, models.Model):
     def get_absolute_url(self):
         return "lms_item", (self.pk,)
 
+    def users_solved(self):
+        return self.solutions.distinct('author').count()
+
 
 class UserItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -109,13 +113,12 @@ class SolutionPrivacy(object):
                )
 
 
-class Solution(MarkdownContent, models.Model):
+class Solution(models.Model):
     item = models.ForeignKey(Item, related_name="solutions")
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                related_name="solutions")
     created_at = models.DateTimeField(auto_now_add=True)
     privacy = models.IntegerField(choices=SolutionPrivacy.choices,
                                   default=SolutionPrivacy.PUBLIC)
-    code = models.TextField()
-    content = models.TextField(null=True, blank=True)
-    content_html = models.TextField(null=True, blank=True)
+    content = models.TextField()
+    content_html = models.TextField()

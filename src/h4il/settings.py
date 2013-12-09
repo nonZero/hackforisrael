@@ -150,9 +150,6 @@ INSTALLED_APPS = (
 
     'debug_toolbar',
 
-    'floppyforms_foundation',
-    'floppyforms',
-
     'south',
 
     'hackita_util',
@@ -164,6 +161,9 @@ INSTALLED_APPS = (
     'events',
     'surveys',
     'lms',
+
+    'floppyforms_foundation',
+    'floppyforms',
 
     'allauth',
     'allauth.account',
