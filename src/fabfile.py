@@ -55,3 +55,8 @@ def hard_reload():
 
 def log():
     run("tail -n 50 %s*" % env.log_dir)
+
+
+def list_migrations():
+    with virtualenv(env.code_dir):
+        run("cd src && python manage.py migrate --list")
