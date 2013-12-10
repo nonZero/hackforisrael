@@ -33,7 +33,11 @@
                       <li id="lms-item-{{i.id}}" class="list-group-item{%if ui.checked %} item-done{% endif %}{% if not i.is_published %} unpublished{% endif %}">
                           <span class="glyphicon glyphicon-{% if ui.checked %}check{% else %}unchecked{% endif %}"></span>
                           <span class="pull-right">
-                              {{ui.id}}
+                                {% with i.users_solved as x %}
+                                  {% if x %}
+                                    <span class="glyphicon glyphicon-bookmark"></span> {{x}}
+                                  {% endif %}
+                                {% endwith %}
                           </span>
                           {{i|u}}
                       </li>
