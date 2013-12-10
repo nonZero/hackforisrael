@@ -11,5 +11,6 @@ django-extra-views==0.6.3
 
 bleach==1.2.2
 Markdown==2.3.1
+Pygments==1.6
 
 ipython==1.1.0

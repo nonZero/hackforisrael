@@ -11,7 +11,8 @@ class MarkdownContent(object):
     html
     """
     def save(self, *args, **kwargs):
-        self.content_html = markdown.markdown(self.content, safe_mode='escape')
+        self.content_html = markdown.markdown(self.content, safe_mode='escape',
+                                                extensions=['codehilite'])
         return super(MarkdownContent, self).save(*args, **kwargs)
 
 
