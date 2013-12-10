@@ -8,6 +8,9 @@ urlpatterns = patterns('',
     url(r'^(?P<slug>[-_\w\d]+)/$', views.TrailDetailView.as_view(),
         name='trail'),
 
+    url(r'^(?P<slug>[-_\w\d]+)/edit/$', views.EditTrailView.as_view(),
+        name='trail_edit'),
+
     url(r'^item/(?P<pk>\d+)/$', views.LMSItemDetailView.as_view(),
         name='lms_item'),
     url(r'^item/(?P<pk>\d+)/edit/$', views.LMSItemEditView.as_view(),

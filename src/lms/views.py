@@ -30,6 +30,11 @@ class TrailDetailView(DetailView):
         return d
 
 
+class EditTrailView(StaffOnlyMixin, UpdateView):
+    model = models.Trail
+    form_class = forms.EditTrailForm
+
+
 class LMSItemDetailView(DetailView):
     model = models.Item
 

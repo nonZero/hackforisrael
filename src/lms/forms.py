@@ -3,6 +3,25 @@ import floppyforms as forms
 from h4il.wmd import WMDWidget
 
 
+class EditTrailForm(forms.ModelForm):
+    class Meta:
+        model = models.Trail
+        fields = [
+                  'title',
+                  'slug',
+                  'content',
+                  'is_published',
+                  'ordinal',
+                  ]
+        widgets = {
+            'title': forms.TextInput,
+            'slug': forms.SlugInput,
+            'content': WMDWidget,
+            'is_published': forms.CheckboxInput,
+            'ordinal': forms.NumberInput,
+        }
+
+
 class EditItemForm(forms.ModelForm):
     class Meta:
         model = models.Item

@@ -12,6 +12,11 @@
             <ol class="breadcrumb">
               <li><a href="{% url "trails" %}">{% trans "Trails" %}</a></li>
             </ol>
+            {% if user.is_staff %}
+                <a href="{% url 'trail_edit' object.slug %}" class="pull-right btn btn-success">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            {% endif %}
             <h2>
                 {{object}}
             </h2>
