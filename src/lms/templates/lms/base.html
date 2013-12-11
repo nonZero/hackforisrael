@@ -61,9 +61,14 @@
 
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}js/csrf.js"></script>
+
+    {% block scripts %}
+    {% endblock %}
 
     {% include "website/_analytics.html" %}
 
   </body>
 </html>
 {% endlanguage %}
+

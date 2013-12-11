@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load humanize %}
 {% load hackita %}
+{% load static %}
 
 {% block title %}{{object}}{% endblock %}
 
@@ -28,9 +29,12 @@
                   </div>
                 {% endif %}
 
-                <ul class="list-group">
+                <ul class="list-group trail-items">
                     {% for i, ui in user_items %}
-                      <li id="lms-item-{{i.id}}" class="list-group-item{%if ui.checked %} item-done{% endif %}{% if not i.is_published %} unpublished{% endif %}">
+                      <li id="lms-item-{{i.id}}" data-id="{{i.id}}" class="list-group-item{%if ui.checked %} item-done{% endif %}{% if not i.is_published %} unpublished{% endif %}">
+                            {% if user.is_staff %}
+                              <span class="glyphicon glyphicon-move"></span>
+                            {% endif %}
                           <span class="glyphicon glyphicon-{% if ui.checked %}check{% else %}unchecked{% endif %}"></span>
                           <span class="pull-right">
                                 {% with i.users_solved as x %}
@@ -47,6 +51,34 @@
     </div>
 </div>
 
-
-
 {% endblock %}
+
+{% block scripts %}
+    {% if user.is_staff %}
+        <script src="{% static 'js/jquery-sortable.js' %}"></script>
+        <script>
+        $(function() {
+          $(".trail-items").sortable({
+              nested: false,
+              handle: 'span.glyphicon-move',
+              onDrop: function ($item, container, _super) {
+                  $item.removeClass("dragged").removeAttr("style");
+                  $("body").removeClass("dragging");
+                    var l = $('.trail-items li').map(function() {
+                        return $(this).data('id');
+                    }).get();
+                  console.log(l);
+                $.post('', {
+                    items : l,
+                }, function(data) {
+                    // :-)
+                }).fail(function() {
+                    alert('Server Error. Please refresh your browser and try again');
+                });
+              }
+          });
+        });
+        </script>
+    {% endif %}
+{% endblock %}
+

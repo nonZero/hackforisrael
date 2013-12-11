@@ -27,3 +27,23 @@
     right: 0;
     left: auto;
 }
+
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+.trail-items li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+.trail-items li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}

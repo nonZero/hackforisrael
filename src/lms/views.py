@@ -1,15 +1,17 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
-from django.utils.translation import ugettext as _
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from lms import models, forms
 from markdown.extensions.codehilite import pygments
+import json
 
 
 class TrailListView(ListView):
@@ -29,6 +31,23 @@ class TrailDetailView(DetailView):
         d = super(TrailDetailView, self).get_context_data(**kwargs)
         d['user_items'] = self.get_object().user_items(self.request.user)
         return d
+
+    def post(self, request, *args, **kwargs):
+
+        """ reorder trail items """
+
+#         if settings.DEBUG:
+#             import time
+#             time.sleep(0.3)
+
+        item_ids = [int(x) for x in request.POST.getlist('items[]')]
+        qs = self.get_object().items
+        for i, iid in enumerate(item_ids):
+            qs.filter(id=iid).update(ordinal=i)
+
+        return HttpResponse(json.dumps(True),
+                            content_type='application/json')
+
 
 
 class EditTrailView(StaffOnlyMixin, UpdateView):
