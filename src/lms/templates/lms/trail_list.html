@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load humanize %}
 {% load hackita %}
+{% load static %}
 
 {% block title %}{% trans "Trails" %}{% endblock %}
 
@@ -13,9 +14,12 @@
                 {% trans "Trails" %}
             </h2>
 
-        <ul class="list-group">
+        <ul class="list-group trails">
                 {% for o in object_list %}
-                  <li class="list-group-item{% if not o.is_published %} unpublished{% endif %}">
+                  <li data-id="{{o.id}}" class="list-group-item{% if not o.is_published %} unpublished{% endif %}">
+                        {% if user.is_staff %}
+                          <span class="glyphicon glyphicon-move"></span>
+                        {% endif %}
                         {{o|u}}
                     </li>
                 {% endfor %}
@@ -24,3 +28,33 @@
     </div>
 
 {% endblock %}
+
+{% block scripts %}
+    {% if user.is_staff %}
+        <script src="{% static 'js/jquery-sortable.js' %}"></script>
+        <script>
+        $(function() {
+          $(".trails").sortable({
+              nested: false,
+              handle: 'span.glyphicon-move',
+              onDrop: function ($item, container, _super) {
+                  $item.removeClass("dragged").removeAttr("style");
+                  $("body").removeClass("dragging");
+                    var l = $('.trails li').map(function() {
+                        return $(this).data('id');
+                    }).get();
+                  console.log(l);
+                $.post('', {
+                    trails : l,
+                }, function(data) {
+                    // :-)
+                }).fail(function() {
+                    alert('Server Error. Please refresh your browser and try again');
+                });
+              }
+          });
+        });
+        </script>
+    {% endif %}
+{% endblock %}
+

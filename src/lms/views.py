@@ -23,6 +23,22 @@ class TrailListView(ListView):
             qs = qs.filter(is_published=True)
         return qs
 
+    def post(self, request, *args, **kwargs):
+
+        """ reorder trail items """
+
+#         if settings.DEBUG:
+#             import time
+#             time.sleep(0.3)
+
+        item_ids = [int(x) for x in request.POST.getlist('trails[]')]
+        qs = self.get_queryset()
+        for i, iid in enumerate(item_ids):
+            qs.filter(id=iid).update(ordinal=i)
+
+        return HttpResponse(json.dumps(True),
+                            content_type='application/json')
+
 
 class TrailDetailView(DetailView):
     model = models.Trail
