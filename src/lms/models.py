@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import markdown
@@ -55,6 +54,33 @@ class Trail(MarkdownContent, models.Model):
         return [(x, get_user_item(x)) for x in qs]
 
 
+class Language(object):
+    TEXT = 0
+    PYTHON = 100
+    JAVASCRIPT = 101
+
+    choices = (
+               (TEXT, 'Text'),
+               (PYTHON, 'Python'),
+               (JAVASCRIPT, 'Javasript'),
+               )
+
+    lexers = {
+               PYTHON: 'python',
+               JAVASCRIPT: 'javasript',
+             }
+
+    @classmethod
+    def highlight(cls, lang, code):
+        from pygments import highlight
+        from pygments.lexers import get_lexer_by_name
+        from pygments.formatters import HtmlFormatter
+
+        lexer = get_lexer_by_name(cls.lexers[lang], stripall=True)
+        formatter = HtmlFormatter(linenos=True, cssclass="codehilite")
+        return highlight(code, lexer, formatter)
+
+
 class Item(MarkdownContent, models.Model):
     trail = models.ForeignKey(Trail, related_name="items")
 #     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -65,6 +91,9 @@ class Item(MarkdownContent, models.Model):
     content_html = models.TextField(null=True, blank=True)
     is_published = models.BooleanField(default=False)
     is_exercise = models.BooleanField(default=False)
+    language = models.IntegerField(choices=Language.choices,
+                                   default=Language.TEXT)
+    languages = Language
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated_at = models.DateTimeField(auto_now=True)
 
@@ -121,5 +150,8 @@ class Solution(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     privacy = models.IntegerField(choices=SolutionPrivacy.choices,
                                   default=SolutionPrivacy.PUBLIC)
+    language = models.IntegerField(choices=Language.choices,
+                                   default=Language.TEXT)
+    languages = Language
     content = models.TextField()
     content_html = models.TextField()

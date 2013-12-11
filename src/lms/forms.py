@@ -26,12 +26,13 @@ class EditItemForm(forms.ModelForm):
     class Meta:
         model = models.Item
         fields = [
+                  'is_published',
                   'title',
                   'content',
                   'trail',
                   'ordinal',
-                  'is_published',
                   'is_exercise',
+                  'language',
                   ]
         widgets = {
             'title': forms.TextInput,
@@ -40,6 +41,7 @@ class EditItemForm(forms.ModelForm):
             'trail': forms.Select,
             'is_published': forms.CheckboxInput,
             'is_exercise': forms.CheckboxInput,
+            'language': forms.Select,
         }
 
 

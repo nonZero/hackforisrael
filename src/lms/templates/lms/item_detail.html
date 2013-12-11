@@ -73,6 +73,9 @@
               <div id="post-solution" class="panel-collapse collapse{% if not user_item.checked %} in{% endif %}">
                 <div class="panel-body">
                     <form method="post" action="{% url 'lms_post_solution' object.id %}">
+                        {% if item.language %}
+                            <p><b>Language: {{item.get_language_display}}</b></p>
+                        {% endif %}
                         {% form form using 'floppyforms/layouts/bootstrap3.html' %}
                         {% csrf_token %}
                         <button class="btn btn-primary">Post Solution</button>
@@ -92,7 +95,13 @@
                     </h3>
                   </div>
                   <div class="panel-body">
-                    <code>{{s.content}}</code>
+                    {% if s.content_html %}
+                        <div class="codehilite">
+                          {{s.content_html|safe}}
+                        </div>
+                    {% else %}
+                        {{s.content|urlize|linebreaks}}
+                    {% endif %}
                   </div>
                 </div>
             {% endfor %}

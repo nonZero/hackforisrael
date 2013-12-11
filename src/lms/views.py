@@ -9,6 +9,7 @@ from django.views.generic.list import ListView
 from django.utils.translation import ugettext as _
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from lms import models, forms
+from markdown.extensions.codehilite import pygments
 
 
 class TrailListView(ListView):
@@ -83,8 +84,12 @@ class SolutionCreateView(ProtectedMixin, CreateView):
 
     def form_valid(self, form):
         item = self.get_item()
-        form.instance.item = item 
+        form.instance.item = item
+        form.instance.language = item.language
         form.instance.author = self.request.user
+        if item.language:
+            form.instance.content_html = form.instance.languages.highlight(
+                                 form.instance.language, form.instance.content)
         o = form.save()
         ui, created = o.item.users.get_or_create(user=self.request.user)
         if not ui.checked:

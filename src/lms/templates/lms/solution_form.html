@@ -24,6 +24,9 @@
         <h2> {% trans "Post Solution" %} </h2>
 
         <form method="post">
+            {% if item.language %}
+                <p><b>Language: {{item.get_language_display}}</b></p>
+            {% endif %}
             {% form form using 'floppyforms/layouts/bootstrap3.html' %}
             {% csrf_token %}
             <button class="btn btn-primary">Post Solution</button>
