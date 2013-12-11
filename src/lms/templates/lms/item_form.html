@@ -15,10 +15,14 @@
                 <a href="{% url "trails" %}">{% trans "Trails" %}</a>
             </li>
             <li>
-                {{object.trail|u}}
+                {{trail|u}}
             </li>
             <li>
-                {{object|u}}
+                {% if object %}
+                  {{object|u}}
+                {% else %}
+                  New Item
+                {% endif %}
             </li>
         </ol>
         <h2> {% trans "Edit" %} {{object}} </h2>

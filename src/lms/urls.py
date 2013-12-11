@@ -15,6 +15,8 @@ urlpatterns = patterns('',
         name='trail_edit'),
 
 
+    url(r'^item/add/(?P<slug>[-_\w\d]+)/$', views.LMSItemAddView.as_view(),
+        name='lms_item_add'),
     url(r'^item/(?P<pk>\d+)/$', views.LMSItemDetailView.as_view(),
         name='lms_item'),
     url(r'^item/(?P<pk>\d+)/edit/$', views.LMSItemEditView.as_view(),

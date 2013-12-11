@@ -14,6 +14,9 @@
               <li><a href="{% url "trails" %}">{% trans "Trails" %}</a></li>
             </ol>
             {% if user.is_staff %}
+                <a href="{% url 'lms_item_add' object.slug %}" class="pull-right btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
                 <a href="{% url 'trail_edit' object.slug %}" class="pull-right btn btn-success">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>

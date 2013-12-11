@@ -77,7 +77,7 @@ class AddTrailView(StaffOnlyMixin, CreateView):
 
     def get_initial(self):
         d = super(AddTrailView, self).get_initial()
-        d['ordinal'] = models.Trail.objects.aggregate(last=Max('id')
+        d['ordinal'] = models.Trail.objects.aggregate(last=Max('ordinal')
                                                       )['last'] + 1
         return d
 
@@ -119,6 +119,32 @@ class LMSItemDetailView(DetailView):
 class LMSItemEditView(StaffOnlyMixin, UpdateView):
     model = models.Item
     form_class = forms.EditItemForm
+
+    def get_context_data(self, **kwargs):
+        d = super(LMSItemEditView, self).get_context_data(**kwargs)
+        d['trail'] = self.get_object().trail
+        return d
+
+
+class LMSItemAddView(StaffOnlyMixin, CreateView):
+    model = models.Item
+    form_class = forms.EditItemForm
+
+    def get_trail(self):
+        return get_object_or_404(models.Trail, slug=self.kwargs['slug'])
+
+    def get_context_data(self, **kwargs):
+        d = super(LMSItemAddView, self).get_context_data(**kwargs)
+        d['trail'] = self.get_trail()
+        return d
+
+    def get_initial(self):
+        t = self.get_trail()
+        d = super(LMSItemAddView, self).get_initial()
+        d['ordinal'] = (t.items.aggregate(last=Max('ordinal')
+                                                      )['last'] or 0) + 1
+        d['trail'] = t
+        return d
 
 
 class SolutionCreateView(ProtectedMixin, CreateView):
