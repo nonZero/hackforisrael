@@ -41,6 +41,7 @@ class LMSItemDetailView(DetailView):
     def get_context_data(self, **kwargs):
         d = super(LMSItemDetailView, self).get_context_data(**kwargs)
         if self.request.user.id:
+            d['form'] = forms.PostSolutionForm()
             try:
                 d['user_item'] = models.UserItem.objects.get(
                                                      item=self.get_object(),
@@ -84,9 +85,14 @@ class SolutionCreateView(ProtectedMixin, CreateView):
         item = self.get_item()
         form.instance.item = item 
         form.instance.author = self.request.user
-        self.object = form.save()
+        o = form.save()
+        ui, created = o.item.users.get_or_create(user=self.request.user)
+        if not ui.checked:
+            ui.checked = True
+            ui.checked_at = timezone.now()
+            ui.save()
         messages.success(self.request, _('Soultion submitted.'))
-        return redirect(item)
+        return redirect(o.item.trail.get_absolute_url() + "#lms-item-%d" % item.id)
 
     def get_context_data(self, **kwargs):
         d = super(SolutionCreateView, self).get_context_data(**kwargs)

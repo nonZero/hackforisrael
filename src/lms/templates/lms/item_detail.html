@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load humanize %}
 {% load hackita %}
+{% load floppyforms %}
 
 {% block title %}{{object}} / {{object.trail}}{% endblock %}
 
@@ -31,31 +32,71 @@
                 {{object.content_html|safe}}
             </div>
         </div>
-        {% if user.id %}
-            <div class="pull-right">
-                <form method="post">
-                    {% csrf_token %}
-                    {% if user_item.checked %}
-                        <button class="btn" name='uncomplete'>
-                            Undo mark completed
-                        </button>
-                    {% else %}
-                        <button class="btn btn-primary" name='complete'>
-                            Mark as completed
-                        </button>
-                    {% endif %}
-                </form>
-            </div>
-            {% with object.users_solved as x %}
-              {% if x %}
-                <span class="glyphicon glyphicon-bookmark"></span>
-                {{x}} User{{x|pluralize}} submitted solution{{x|pluralize}}.
-              {% endif %}
-            {% endwith %}
-            {% if user_item.checked %}
-                <span class="glyphicon glyphicon-check"></span>
-                Completed {{user_item.checked_at|naturaltime}}
+        <div class="pull-right">
+            {% if object.is_exercise %}
+                {% with object.users_solved as x %}
+                  {% if x %}
+                    <span class="glyphicon glyphicon-bookmark"></span>
+                    {{x}} User{{x|pluralize}} submitted solution{{x|pluralize}}.
+                  {% endif %}
+                {% endwith %}
+            {% else %}
+                {% if user.id %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if user_item.checked %}
+                            <button class="btn" name='uncomplete'>
+                                Undo mark completed
+                            </button>
+                        {% else %}
+                            <button class="btn btn-primary" name='complete'>
+                                Mark as completed
+                            </button>
+                        {% endif %}
+                    </form>
+                {% endif %}
             {% endif %}
+        </div>
+        {% if user_item.checked %}
+            <span class="glyphicon glyphicon-check"></span>
+            Completed {{user_item.checked_at|naturaltime}}
+        {% endif %}
+        {% if user.id and object.is_exercise %}
+            <p/>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title" 
+                data-toggle="collapse" data-target="#post-solution">
+                    {% trans "Post Solution" %} </h2>
+                </h3>
+              </div>
+              <div id="post-solution" class="panel-collapse collapse{% if not user_item.checked %} in{% endif %}">
+                <div class="panel-body">
+                    <form method="post" action="{% url 'lms_post_solution' object.id %}">
+                        {% form form using 'floppyforms/layouts/bootstrap3.html' %}
+                        {% csrf_token %}
+                        <button class="btn btn-primary">Post Solution</button>
+                    </form>
+                </div>
+              </div>
+          </div>
+        {% endif %}
+        {% if user_item.checked %}
+            {% for s in object.solutions.all %}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{s.author}}, 
+                        <i>
+                            {{s.created_at|naturaltime}}
+                        </i>
+                    </h3>
+                  </div>
+                  <div class="panel-body">
+                    <code>{{s.content}}</code>
+                  </div>
+                </div>
+            {% endfor %}
+
         {% endif %}
     </div>
 
