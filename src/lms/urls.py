@@ -5,11 +5,15 @@ urlpatterns = patterns('',
 
     url(r'^$', views.TrailListView.as_view(), name='trails'),
 
+    url(r'^add-trail/$', views.AddTrailView.as_view(),
+        name='trail_add'),
+
     url(r'^(?P<slug>[-_\w\d]+)/$', views.TrailDetailView.as_view(),
         name='trail'),
 
     url(r'^(?P<slug>[-_\w\d]+)/edit/$', views.EditTrailView.as_view(),
         name='trail_edit'),
+
 
     url(r'^item/(?P<pk>\d+)/$', views.LMSItemDetailView.as_view(),
         name='lms_item'),

@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models.aggregates import Max
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
@@ -65,10 +66,20 @@ class TrailDetailView(DetailView):
                             content_type='application/json')
 
 
-
 class EditTrailView(StaffOnlyMixin, UpdateView):
     model = models.Trail
     form_class = forms.EditTrailForm
+
+
+class AddTrailView(StaffOnlyMixin, CreateView):
+    model = models.Trail
+    form_class = forms.EditTrailForm
+
+    def get_initial(self):
+        d = super(AddTrailView, self).get_initial()
+        d['ordinal'] = models.Trail.objects.aggregate(last=Max('id')
+                                                      )['last'] + 1
+        return d
 
 
 class LMSItemDetailView(DetailView):

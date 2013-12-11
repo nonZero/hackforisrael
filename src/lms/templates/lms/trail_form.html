@@ -15,11 +15,16 @@
                 <a href="{% url "trails" %}">{% trans "Trails" %}</a>
             </li>
             <li>
-                {{object|u}}
+                {% if object %}
+                  {{object|u}}
+                {% else %}
+                  New Trail
+                {% endif %}
             </li>
         </ol>
+        {% if object %}
         <h2> {% trans "Edit" %} {{object}} </h2>
-
+        {% endif %}
         <form method="post">
 
             {% csrf_token %}

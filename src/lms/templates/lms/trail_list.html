@@ -10,6 +10,11 @@
 
     <div class="row">
         <div class="col-lg-12">
+            {% if user.is_staff %}
+                <a href="{% url 'trail_add' %}" class="pull-right btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            {% endif %}
             <h2>
                 {% trans "Trails" %}
             </h2>
