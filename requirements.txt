@@ -14,3 +14,4 @@ Markdown==2.3.1
 Pygments==1.6
 
 ipython==1.1.0
+python-dateutil==2.1

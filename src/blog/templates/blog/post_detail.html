@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ STATIC_URL }}code.css">
+
+<h1>{{ slug }} by {{ author }}. Created on {{ created_date }}</h1>
+
+<div id="post_html">
+	{{ html | safe }}
+</div>

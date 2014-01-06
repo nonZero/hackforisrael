@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^ideas/$', views.website_view('ideas'), name='ideas'),
 
     url(r'^hashmabirs/', include('hashmabir.urls')),
+    url(r'^blog/', include('blog.urls')),
 
     url(r'^dashboard/$', sa_views.Dashboard.as_view(), name='dashboard'),
     url(r'^register/$', sa_views.RegisterView.as_view(), name='register'),
