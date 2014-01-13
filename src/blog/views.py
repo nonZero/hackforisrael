@@ -1,4 +1,6 @@
 from django.views.generic import TemplateView
+from django.http import HttpResponseServerError
+from django.utils.translation import ugettext_lazy as _
 
 from codecs import open  # fix opening unicode files
 import markdown
@@ -13,7 +15,7 @@ POSTS_PATH = "blog/posts"
 #TODO actually load all the posts into memory
 # I still think that abusing the Model interface to provide precached file persistence will be elegant
 def list_posts():
-    posts_dir_files = (os.path.splitext(f) for f in  os.listdir(POSTS_PATH))
+    posts_dir_files = (os.path.splitext(f) for f in os.listdir(POSTS_PATH))
     return [slug for (slug, ext) in posts_dir_files if ext == ".md"]
 
 
@@ -23,6 +25,8 @@ def load_post(slug):
         html = md.convert(md_file.read())
 
     return md.Meta, html
+
+
 
 
 class BlogPostListView(TemplateView):
@@ -38,15 +42,18 @@ class BlogPostListView(TemplateView):
 class BlogPostDetailView(TemplateView):
     template_name = 'blog/post_detail.html'
 
-    def get_context_data(self, **kwargs):
-        slug = kwargs['slug']
+    def get_context_data(self, slug, **kwargs):
+        slug = slug
         metadata, html = load_post(slug)
 
         context = super(BlogPostDetailView, self).get_context_data(**kwargs)
         context['slug'] = slug
         #TODO internationalize the metadata fields
-        #TODO add error checking (5XX page) for missing metadata
-        context['author'] = metadata['author'][0]
-        context['created_date'] = dateutil.parser.parse(metadata['date'][0])
+        required_fields = {_('author'), _('date')}
+        if not required_fields.issubset(metadata):
+            return HttpResponseServerError("Post metadata is missing, please add %s" % (
+                                          ', '.join(required_fields.difference(metadata))))
+        context['author'] = metadata[_('author')][0]
+        context['created_date'] = dateutil.parser.parse(metadata[_('date')][0])
         context['html'] = html
         return context

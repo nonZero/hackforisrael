@@ -1,5 +1,16 @@
-<ol>
-{% for p in posts %}
-	<li><a href="{{ p }}">{{ p }}</a>
-{% endfor %}
-</ol>
+{% extends 'website/base.html' %}
+{% load i18n %}
+
+{% block content_container %}
+<div id="blog_list" class="row">
+	<ol>
+	{% for p in posts %}
+		<li><a href="{{ p }}">{{ p }}</a>
+{% comment %}
+TODO fix the include after making the new model
+{% endcomment %}
+		{%  include "{{ p }}" %}
+	{% endfor %}
+	</ol>
+</div>
+{% endblock %}

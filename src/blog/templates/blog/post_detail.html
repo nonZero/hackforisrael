@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<link rel="stylesheet" href="{{ STATIC_URL }}blog/code.css">
+{% extends 'website/base.html' %}
+{% load i18n %}
 
-<h1>{{ slug }} by {{ author }}. Created on {{ created_date }}</h1>
+{% block content_container %}
+<div class="row">
+	<link rel="stylesheet" href="{{ STATIC_URL }}blog/code.css">
 
-<div id="post_html">
-	{{ html | safe }}
+	{%  include 'blog/_post.html' %}
 </div>
+{% endblock %}

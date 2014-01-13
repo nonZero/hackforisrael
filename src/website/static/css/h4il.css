@@ -233,3 +233,8 @@ h2 {
 .htmlcontent ul {
     padding: 0 1.5em;
 }
+
+#blog_list {
+    color: black;
+    padding: 10px 0;
+}

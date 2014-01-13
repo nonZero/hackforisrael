@@ -1,20 +1,16 @@
-author: יוני
-date: 2014-01-06
-
-
-# TODO : change metadata to accept:
 מאת: יוני
 תאריך: 2014-01-06
 
-Now we're inside the markdown text
-## h2 line
+# אנחנו בתוך המארקדאון
+## כותרת משנית
 
-###image
+###תמונה:
 ![angel and devil](/static/blog/images/angels_and_devils.jpg "מלאך ושדון")
 
-* unordered list
+1. רשימה
+1. ממוספרת
 
-### some python code:
+### קצת קוד פייתון:
     #!python
     import antigravity
 
