@@ -2,15 +2,20 @@
 {% load i18n %}
 
 {% block content_container %}
+<link rel="stylesheet" href="{{ STATIC_URL }}blog/code.css">
+
 <div id="blog_list" class="row">
-	<ol>
-	{% for p in posts %}
-		<li><a href="{{ p }}">{{ p }}</a>
-{% comment %}
-TODO fix the include after making the new model
-{% endcomment %}
-		{%  include "{{ p }}" %}
+<div class="columns large-16">
+	<ul>
+	{% for slug, post in posts.items %}
+		<li>
+			<a href="{{ slug }}">{{ post.slug }}</a>
+		</li>
+
+		{%  include 'blog/_post.html' %}
+
 	{% endfor %}
-	</ol>
+	</ul>
+</div>
 </div>
 {% endblock %}

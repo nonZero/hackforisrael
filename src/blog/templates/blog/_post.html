@@ -1,6 +1,6 @@
-<h1>{{ slug }}</h1>
-<h1>מאת {{ author }} {{ created_date|date:"d F Y" }}</h1>
+<h1>{{ post.created_date|date:"d F Y" }}</h1>
+<h1>מאת {{ post.author }}</h1>
 
 <div id="post_html" dir="ltr">
-	{{ html | safe }}
+	{{ post.html | safe }}
 </div>

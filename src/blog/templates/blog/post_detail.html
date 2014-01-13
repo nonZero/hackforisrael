@@ -2,9 +2,9 @@
 {% load i18n %}
 
 {% block content_container %}
+<link rel="stylesheet" href="{{ STATIC_URL }}blog/code.css">
 <div class="row">
-	<link rel="stylesheet" href="{{ STATIC_URL }}blog/code.css">
-
+	<h1>{{ post.slug }}</h1>
 	{%  include 'blog/_post.html' %}
 </div>
 {% endblock %}
