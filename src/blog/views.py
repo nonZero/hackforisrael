@@ -45,6 +45,7 @@ class BlogPostDetailView(TemplateView):
         context = super(BlogPostDetailView, self).get_context_data(**kwargs)
         context['slug'] = slug
         #TODO internationalize the metadata fields
+        #TODO add error checking (5XX page) for missing metadata
         context['author'] = metadata['author'][0]
         context['created_date'] = dateutil.parser.parse(metadata['date'][0])
         context['html'] = html
