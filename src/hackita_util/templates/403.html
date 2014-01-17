@@ -1,0 +1,14 @@
+{% extends 'users/basebase.html' %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Permission Denied" %}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="columns large-12">
+            <div class="panel problem">
+                {% trans "Permission Denied" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

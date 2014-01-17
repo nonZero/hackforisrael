@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-17 02:03+0200\n"
+"POT-Creation-Date: 2014-01-17 02:57+0200\n"
 "PO-Revision-Date: 2014-01-17 02:04+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,103 +34,103 @@ msgstr "פרופיל אישי"
 msgid "Important dates"
 msgstr "תאריכים חשובים"
 
-#: .\base_views.py:29
+#: .\base_views.py:61
 msgid "Sent"
 msgstr "נשלח"
 
-#: .\base_views.py:29
+#: .\base_views.py:61
 msgid "Already sent"
 msgstr "כבר נשלחה"
 
-#: .\base_views.py:39
+#: .\base_views.py:71
 msgid "Invited"
 msgstr "הוזמן"
 
-#: .\base_views.py:39
+#: .\base_views.py:71
 msgid "Already invited"
 msgstr "כבר הוזמן"
 
-#: .\models.py:48
+#: .\models.py:47
 msgid "Male"
 msgstr "זכר"
 
-#: .\models.py:49
+#: .\models.py:48
 msgid "Female"
 msgstr "נקבה"
 
-#: .\models.py:56
+#: .\models.py:55
 msgid "Hebrew first name"
 msgstr "שם פרטי בעברית"
 
-#: .\models.py:58
+#: .\models.py:57
 msgid "Hebrew last name"
 msgstr "שם משפחה בעברית"
 
-#: .\models.py:61
+#: .\models.py:60
 msgid "English first name"
 msgstr "שם פרטי באנגלית"
 
-#: .\models.py:63
+#: .\models.py:62
 msgid "English last name"
 msgstr "שם משפחה באנגלית"
 
-#: .\models.py:71
+#: .\models.py:70
 msgid "program leader"
 msgstr "חבר מוביל"
 
-#: .\models.py:72
+#: .\models.py:71
 msgid "community member"
 msgstr "חבר קהילה"
 
-#: .\models.py:73
+#: .\models.py:72
 msgid "phone"
 msgstr "טלפון"
 
-#: .\models.py:74
+#: .\models.py:73
 msgid "street_address"
 msgstr "כתובת (רחוב ומספר)"
 
-#: .\models.py:75
+#: .\models.py:74
 msgid "city"
 msgstr "ישוב"
 
-#: .\models.py:76
+#: .\models.py:75
 msgid "birthday"
 msgstr "יום הולדת"
 
-#: .\models.py:77
+#: .\models.py:76
 msgid "blurb"
 msgstr "על עצמי"
 
-#: .\models.py:135
+#: .\models.py:131
 msgctxt "userlog"
 msgid "Other"
 msgstr "אחר"
 
-#: .\models.py:136
+#: .\models.py:132
 msgctxt "userlog"
 msgid "Add"
 msgstr "הוספה"
 
-#: .\models.py:137
+#: .\models.py:133
 msgctxt "userlog"
 msgid "Change"
 msgstr "שינוי"
 
-#: .\models.py:138
+#: .\models.py:134
 msgctxt "userlog"
 msgid "Remove"
 msgstr "הסרה"
 
-#: .\models.py:160
+#: .\models.py:156
 msgid "Creation time"
 msgstr "תאריך יצירה"
 
-#: .\models.py:165 .\templates\users\hackitauser_detail.html:86
+#: .\models.py:161 .\templates\users\hackitauser_detail.html:86
 msgid "Visible to the user"
 msgstr "גלוי למשתמש"
 
-#: .\models.py:167
+#: .\models.py:163
 msgid "Content"
 msgstr "תוכן"
 

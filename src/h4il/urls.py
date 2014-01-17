@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
 from website import views
 from student_applications import views as sa_views
@@ -67,3 +68,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^hadmin/', include(admin.site.urls)),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^500/$', 'django.views.defaults.server_error'),
+        (r'^404/$', 'django.views.defaults.page_not_found'),
+    )
