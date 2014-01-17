@@ -7,8 +7,13 @@
 
     <div class="row">
         <div class="columns large-12">
-
+            <a href="{% url "edit_profile" %}" class="button small left">{%  trans "Edit profile" %}</a>
             <h2>{% trans "Community" %}</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="columns large-12">
 
             <ul class="cohort-list inline-list">
                 <li>
@@ -27,11 +32,6 @@
             <form method="post">
 
              <table class="users">
-                {% comment %}
-                     <tr>
-                         <th colspan="3">{{u.forms_filled}}</th>
-                     </tr>
-                {% endcomment %}
                 {% for u in object_list %}
                     <tr>
                         {%  if user.is_staff %}
@@ -41,10 +41,14 @@
                             </td>
                         {%  endif %}
                         <td>
+                        {%  if user.is_staff %}
                             <a href="{% url "user_dashboard" u.id %}">
+                        {%  endif %}
                                 <img src="{{u.gravatar_url}}&s=20" alt="{{u}}"/>
                                 {{u}}
+                        {%  if user.is_staff %}
                             </a>
+                        {%  endif %}
                         </td>
                         <td class="text-left">
                             <a href="mailto:{{ u.email }}">{{ u.email }}</a>

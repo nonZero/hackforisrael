@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.aggregates import Count
 from django.utils import timezone
@@ -69,11 +70,13 @@ class HackitaUser(AbstractUser):
 
     program_leader = models.BooleanField(_("program leader"), default=False)
     community_member = models.BooleanField(_("community member"), default=False)
-    phone = models.CharField(_("phone"), max_length=50, null=True, blank=True)
+    phone = models.CharField(_("phone"), max_length=50, null=True, blank=True, validators=[
+        RegexValidator(r'^[-\d\s]*$', _('Numbers and dashes only')),
+    ])
     street_address = models.CharField(_("street_address"), max_length=200, null=True, blank=True)
     city = models.CharField(_("city"), max_length=100, null=True, blank=True)
     birthday = models.DateField(_("birthday"), null=True, blank=True)
-    blurb = models.TextField(_("blurb"), null=True, blank=True, help_text="Tell us about yourself!")
+    blurb = models.TextField(_("blurb"), null=True, blank=True, help_text=_("Tell us about yourself!"))
 
     objects = HackitaUserManager()
 

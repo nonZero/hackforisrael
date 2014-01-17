@@ -1,11 +1,12 @@
 from django.contrib import messages
+from django.core.urlresolvers import reverse_lazy
 from django.db import transaction
 from django.db.models.aggregates import Sum
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from events.models import Event
 from h4il.base_views import StaffOnlyMixin
@@ -13,7 +14,8 @@ from student_applications.consts import get_user_pretty_answers
 from student_applications.models import Cohort, UserCohortStatus, Tag, UserTag, \
     UserCohort
 from users import models, forms
-from users.base_views import UsersOperationsMixin
+from users.base_views import UsersOperationsMixin, CommunityOnlyMixin
+from users.forms import EditProfileForm
 from users.models import HackitaUser, UserNote, UserLog, UserLogOperation
 
 
@@ -152,7 +154,7 @@ class CreateUserNoteView(StaffOnlyMixin, CreateView):
         return redirect(u)
 
 
-class CommunityView(StaffOnlyMixin, UsersOperationsMixin, ListView):
+class CommunityView(CommunityOnlyMixin, UsersOperationsMixin, ListView):
     template_name = "users/community.html"
 
     def get_cohort(self):
@@ -196,11 +198,11 @@ class CommunityView(StaffOnlyMixin, UsersOperationsMixin, ListView):
         return redirect(request.path)
 
 
+class EditProfileView(CommunityOnlyMixin, UpdateView):
+    model = HackitaUser
+    form_class = EditProfileForm
 
-#class EditProfileView(UpdateView):
-#    model = HackitaUser
-#    fields = (
-#        'phone',
-#        'city',
-#        'street_address',
-#    )
+    success_url = reverse_lazy("community")
+
+    def get_object(self, queryset=None):
+        return self.request.user

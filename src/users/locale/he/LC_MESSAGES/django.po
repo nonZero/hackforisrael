@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-17 02:57+0200\n"
-"PO-Revision-Date: 2014-01-17 02:04+0200\n"
+"POT-Creation-Date: 2014-01-17 11:26+0200\n"
+"PO-Revision-Date: 2014-01-17 11:26+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,19 +33,19 @@ msgstr "פרופיל אישי"
 msgid "Important dates"
 msgstr "תאריכים חשובים"
 
-#: .\base_views.py:61
+#: .\base_views.py:60
 msgid "Sent"
 msgstr "נשלח"
 
-#: .\base_views.py:61
+#: .\base_views.py:60
 msgid "Already sent"
 msgstr "כבר נשלחה"
 
-#: .\base_views.py:71
+#: .\base_views.py:70
 msgid "Invited"
 msgstr "הוזמן"
 
-#: .\base_views.py:71
+#: .\base_views.py:70
 msgid "Already invited"
 msgstr "כבר הוזמן"
 
@@ -102,6 +101,10 @@ msgstr "יום הולדת"
 msgid "blurb"
 msgstr "על עצמי"
 
+#: .\models.py:76
+msgid "Tell us about yourself!"
+msgstr "ספר לנו קצת על עצמך!"
+
 #: .\models.py:131
 msgctxt "userlog"
 msgid "Other"
@@ -134,7 +137,7 @@ msgstr "גלוי למשתמש"
 msgid "Content"
 msgstr "תוכן"
 
-#: .\views.py:151
+#: .\views.py:153
 msgid "Note added."
 msgstr "ההערה נרשמה."
 
@@ -195,6 +198,7 @@ msgid "Log"
 msgstr "יומן"
 
 #: .\templates\users\community.html:11
+#: .\templates\users\hackitauser_form.html:10
 msgid "Community"
 msgstr "קהילה"
 
@@ -235,6 +239,15 @@ msgstr "ב:"
 msgid "Invisible to the user"
 msgstr "נסתר מהמשתמש"
 
+#: .\templates\users\hackitauser_form.html:12
+msgid "Edit profile"
+msgstr "עריכת פרופיל"
+
+#: .\templates\users\hackitauser_form.html:18
+#: .\templates\users\usernote_form.html:20
+msgid "Add"
+msgstr "הוספה"
+
 #: .\templates\users\invite_success.html:10
 msgid "Invitations Sent"
 msgstr "הזמנות שנשלחו"
@@ -261,10 +274,6 @@ msgstr "מתוך"
 msgctxt "pagination"
 msgid "page"
 msgstr "עמוד"
-
-#: .\templates\users\usernote_form.html:20
-msgid "Add"
-msgstr "הוספה"
 
 #~ msgid ""
 #~ "For easy access, please sign in or sign up with one of your existing "

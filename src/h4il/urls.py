@@ -39,9 +39,11 @@ urlpatterns = patterns('',
     url(r'^invitation/(?P<slug>[a-z]+)/edit/$',
         events_views.InvitationUpdateView.as_view(), name='invitation_edit'),
 
+    # Community ONLY
+    url(r'^community/$', users_views.CommunityView.as_view(), name='community'),
+    url(r'^edit-profile/$', users_views.EditProfileView.as_view(), name='edit_profile'),
 
     # STAFF ONLY
-    url(r'^community/$', users_views.CommunityView.as_view(), name='community'),
 
     url(r'^users/$', users_views.UsersListView.as_view(), name='users'),
     url(r'^users/(?P<pk>\d+)/$', users_views.UserView.as_view(),

@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-12">
+
+            <h2>
+                <a href="{%  url 'community' %}">{%  trans "Community" %}</a>
+                &gt;
+                {% trans "Edit profile" %}
+            </h2>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="button" value="{% trans "Add" %}"/>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
