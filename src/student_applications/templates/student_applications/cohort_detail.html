@@ -1,6 +1,7 @@
 {% extends 'users/base.html' %}
 {% load i18n %}
 {% load humanize %}
+{% load hackita %}
 
 {% block content %}
 
@@ -44,18 +45,8 @@
              <textarea id="emails" dir="ltr" style="text-align: left;">
              </textarea>
             {% csrf_token %}
-            <select name='survey'>
-                <option value="">---</option>
-                {% for s in surveys %}
-                  <option value="{{s.id}}">{{s}}</option>
-                {% endfor %}
-            </select>
-            <select name='event'>
-                <option value="">---</option>
-                {% for e in events %}
-                  <option value="{{e.id}}">{{e}}</option>
-                {% endfor %}
-            </select>
+            {%  select surveys 'survey' %}
+            {%  select events 'event' %}
             <select name='status'>
                 <option value="">---</option>
                 {% for k, v in statuses %}

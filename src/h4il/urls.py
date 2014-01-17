@@ -40,6 +40,8 @@ urlpatterns = patterns('',
 
 
     # STAFF ONLY
+    url(r'^community/$', users_views.CommunityView.as_view(), name='community'),
+
     url(r'^users/$', users_views.UsersListView.as_view(), name='users'),
     url(r'^users/(?P<pk>\d+)/$', users_views.UserView.as_view(),
         name='user_dashboard'),

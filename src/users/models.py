@@ -1,4 +1,5 @@
 # coding: utf-8
+import hashlib
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.contenttypes import generic
@@ -19,7 +20,6 @@ def random_username():
 
 
 class HackitaUserManager(UserManager):
-
     def create_user(self, username, email, password=None, **extra_fields):
         """
         Creates and saves a User with the given username, email and password.
@@ -44,13 +44,12 @@ class Gender(object):
     MALE = 1
     FEMALE = 2
     choices = (
-               (MALE, _('Male')),
-               (FEMALE, _('Female')),
-              )
+        (MALE, _('Male')),
+        (FEMALE, _('Female')),
+    )
 
 
 class HackitaUser(AbstractUser):
-
     gender = models.IntegerField(choices=Gender.choices, null=True)
 
     hebrew_first_name = models.CharField(_('Hebrew first name'), max_length=50,
@@ -68,6 +67,14 @@ class HackitaUser(AbstractUser):
     last_form_filled = models.DateTimeField(null=True, blank=True,
                                             db_index=True)
 
+    program_leader = models.BooleanField(_("program leader"), default=False)
+    community_member = models.BooleanField(_("community member"), default=False)
+    phone = models.CharField(_("phone"), max_length=50, null=True, blank=True)
+    street_address = models.CharField(_("street_address"), max_length=200, null=True, blank=True)
+    city = models.CharField(_("city"), max_length=100, null=True, blank=True)
+    birthday = models.DateField(_("birthday"), null=True, blank=True)
+    blurb = models.TextField(_("blurb"), null=True, blank=True, help_text="Tell us about yourself!")
+
     objects = HackitaUserManager()
 
     def __unicode__(self):
@@ -77,22 +84,28 @@ class HackitaUser(AbstractUser):
 
     def all_cohorts(self):
         all_cohorts = student_applications.models.Cohort.objects.order_by(
-                                              'ordinal').values_list('ordinal',
-                                                                     flat=True)
+            'ordinal').values_list('ordinal',
+                                   flat=True)
         cohorts = SortedDict([(k, None) for k in all_cohorts])
         for o in self.cohorts.all():
             cohorts[o.cohort.ordinal] = o
 
         return cohorts
 
+    def registered_cohorts(self):
+        return self.cohorts.filter(status=student_applications.models.UserCohortStatus.REGISTERED)
+
     def grouped_tags(self):
         from student_applications.models import Tag
+
         return Tag.objects.filter(users__user=self).annotate(
-                                             count=Count('users__created_by'))
+            count=Count('users__created_by'))
 
     def get_absolute_url(self):
         return "/users/%d/" % self.id
 
+    def gravatar_url(self):
+        return "http://www.gravatar.com/avatar/{}?d=blank".format(hashlib.md5(self.email.lower()).hexdigest())
 
 
 def update_personal_details(user, data):
@@ -115,18 +128,18 @@ class UserLogOperation(object):
     REMOVE = 3
 
     choices = (
-               (OTHER, pgettext_lazy('userlog', 'Other')),
-               (ADD, pgettext_lazy('userlog', 'Add')),
-               (CHANGE, pgettext_lazy('userlog', 'Change')),
-               (REMOVE, pgettext_lazy('userlog', 'Remove')),
-              )
+        (OTHER, pgettext_lazy('userlog', 'Other')),
+        (ADD, pgettext_lazy('userlog', 'Add')),
+        (CHANGE, pgettext_lazy('userlog', 'Change')),
+        (REMOVE, pgettext_lazy('userlog', 'Remove')),
+    )
 
 
 class UserLog(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="logs")
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                  related_name="logs_created", null=True)
+                                   related_name="logs_created", null=True)
     message = models.TextField(null=True)
     content_type = models.ForeignKey(ContentType, null=True)
     object_id = models.PositiveIntegerField(null=True)
@@ -144,7 +157,7 @@ class UserNote(models.Model):
     slug = models.SlugField(default=random_slug)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="notes")
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                related_name="notes_authored")
+                               related_name="notes_authored")
     visible_to_user = models.BooleanField(_("Visible to the user"),
                                           default=False)
     content = models.TextField(_("Content"))

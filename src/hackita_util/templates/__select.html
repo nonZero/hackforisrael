@@ -1,0 +1,6 @@
+<select{% if name %} name='{{name}}'{% endif %}>
+    <option value="{{default_value}}">{{default_label}}</option>
+    {% for o in objects %}
+      <option value="{{o.id}}">{{o}}</option>
+    {% endfor %}
+</select>

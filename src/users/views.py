@@ -13,6 +13,7 @@ from student_applications.consts import get_user_pretty_answers
 from student_applications.models import Cohort, UserCohortStatus, Tag, UserTag, \
     UserCohort
 from users import models, forms
+from users.base_views import UsersOperationsMixin
 from users.models import HackitaUser, UserNote, UserLog, UserLogOperation
 
 
@@ -22,7 +23,6 @@ class AllUsersLogView(StaffOnlyMixin, ListView):
 
 
 class UsersListView(StaffOnlyMixin, ListView):
-
     def get_cohort(self):
         if 'cohort' not in self.request.GET:
             return None
@@ -30,7 +30,7 @@ class UsersListView(StaffOnlyMixin, ListView):
         if not hasattr(self, '_cohort'):
             try:
                 self._cohort = Cohort.objects.get(ordinal=int(
-                                                  self.request.GET['cohort']))
+                    self.request.GET['cohort']))
             except ValueError, Cohort.DoesNotExist:
                 self._cohort = None
 
@@ -48,8 +48,8 @@ class UsersListView(StaffOnlyMixin, ListView):
 
         if 'score' in self.request.GET:
             qs = qs.filter(tags__created_by=self.request.user).annotate(
-                  score=Sum('tags__tag__group')
-                     ).order_by('-forms_filled', '-score', '-last_form_filled')
+                score=Sum('tags__tag__group')
+            ).order_by('-forms_filled', '-score', '-last_form_filled')
         else:
             qs = qs.order_by('-forms_filled', '-last_form_filled')
 
@@ -57,10 +57,10 @@ class UsersListView(StaffOnlyMixin, ListView):
         if cohort:
             qs = qs.filter(cohorts__cohort=cohort,
                            cohorts__status__in=[
-                                    UserCohortStatus.AVAILABLE,
-                                    UserCohortStatus.INVITED_TO_INTERVIEW,
-                                    UserCohortStatus.ACCEPTED,
-                                    ])
+                               UserCohortStatus.AVAILABLE,
+                               UserCohortStatus.INVITED_TO_INTERVIEW,
+                               UserCohortStatus.ACCEPTED,
+                           ])
 
         return qs
 
@@ -92,8 +92,8 @@ class UsersListView(StaffOnlyMixin, ListView):
                         pass
 
         return render(request, "users/invite_success.html", {
-                                                     'results': results
-                                                     })
+            'results': results
+        })
 
 
 class UserView(StaffOnlyMixin, DetailView):
@@ -106,7 +106,7 @@ class UserView(StaffOnlyMixin, DetailView):
         d['tagged'] = user.tags.filter(created_by=self.request.user)
         tagged_ids = [ut.tag.id for ut in d['tagged']]
         d['all_tags'] = [(tag, tag.id in tagged_ids) for tag in
-                                                            Tag.objects.all()]
+                         Tag.objects.all()]
 
         return d
 
@@ -146,7 +146,61 @@ class CreateUserNoteView(StaffOnlyMixin, CreateView):
         form.instance.author = self.request.user
         o = form.save()
         UserLog.objects.create(user=u, created_by=self.request.user,
-                       content_object=o,
-                       operation=UserLogOperation.ADD)
+                               content_object=o,
+                               operation=UserLogOperation.ADD)
         messages.success(self.request, _('Note added.'))
         return redirect(u)
+
+
+class CommunityView(StaffOnlyMixin, UsersOperationsMixin, ListView):
+    template_name = "users/community.html"
+
+    def get_cohort(self):
+        if 'cohort' not in self.request.GET:
+            return None
+
+        if not hasattr(self, '_cohort'):
+            try:
+                self._cohort = Cohort.objects.get(ordinal=int(
+                    self.request.GET['cohort']))
+            except ValueError, Cohort.DoesNotExist:
+                self._cohort = None
+
+        return self._cohort
+
+    def get_context_data(self, **kwargs):
+        d = super(CommunityView, self).get_context_data(**kwargs)
+        d['cohort'] = self.get_cohort()
+        d['cohorts'] = Cohort.objects.order_by('ordinal')
+        d['events'] = Event.objects.order_by('starts_at')
+        return d
+
+    def get_queryset(self):
+        qs = HackitaUser.objects.filter(community_member=True).order_by('program_leader', 'hebrew_last_name',
+                                                                        'hebrew_first_name')
+        cohort = self.get_cohort()
+        if cohort:
+            qs = qs.filter(cohorts__cohort=cohort, cohorts__status=UserCohortStatus.REGISTERED)
+        return qs
+
+    def post(self, request, *args, **kwargs):
+
+        # Send surveys
+        if request.POST.get('survey'):
+            return redirect(self.send_survey(request))
+
+        # Send event invitations
+        if request.POST.get('event'):
+            return redirect(self.send_invites(request))
+
+        return redirect(request.path)
+
+
+
+#class EditProfileView(UpdateView):
+#    model = HackitaUser
+#    fields = (
+#        'phone',
+#        'city',
+#        'street_address',
+#    )

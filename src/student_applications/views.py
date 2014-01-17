@@ -6,12 +6,11 @@ from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, ugettext
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
-from events.models import Event
 from extra_views.formsets import InlineFormSetView
 from h4il.base_views import ProtectedMixin, StaffOnlyMixin
 from q13es.forms import get_pretty_answer
@@ -19,7 +18,7 @@ from q13es.models import Answer
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES, get_user_pretty_answers
 from student_applications.models import UserCohortStatus, Cohort, UserCohort
-from surveys.models import Survey
+from users.base_views import UsersOperationsMixin
 from users.models import update_personal_details, HackitaUser
 import logging
 
@@ -27,14 +26,13 @@ logger = logging.getLogger(__name__)
 
 
 class UserViewMixin(ProtectedMixin):
-
     def get_context_data(self, **kwargs):
         d = super(UserViewMixin, self).get_context_data(**kwargs)
 
         d['filled_count'], d['total_count'] = get_user_progress(
-                                                            self.request.user)
+            self.request.user)
         d['progress'] = int(100 * (d['filled_count'] + 1) /
-                             (d['total_count'] + 1))
+                            (d['total_count'] + 1))
 
         return d
 
@@ -92,20 +90,20 @@ class RegisterView(UserViewMixin, FormView):
             message = "\n".join(u"{label}: {html}".format(**fld) for fld in
                                 get_pretty_answer(form, data)['fields'])
             mail_managers(u"{}: {hebrew_last_name} {hebrew_first_name}".format(
-                               _("New User"), **data), message)
+                _("New User"), **data), message)
 
         elif form_name == 'cohort1':
             COHORTS = (
-                        ('group_monday_morning', 1),
-                        ('group_thursday_morning', 2),
-                        ('group_evenings', 3),
-                      )
+                ('group_monday_morning', 1),
+                ('group_thursday_morning', 2),
+                ('group_evenings', 3),
+            )
             cohorts = {x[1]: Cohort.objects.get(ordinal=x[1]) for x in COHORTS}
             for k, ordinal in COHORTS:
                 v = data[k] == u"כן"
                 UserCohort.objects.create(user=u, cohort=cohorts[ordinal],
-                          status=UserCohortStatus.AVAILABLE if v else
-                          UserCohortStatus.UNAVAILABLE)
+                                          status=UserCohortStatus.AVAILABLE if v else
+                                          UserCohortStatus.UNAVAILABLE)
 
         # update denormalized index fields
         u.forms_filled = u.answers.count()
@@ -116,7 +114,7 @@ class RegisterView(UserViewMixin, FormView):
             messages.success(self.request,
                              _("Registration completed! Thank you very much!"))
             url = self.request.build_absolute_uri(reverse('user_dashboard',
-                                                           args=(u.id,)))
+                                                          args=(u.id,)))
             mail_managers(_("User registered: %s") % u.email, url)
             return redirect('dashboard')
 
@@ -158,14 +156,12 @@ class CohortListView(StaffOnlyMixin, ListView):
     model = Cohort
 
 
-class CohortDetailView(StaffOnlyMixin, DetailView):
+class CohortDetailView(StaffOnlyMixin, UsersOperationsMixin, DetailView):
     model = Cohort
     slug_field = 'code'
 
     def get_context_data(self, **kwargs):
         d = super(CohortDetailView, self).get_context_data(**kwargs)
-        d['surveys'] = Survey.objects.all()
-        d['events'] = Event.objects.filter(is_active=True)
         d['statuses'] = UserCohortStatus.choices
         return d
 
@@ -173,45 +169,24 @@ class CohortDetailView(StaffOnlyMixin, DetailView):
 
         cohort = self.get_object()
 
-        user_ids = [int(x) for x in request.POST.getlist('users')]
-        base_url = request.build_absolute_uri('/')[:-1]
-
         if request.POST.get('status'):
             status = int(request.POST.get('status'))
-            for uid in user_ids:
+            for uid in self.get_user_ids():
                 user = HackitaUser.objects.get(pk=uid)
                 uc = UserCohort.objects.get(user=user, cohort=cohort)
                 if uc.status != status:
                     uc.status = status
                     uc.save()
                     messages.success(request, u"%s: %s" %
-                                     (user, uc.get_status_display()))
-            # fall thorugh.
+                                              (user, uc.get_status_display()))
+                    # fall through.
 
         # Send surveys
         if request.POST.get('survey'):
-            survey = Survey.objects.get(pk=int(request.POST['survey']))
+            return redirect(self.send_survey(request))
 
-            for uid in user_ids:
-                user = HackitaUser.objects.get(pk=uid)
-                o, created = survey.add_user(user)
-                if created:
-                    o.send(base_url)
-                messages.success(request, u"%s: %s" % (user,
-                                  _("Sent") if created else _("Already sent")))
-
-            return redirect(survey)
-
-        # send event invitations
+        # Send event invitations
         if request.POST.get('event'):
-            event = Event.objects.get(pk=int(request.POST['event']))
-
-            for uid in user_ids:
-                user = HackitaUser.objects.get(pk=uid)
-                o, created = event.invite_user(user, request.user, base_url)
-                messages.success(request, u"%s: %s" % (user,
-                           _("Invited") if created else _("Already invited")))
-
-            return redirect(event)
+            return redirect(self.send_invites(request))
 
         return redirect(cohort)

@@ -14,3 +14,13 @@ def u(instance, autoescape=None):
     result = '<a href="%s">%s</a>' % (esc(instance.get_absolute_url()),
                                       esc(unicode(instance)))
     return mark_safe(result)
+
+@register.inclusion_tag('__select.html')
+def select(objects, name=None, default_label="---", default_value=""):
+    return {
+        'objects': objects,
+        'name': name,
+        'default_label': default_label,
+        'default_value': default_value,
+    }
+
