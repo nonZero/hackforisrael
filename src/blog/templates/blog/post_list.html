@@ -1,0 +1,21 @@
+{% extends 'website/base.html' %}
+{% load i18n %}
+
+{% block content_container %}
+<link rel="stylesheet" href="{{ STATIC_URL }}blog/code.css">
+
+<div id="blog_list" class="row">
+<div class="columns large-16">
+	<ul>
+	{% for slug, post in posts.items %}
+		<li>
+			<a href="{{ slug }}">{{ post.slug }}</a>
+		</li>
+
+		{%  include 'blog/_post.html' %}
+
+	{% endfor %}
+	</ul>
+</div>
+</div>
+{% endblock %}

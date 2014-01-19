@@ -161,6 +161,7 @@ INSTALLED_APPS = (
     'events',
     'surveys',
     'lms',
+    'blog',
 
     'floppyforms_foundation',
     'floppyforms',
