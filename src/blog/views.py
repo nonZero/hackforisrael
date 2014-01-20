@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from blog.models import AllPosts
+from blog.models import AllPosts, Post
 
 
 class BlogPostListView(TemplateView):
@@ -18,5 +18,5 @@ class BlogPostDetailView(TemplateView):
 
     def get_context_data(self, slug, **kwargs):
         context = super(BlogPostDetailView, self).get_context_data(**kwargs)
-        context['post'] = AllPosts()[slug]
+        context['post'] = Post(slug)
         return context
