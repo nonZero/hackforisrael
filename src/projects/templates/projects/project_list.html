@@ -1,0 +1,30 @@
+{% extends 'users/base.html' %}
+{% load i18n hackita %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-16">
+            <h1>{% trans "Projects" %}</h1>
+
+            {% for o in object_list %}
+                <div class="panel">
+                    {% if not o.is_published %}
+                        <span class="left label alert">{% trans "Draft" %}</span>
+                    {% endif %}
+                    <h5>{{ o|u }}</h5>
+
+
+                    {% if o.summary %}
+                        {{ o.summary|linebreaks|urlize }}
+                    {% endif %}
+
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+{% endblock %}

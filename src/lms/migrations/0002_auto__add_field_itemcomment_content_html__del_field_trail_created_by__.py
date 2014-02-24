@@ -32,7 +32,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'UserItem.created_at'
         db.add_column(u'lms_useritem', 'created_at',
-                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True),
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime.now()),
                       keep_default=False)
 
         # Adding field 'UserItem.checked_at'

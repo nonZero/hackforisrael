@@ -249,3 +249,7 @@ h2 {
     color: black;
     padding: 10px 0;
 }
+
+.breadcrumbs {
+    font-size: 1.4em;
+}

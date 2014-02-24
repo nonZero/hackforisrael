@@ -1,5 +1,6 @@
+import user
 from django.contrib import messages
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
 from django.utils.decorators import method_decorator
 from events.models import Event
@@ -12,6 +13,7 @@ def user_test_required(test_function, login_url=None):
     """
     Decorator for views that checks whether a user is logged in and has a particular permission
     """
+
     def check_perms(user):
 
         # redirect to login only if not logged in.
@@ -26,14 +28,34 @@ def user_test_required(test_function, login_url=None):
 
     return user_passes_test(check_perms, login_url=login_url)
 
-community_member_required = user_test_required(lambda u: u.is_superuser or u.community_member)
+
+community_member_required = user_test_required(
+    lambda u: u.is_superuser or u.community_member)
 
 
 class CommunityOnlyMixin(object):
-
     @method_decorator(community_member_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(CommunityOnlyMixin, self).dispatch(request, *args, **kwargs)
+        return super(CommunityOnlyMixin, self).dispatch(request, *args,
+                                                        **kwargs)
+
+
+class PermissionRequiredMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            if hasattr(self, 'check_permission'):
+                if not self.check_permission(request.user):
+                    raise PermissionDenied()
+            else:
+                assert hasattr(self, 'permission'), (
+                    "View must implement check_permission or specify permission"
+                )
+                if not request.user.has_perm(self.permission):
+                    raise PermissionDenied()
+
+        return super(PermissionRequiredMixin, self).dispatch(request, *args,
+                                                             **kwargs)
 
 
 class UsersOperationsMixin(object):
@@ -57,7 +79,9 @@ class UsersOperationsMixin(object):
             if created:
                 o.send(self.get_base_url())
             messages.success(request, u"%s: %s" % (user,
-                                                   _("Sent") if created else _("Already sent")))
+                                                   _(
+                                                       "Sent") if created else _(
+                                                       "Already sent")))
         return survey
 
     def send_invites(self, request):
@@ -65,9 +89,12 @@ class UsersOperationsMixin(object):
 
         for uid in self.get_user_ids():
             user = HackitaUser.objects.get(pk=uid)
-            o, created = event.invite_user(user, request.user, self.get_base_url())
+            o, created = event.invite_user(user, request.user,
+                                           self.get_base_url())
             messages.success(request, u"%s: %s" % (user,
-                                                   _("Invited") if created else _("Already invited")))
+                                                   _(
+                                                       "Invited") if created else _(
+                                                       "Already invited")))
 
         return event
 

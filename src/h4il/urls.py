@@ -42,6 +42,7 @@ urlpatterns = patterns('',
 
     # Community ONLY
     url(r'^community/$', users_views.CommunityView.as_view(), name='community'),
+    url(r'^project/', include('projects.urls', namespace='project'), ),
     url(r'^edit-profile/$', users_views.EditProfileView.as_view(), name='edit_profile'),
 
     # STAFF ONLY

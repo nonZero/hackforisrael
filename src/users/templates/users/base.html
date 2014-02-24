@@ -3,6 +3,8 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+    {% block page_css %}
+    {% endblock %}
 {% endblock %}
 
 {% block content_container %}
@@ -30,7 +32,11 @@
                             &bull;
                             <a href="{% url "surveys" %}">{% trans "Surveys" %}</a>
                             &bull;
+                            <a href="{% url "project:list" %}">{% trans "Projects" %}</a>
+                            &bull;
                             <a href="{% url "users_log" %}">{% trans "Log" %}</a>
+                            &bull;
+                            <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>
                         {% endif %}
                     </div>
                 </div>

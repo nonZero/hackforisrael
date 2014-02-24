@@ -1,0 +1,36 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/project_form.css">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-16">
+            <h1>{% trans "Edit" %}</h1>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <br/>
+
+                {% for formset in inlines %}
+                    <div class="inline">
+                        {{ formset }}
+                    </div>
+                {% endfor %}
+
+                <input class="button" type="submit" value={% trans 'save' %}>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
