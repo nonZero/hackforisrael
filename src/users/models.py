@@ -53,14 +53,17 @@ class Gender(object):
 class HackitaUser(AbstractUser):
     gender = models.IntegerField(choices=Gender.choices, null=True)
 
-    hebrew_first_name = models.CharField(_('Hebrew first name'), max_length=50,
+    hebrew_first_name = models.CharField(_('Hebrew first name'),
+                                         max_length=50,
                                          null=True, blank=True)
     hebrew_last_name = models.CharField(_('Hebrew last name'), max_length=50,
                                         null=True, blank=True)
 
     english_first_name = models.CharField(_('English first name'),
-                                          max_length=50, null=True, blank=True)
-    english_last_name = models.CharField(_('English last name'), max_length=50,
+                                          max_length=50, null=True,
+                                          blank=True)
+    english_last_name = models.CharField(_('English last name'),
+                                         max_length=50,
                                          null=True, blank=True)
 
     # denormalize for queries
@@ -69,16 +72,25 @@ class HackitaUser(AbstractUser):
                                             db_index=True)
 
     program_leader = models.BooleanField(_("program leader"), default=False)
-    community_member = models.BooleanField(_("community member"), default=False)
-    phone = models.CharField(_("phone"), max_length=50, null=True, blank=True, validators=[
-        RegexValidator(r'^[-\d\s]*$', _('Numbers and dashes only')),
-    ])
-    street_address = models.CharField(_("street_address"), max_length=200, null=True, blank=True)
+    community_member = models.BooleanField(_("community member"),
+                                           default=False)
+    phone = models.CharField(_("phone"), max_length=50, null=True, blank=True,
+                             validators=[
+                                 RegexValidator(r'^[-\d\s]*$',
+                                                _('Numbers and dashes only')),
+                             ])
+    street_address = models.CharField(_("street_address"), max_length=200,
+                                      null=True, blank=True)
     city = models.CharField(_("city"), max_length=100, null=True, blank=True)
     birthday = models.DateField(_("birthday"), null=True, blank=True)
-    blurb = models.TextField(_("blurb"), null=True, blank=True, help_text=_("Tell us about yourself!"))
+    blurb = models.TextField(_("blurb"), null=True, blank=True,
+                             help_text=_("Tell us about yourself!"))
 
     objects = HackitaUserManager()
+
+    class Meta:
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
 
     def __unicode__(self):
         if self.hebrew_first_name and self.hebrew_last_name:
@@ -96,7 +108,8 @@ class HackitaUser(AbstractUser):
         return cohorts
 
     def registered_cohorts(self):
-        return self.cohorts.filter(status=student_applications.models.UserCohortStatus.REGISTERED)
+        return self.cohorts.filter(
+            status=student_applications.models.UserCohortStatus.REGISTERED)
 
     def grouped_tags(self):
         from student_applications.models import Tag
@@ -108,7 +121,8 @@ class HackitaUser(AbstractUser):
         return "/users/%d/" % self.id
 
     def gravatar_url(self):
-        return "http://www.gravatar.com/avatar/{}?d=blank".format(hashlib.md5(self.email.lower()).hexdigest())
+        return "http://www.gravatar.com/avatar/{}?d=blank".format(
+            hashlib.md5(self.email.lower()).hexdigest())
 
 
 def update_personal_details(user, data):
