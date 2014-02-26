@@ -17,7 +17,7 @@ class Event(models.Model):
     is_open = models.BooleanField(_("Invitations open"), default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                   related_name="events_created")
+                                   related_name="events_created", limit_choices_to={'is_staff': True})
     starts_at = models.DateTimeField(_("Starts at"))
     ends_at = models.DateTimeField(_("Ends at"))
     registration_ends_at = models.DateTimeField(_("Registartion ends at"),
