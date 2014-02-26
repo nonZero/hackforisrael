@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 from django_extensions.db.fields.json import JSONField
-from q13es.forms import get_pretty_answer
 
 
 class Answer(models.Model):
@@ -17,6 +16,8 @@ class Answer(models.Model):
         return u"%s: %s (%s)" % (self.user, self.q13e_slug, self.created_at)
 
     def get_pretty(self, form):
+        # TODO: refactor
+        from q13es.forms import get_pretty_answer
         dct = get_pretty_answer(form, self.data)
         dct['answer'] = self
         return dct

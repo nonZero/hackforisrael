@@ -4,7 +4,6 @@ from django.template.loader import render_to_string
 from django_extensions.db.fields.json import JSONField
 from h4il.base_models import random_slug
 from h4il.mail import send_html_mail
-from q13es.forms import get_pretty_answer, parse_form
 import logging
 from h4il.html import HTMLField
 
@@ -21,6 +20,8 @@ class Survey(models.Model):
         return self.email_subject
 
     def get_form_class(self):
+        # TODO: refactor
+        from q13es.forms import parse_form
         return parse_form(self.q13e)
 
     def add_user(self, user):
@@ -47,6 +48,8 @@ class SurveyAnswer(models.Model):
         return u"%s: %s (%s)" % (self.survey, self.user, self.created_at)
 
     def get_pretty(self):
+        # TODO: refactor
+        from q13es.forms import get_pretty_answer
         dct = get_pretty_answer(self.survey.get_form_class(), self.data)
         dct['answer'] = self
         return dct
