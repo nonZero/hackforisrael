@@ -78,3 +78,8 @@ if settings.DEBUG:
         (r'^500/$', 'django.views.defaults.server_error'),
         (r'^404/$', 'django.views.defaults.page_not_found'),
     )
+
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )

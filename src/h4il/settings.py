@@ -148,7 +148,6 @@ INSTALLED_APPS = (
 
     'django_extensions',
 
-    'debug_toolbar',
 
     'south',
 
@@ -171,6 +170,9 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'debug_toolbar',
+
 )
 
 AUTH_USER_MODEL = 'users.HackitaUser'
@@ -227,6 +229,7 @@ LOGGING = {
     }
 }
 
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 try:
     from local_settings import *
