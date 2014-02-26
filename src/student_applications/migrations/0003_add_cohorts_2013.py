@@ -28,7 +28,7 @@ class Migration(DataMigration):
 
         for d in COHORTS:
             o = orm.Cohort.objects.create(**d)
-            print "Created cohort #%d" % d['ordinal']
+            # print "Created cohort #%d" % d['ordinal']
 
     def backwards(self, orm):
         orm.Cohort.objects.all().delete()
