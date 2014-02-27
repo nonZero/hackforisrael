@@ -22,6 +22,12 @@
                             </form>
                         </div>
                         {% trans "You are logged in as" %} {{user.email}}
+                        {% if user.community_member or user.is_staff %}
+                            &bull;
+                            <a href="{% url "community" %}">{% trans "Community" %}</a>
+                            &bull;
+                            <a href="{% url "project:list" %}">{% trans "Projects" %}</a>
+                        {% endif %}
                         {% if user.is_staff %}
                             &bull;
                             <a href="{% url "users" %}">{% trans "Users" %}</a>
@@ -31,8 +37,6 @@
                             <a href="{% url "events" %}">{% trans "Events" %}</a>
                             &bull;
                             <a href="{% url "surveys" %}">{% trans "Surveys" %}</a>
-                            &bull;
-                            <a href="{% url "project:list" %}">{% trans "Projects" %}</a>
                             &bull;
                             <a href="{% url "users_log" %}">{% trans "Log" %}</a>
                             &bull;
