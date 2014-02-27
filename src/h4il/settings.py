@@ -160,7 +160,8 @@ INSTALLED_APPS = (
     'events',
     'surveys',
     'lms',
-    'blog',
+    #'blog',
+    'feedback',
     'projects',
 
     'floppyforms_foundation',
@@ -230,6 +231,7 @@ LOGGING = {
 }
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
 
 try:
     from local_settings import *
