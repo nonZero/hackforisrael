@@ -161,7 +161,7 @@ INSTALLED_APPS = (
     'surveys',
     'lms',
     #'blog',
-    'feedback',
+    #'feedback',
     'projects',
 
     'floppyforms_foundation',
