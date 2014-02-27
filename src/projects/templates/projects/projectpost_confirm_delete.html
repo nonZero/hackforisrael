@@ -1,0 +1,44 @@
+{% extends 'users/base.html' %}
+{% load i18n humanize   %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/project_form.css">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-16">
+            <h1>
+                {% trans "Delete" %}
+            </h1>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="panel">
+                    <p><b><i>{{ object.created_at|naturaltime }} &bull; {{ object.user }}</i></b></p>
+                    {{ object.content|urlize|linebreaks }}
+                </div>
+
+                <br/>
+
+                {% for formset in inlines %}
+                    <div class="inline">
+                        {{ formset }}
+                    </div>
+                {% endfor %}
+
+                <span>
+                    {% trans "Are you sure?" %}
+                </span>
+                <input class="button" type="submit" value={% trans 'Delete' %}>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+

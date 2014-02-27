@@ -1,11 +1,11 @@
 {% extends 'users/base.html' %}
-{% load i18n hackita %}
+{% load i18n hackita humanize %}
 
 
 {% block content %}
 
     <div class="row">
-        <div class="columns large-16">
+        <div class="columns large-8">
             <h1>{% trans "Projects" %}</h1>
 
             {% for o in object_list %}
@@ -22,6 +22,27 @@
 
                 </div>
             {% endfor %}
+
+        </div>
+        <div class="columns large-4">
+            <h3>{% trans "Latest Updates" %}</h3>
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <i><a href="{{ post.get_absolute_url }}">
+                            {{ post.project }} ({{ post.created_at|naturaltime }})
+                        </a></i>
+                        {% if post.summary %}
+                            {{ post.summary|urlize|linebreaks }}
+                            <a href="{{ post.get_absolute_url }}">
+                            {% trans "Read more..." %}
+                        </a>
+                        {% else %}
+                            {{ post.content|urlize|linebreaks }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
 
         </div>
     </div>

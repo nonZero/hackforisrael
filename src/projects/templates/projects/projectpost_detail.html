@@ -6,35 +6,20 @@
     <div class="row">
         <div class="columns large-12">
 
-            {% if perms.projects.change_project or can_edit %}
+            {% if can_edit %}
                 <div class="left">
-                    {% if perms.projects.change_project %}
-                        <a href="{% url "project:admin" object.slug %}"
-                           class="button small">{% trans "Admin" %}</a>
-                    {% endif %}
-
                     <a href="{{ object.get_edit_url }}"
                        class="button small">{% trans "Edit" %}</a>
-
-                    <a href="{% url 'project:create_post' object.slug %}"
-                       class="button small ">{% trans "Add Update" %}</a>
-
+                </div>
+                <div class="left">
+                    <a href="{%  url 'project:delete_post' object.project.slug object.id %}"
+                       class="button small">{% trans "Delete" %}</a>
                 </div>
             {% endif %}
 
-            <h1>{{ object }}</h1>
-
-            {% if object.main_url %}
-                <h3 style="direction:ltr">
-                    <a href="{{ object.main_url }}">{{ object.main_url }}</a>
-                </h3>
-            {% endif %}
-
-            {% if object.summary %}
-                <h5>
-                    {{ object.summary|urlize|linebreaks }}
-                </h5>
-            {% endif %}
+            <h1>{% trans "Update" %}</h1>
+            <p><b><i>{{ object.created_at|naturaltime }} &bull; {{ object.user }}</i></b></p>
+            {{ object.content|urlize|linebreaks }}
         </div>
     </div>
 
@@ -77,9 +62,6 @@
                             </a></i>
                             {% if post.summary %}
                                 {{ post.summary|urlize|linebreaks }}
-                                <a href="{{ post.get_absolute_url }}">
-                                    {% trans "Read more..." %}
-                                </a>
                             {% else %}
                                 {{ post.content|urlize|linebreaks }}
                             {% endif %}

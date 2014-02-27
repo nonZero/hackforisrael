@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-25 18:22+0200\n"
-"PO-Revision-Date: 2014-02-25 18:26+0200\n"
+"POT-Creation-Date: 2014-02-28 01:29+0200\n"
+"PO-Revision-Date: 2014-02-28 01:29+0200\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -65,36 +65,114 @@ msgstr "חבר צוות"
 msgid "project members"
 msgstr "חברי צוות"
 
+#: .\models.py:60
+msgid "Only on project page"
+msgstr "להצגה בדף הפרויקט בלבד"
+
+#: .\models.py:61
+msgid "Promote to community news"
+msgstr "קידום לעמוד עדכוני הקהילה בלבד"
+
+#: .\models.py:62
+msgid "Promote to public homepage and community news"
+msgstr "קידום לדף הבית ולעמוד עדכוני הקהילה"
+
+#: .\models.py:72
+msgid "Content"
+msgstr "תוכן"
+
+#: .\models.py:73
+msgid "Summary"
+msgstr "תקציר"
+
+#: .\models.py:74
+msgid "For use in listings if content is long"
+msgstr "לשימוש במידה והתוכן ארוך"
+
+#: .\models.py:76
+msgid "Promote to"
+msgstr "קידום העדכון"
+
+#: .\models.py:83
+msgid "project update"
+msgstr "עדכון לפרויקט"
+
+#: .\models.py:84
+msgid "project updates"
+msgstr "עדכונים לפרוייקט"
+
 #: .\tests.py:54 .\tests.py:72 .\tests.py:89
 msgid "Permission Denied"
 msgstr "הגישה אסורה"
 
-#: .\templates\projects\project_detail.html:10
-#: .\templates\projects\project_list.html:9
+#: .\views.py:17 .\templates\projects\project_list.html:9
 msgid "Projects"
 msgstr "פרוייקטים"
 
-#: .\templates\projects\project_detail.html:17
-#: .\templates\projects\project_form.html:13
-msgid "Edit"
-msgstr "עריכה"
+#: .\views.py:156
+msgid "Update added successfully."
+msgstr "העדכון נוסף בהצלחה"
 
-#: .\templates\projects\project_detail.html:22
+#: .\views.py:182
+msgid "Update deleted."
+msgstr "העדכון נמחק"
+
+#: .\templates\projects\project_detail.html:13
 msgid "Admin"
 msgstr "ניהול"
 
+#: .\templates\projects\project_detail.html:17
+#: .\templates\projects\project_form.html:13
+#: .\templates\projects\projectpost_detail.html:12
+#: .\templates\projects\projectpost_form.html:15
+msgid "Edit"
+msgstr "עריכה"
+
+#: .\templates\projects\project_detail.html:20
+#: .\templates\projects\projectpost_form.html:17
+msgid "Add Update"
+msgstr "הוספת עדכון"
+
 #: .\templates\projects\project_detail.html:47
+#: .\templates\projects\projectpost_detail.html:32
 msgid "Code"
 msgstr "קוד"
 
 #: .\templates\projects\project_detail.html:61
+#: .\templates\projects\projectpost_detail.html:46
 msgid "Project Members"
 msgstr "חברי צוות"
 
+#: .\templates\projects\project_detail.html:71
+#: .\templates\projects\project_list.html:28
+#: .\templates\projects\projectpost_detail.html:56
+msgid "Latest Updates"
+msgstr "עידכונים אחרונים"
+
+#: .\templates\projects\project_detail.html:81
+#: .\templates\projects\project_list.html:38
+msgid "Read more..."
+msgstr "להמשך קריאה..."
+
 #: .\templates\projects\project_form.html:29
+#: .\templates\projects\projectpost_form.html:35
 msgid "save"
 msgstr "שמירה"
 
 #: .\templates\projects\project_list.html:14
 msgid "Draft"
 msgstr "טיוטה"
+
+#: .\templates\projects\projectpost_confirm_delete.html:14
+#: .\templates\projects\projectpost_confirm_delete.html:37
+#: .\templates\projects\projectpost_detail.html:16
+msgid "Delete"
+msgstr "מחיקה"
+
+#: .\templates\projects\projectpost_confirm_delete.html:35
+msgid "Are you sure?"
+msgstr ""
+
+#: .\templates\projects\projectpost_detail.html:20
+msgid "Update"
+msgstr "עדכון"
