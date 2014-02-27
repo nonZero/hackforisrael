@@ -43,7 +43,20 @@
                             <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>
                         {% endif %}
                     </div>
+
+                    {% if breadcrumbs %}
+                        <ul class="breadcrumbs">
+                            {% for title, url in breadcrumbs %}
+                                <li>
+                                    <a href="{{ url }}">{{ title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+
                 </div>
+
             </div>
 
         {% endif %}
