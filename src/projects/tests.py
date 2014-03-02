@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.test.testcases import assert_and_parse_html
 from projects.models import Project, ProjectMember
@@ -74,6 +75,25 @@ class ProjectsTestCase(TestCase):
 
     def test_project_edit(self):
         url = self.project1.get_edit_url()
+        expected = (
+            (self.su, True),
+            (self.leader, True),
+            (self.member, True),
+            (self.non_member, False),
+            (self.non_community, False),
+        )
+        for user, ok in expected:
+            resp, dom = self.visit(user, url)
+            if ok:
+                self.assertContains(resp, "<form", msg_prefix=user.email)
+            else:
+                self.assertContains(resp, _("Permission Denied"),
+                                    status_code=403)
+
+    def test_create_post(self):
+        url = reverse('project:create_post', kwargs={
+            'project': self.project1.slug
+        })
         expected = (
             (self.su, True),
             (self.leader, True),

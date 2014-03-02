@@ -124,7 +124,7 @@ class ProjectPostMixin(CommunityOnlyMixin):
     def can_edit(self):
         return (
             self.request.user.has_perm('projects.change_projectpost') or
-            self.get_object().project.members.filter(
+            self.project.members.filter(
                 user=self.request.user).exists()
         )
 
