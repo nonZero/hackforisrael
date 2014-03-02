@@ -17,7 +17,7 @@ urlpatterns = patterns(
     url(r'^(?P<slug>{})/admin/$'.format(PROJECT_SLUG_RE),
         views.ProjectAdminView.as_view(), name='admin'),
 
-    url(r'^(?P<project>{})/create_post/$'.format(PROJECT_SLUG_RE),
+    url(r'^(?P<project>{})/create-post/$'.format(PROJECT_SLUG_RE),
         views.ProjectPostCreateView.as_view(), name='create_post'),
 
 
